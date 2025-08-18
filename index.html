@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.svg" />
+    <link rel="manifest" href="site.webmanifest" />
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -16,7 +23,7 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/media.css" />
-    <title>Barbershop</title>
+    <title>Valentyna</title>
   </head>
 
   <body>
@@ -158,7 +165,7 @@
       <section class="hero">
         <div class="hero-content container">
           <h1 class="hero-title">
-            Будь собою. І нехай твоя зачіска говорить за тебе
+            Час бути собою
           </h1>
           <div class="hero-buttons">
             <a href="https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r?fbclid=PAZXh0bgNhZW0CMTEAAadFHCiy5vG_ETSmy5YobeYYk5tcB3JX62x_sZFeJKvZ8pRhK-lD2s9BG4FkJQ_aem_Gz7k_zjCkIeDrJkB793_kw" target="_blank" class="first-button">Записатися</a>
@@ -177,7 +184,7 @@
               media="(max-width: 767px)"
               srcset="./img/haircut-mobile.png"
             />
-            <img src="./img/haircut.png" alt="Стрижки" />
+            <img src="./img/cuts.jpg" alt="Стрижки" />
           </picture>
           <p class="services-text">СТРИЖКИ</p>
         </li>
@@ -188,7 +195,7 @@
               media="(max-width: 767px)"
               srcset="./img/styling-mobile.png"
             />
-            <img src="./img/styling.png" alt="Укладки" />
+            <img src="./img/ukladka2.jpg" alt="Укладки" />
           </picture>
           <p class="services-text">УКЛАДКИ</p>
         </li>
@@ -199,7 +206,7 @@
               media="(max-width: 767px)"
               srcset="./img/color-mobile.png"
             />
-            <img src="./img/color.png" alt="Догляд" />
+            <img src="./img/doglyad2.JPG" alt="Догляд" />
           </picture>
           <p class="services-text">ДОГЛЯД</p>
         </li>
@@ -209,7 +216,7 @@
             <source media="(max-width: 767px)" srcset="./img/tas-mobile.png" />
             <img src="./img/tas.png" alt="ПРОЦЕДУРИ" />
           </picture>
-          <p class="services-text">ПРОЦЕДУРИ ТА ДОДАТКОВІ ПОСЛУГИ</p>
+          <p class="services-text">ХІМ ТА БІО ЗАВИВКА</p>
         </li>
 
         <li class="services-item">
@@ -218,15 +225,15 @@
               media="(max-width: 767px)"
               srcset="./img/highlights-mobile.png"
             />
-            <img src="./img/highlights.png" alt="Фарбування" />
+            <img src="./img/doglyad.JPG" alt="Фарбування" />
           </picture>
           <p class="services-text">ФАРБУВАННЯ</p>
         </li>
 
-        <li class="services-item display-none-item">
+       <!-- <li class="services-item display-none-item">
           <img src="./img/eyebrows.png" alt="Укладки" />
           <p class="services-text">УКЛАДКИ</p>
-        </li>
+        </li> -->
       </ul>
 
       <button type="button" href="https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r?fbclid=PAZXh0bgNhZW0CMTEAAadFHCiy5vG_ETSmy5YobeYYk5tcB3JX62x_sZFeJKvZ8pRhK-lD2s9BG4FkJQ_aem_Gz7k_zjCkIeDrJkB793_kw" target="_blank" class="services-btn">Записатися</button>
@@ -303,47 +310,59 @@
       <div class="gallery-container">
         <!-- Картинки для desktop -->
         <div class="gallery-desktop">
-          <div class="gallery-scroll-container">
-            <img
-              src="./img/gallery 1.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 2.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 3.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 4.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 5.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 6.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 7.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
-            <img
-              src="./img/gallery 8.png"
-              alt="gallery"
-              class="gallery-desktop-image"
-            />
+          <div class="gallery-slider">
+            <button class="gallery-nav-btn gallery-prev" aria-label="Previous">‹</button>
+            <div class="gallery-scroll-container">
+              <div class="gallery-slide active">
+                <img
+                  src="./img/gallery 11.jpg"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 2.jpg"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 3.png"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 4.jpg"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+              </div>
+              <div class="gallery-slide">
+                <img
+                  src="./img/gallery 5.png"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 6.png"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 7.jpg"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+                <img
+                  src="./img/gallery 8.png"
+                  alt="gallery"
+                  class="gallery-desktop-image"
+                />
+              </div>
+            </div>
+            <button class="gallery-nav-btn gallery-next" aria-label="Next">›</button>
+          </div>
+          <div class="gallery-indicators">
+            <button class="gallery-indicator active" data-slide="0"></button>
+            <button class="gallery-indicator" data-slide="1"></button>
           </div>
         </div>
 
@@ -352,7 +371,7 @@
           class="gallery-link"
           target="_blank"
           rel="noopener noreferrer"
-          >More photos in Instagram
+          >More photos in Instagram
           <svg class="gallery-icon">
             <use href="#instagram"></use>
           </svg>
@@ -367,7 +386,7 @@
               class="gallery-mobile-image"
             />
             <img
-              src="./img/gallery 2.png"
+              src="./img/gallery 2.jpg"
               alt="gallery"
               class="gallery-mobile-image"
             />
@@ -399,15 +418,23 @@
           </div>
         </div>
       </div>
+
+      <!-- Lightbox Modal for Gallery Images -->
+      <div class="lightbox-modal" id="lightbox-modal">
+        <div class="lightbox-content">
+          <button class="lightbox-close" id="lightbox-close">&times;</button>
+          <img class="lightbox-image" id="lightbox-image" src="" alt="Gallery image" />
+          <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+          <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+        </div>
+      </div>
     </section>
 
     <section class="price" id="price">
       <div class="price-container">
         <h2 class="price-title">ПОСЛУГИ ТА ЦІНИ</h2>
         <p class="price-description">
-          Професійний догляд, стильні стрижки та ідеальне фарбування – все, щоб
-          підкреслити вашу унікальність. Оберіть послугу, яка відповідає вашим
-          бажанням
+          Ми Перукарня Валентина. Інклюзивна перукарня, де є місце для кожного. Місцева перукарня, що робить стиль без меж.
         </p>
         <div class="price-cards">
           <!-- ///////////////////////////// картка 1 //////////////////////////////// -->
@@ -718,13 +745,13 @@
         <h2 class="booking-title">ЗАБРОНЮЙТЕ ВІЗИТ</h2>
         <p class="booking-subtitle">
           Готові до змін? Заповніть форму зворотного зв'язку, щоб забронювати
-          візит, або зв’яжіться з нами напряму – ми допоможемо втілити вашу
+          візит, або зв'яжіться з нами напряму – ми допоможемо втілити вашу
           ідеальну зачіску в реальність!
         </p>
 
         <div class="booking-content">
           <form class="booking-form">
-            <h3 class="form-title">ЗАМОВТЕ ЗВОРОТНІЙ ЗВ’ЯЗОК</h3>
+            <h3 class="form-title">ЗАМОВТЕ ЗВОРОТНІЙ ЗВ'ЯЗОК</h3>
 
             <div class="form-field">
               <label for="name" class="form-label">Імʼя та прізвище*</label>
