@@ -48,7 +48,7 @@ ul {
 
 /* Общий фон */
 .hero-background {
-  background: url('../img/main.jpg') no-repeat center center / cover;
+  background: url('../img/main1.jpg') no-repeat center center / cover;
   min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center 0px;
