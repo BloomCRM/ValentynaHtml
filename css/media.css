@@ -733,6 +733,40 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
+  /* Mobile Lightbox Improvements */
+  .lightbox-modal {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .lightbox-content {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .lightbox-image {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Improve touch targets for mobile */
+  .lightbox-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-nav {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* //////////////////// прайс лист ////////////////////// */
 
   .price-container {

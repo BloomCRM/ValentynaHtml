@@ -413,6 +413,13 @@ class Lightbox {
     this.galleryImages = document.querySelectorAll('.gallery-desktop-image, .gallery-mobile-image');
     this.currentImageIndex = 0;
     
+    // Touch/swipe variables
+    this.touchStartX = 0;
+    this.touchStartY = 0;
+    this.touchEndX = 0;
+    this.touchEndY = 0;
+    this.minSwipeDistance = 50; // Minimum distance for a swipe to be registered
+    
     this.init();
   }
 
@@ -438,6 +445,11 @@ class Lightbox {
     this.prevBtn.addEventListener('click', () => this.prevImage());
     this.nextBtn.addEventListener('click', () => this.nextImage());
 
+    // Touch events for mobile swipe
+    this.modal.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+    this.modal.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+    this.modal.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+
     // Keyboard events
     document.addEventListener('keydown', (e) => {
       if (!this.modal.classList.contains('active')) return;
@@ -454,6 +466,51 @@ class Lightbox {
           break;
       }
     });
+  }
+
+  // Touch event handlers for swipe functionality
+  handleTouchStart(e) {
+    this.touchStartX = e.changedTouches[0].screenX;
+    this.touchStartY = e.changedTouches[0].screenY;
+  }
+
+  handleTouchMove(e) {
+    // Prevent default to avoid scrolling while swiping
+    e.preventDefault();
+  }
+
+  handleTouchEnd(e) {
+    this.touchEndX = e.changedTouches[0].screenX;
+    this.touchEndY = e.changedTouches[0].screenY;
+    this.handleSwipe();
+  }
+
+  handleSwipe() {
+    const deltaX = this.touchStartX - this.touchEndX;
+    const deltaY = this.touchStartY - this.touchEndY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    // Only process swipe if distance is greater than minimum threshold
+    if (distance > this.minSwipeDistance) {
+      // Determine if swipe is more horizontal than vertical
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+          // Swipe left - go to next image
+          this.nextImage();
+        } else {
+          // Swipe right - go to previous image
+          this.prevImage();
+        }
+      }
+      // Vertical swipes could be used for closing lightbox if needed
+      // else if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      //   if (deltaY > 0) {
+      //     // Swipe up - could close lightbox
+      //     this.closeLightbox();
+      //   }
+      // }
+    }
   }
 
   openLightbox(index) {

@@ -718,6 +718,9 @@ ul {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(5px);
+  /* Enable touch events */
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 .lightbox-modal.active {
@@ -733,6 +736,12 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Improve touch interaction */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .lightbox-image {
