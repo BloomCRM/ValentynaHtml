@@ -723,6 +723,13 @@
     flex-shrink: 0;
     scroll-snap-align: start;
     border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-mobile-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
   /* //////////////////// прайс лист ////////////////////// */

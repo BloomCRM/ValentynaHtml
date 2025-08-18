@@ -146,7 +146,7 @@ class Lightbox {
     this.closeBtn = document.getElementById('lightbox-close');
     this.prevBtn = document.getElementById('lightbox-prev');
     this.nextBtn = document.getElementById('lightbox-next');
-    this.galleryImages = document.querySelectorAll('.gallery-desktop-image');
+    this.galleryImages = document.querySelectorAll('.gallery-desktop-image, .gallery-mobile-image');
     this.currentImageIndex = 0;
     
     this.init();
@@ -157,7 +157,7 @@ class Lightbox {
   }
 
   bindEvents() {
-    // Add click events to all gallery images
+    // Add click events to all gallery images (desktop and mobile)
     this.galleryImages.forEach((image, index) => {
       image.addEventListener('click', () => this.openLightbox(index));
     });
