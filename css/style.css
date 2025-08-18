@@ -41,6 +41,25 @@ ul {
   margin: 0 auto;
 }
 
+/* Mobile-specific improvements */
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text readability */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
 /* ////////////////////////////Modal////////////////////////////// */
 .mobile-menu {
   display: none;

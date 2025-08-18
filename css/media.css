@@ -511,6 +511,8 @@
     font-size: 25px;
     letter-spacing: 0.05em;
     color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
   }
 
   .hero-buttons {
@@ -520,17 +522,34 @@
     margin-bottom: 112px;
   }
 
+  .first-button,
+  .second-button {
+    width: 280px;
+    text-align: center;
+    padding: 15px 30px;
+    font-size: 16px;
+  }
+
   .services {
     padding-bottom: 0;
   }
 
   .services-lisl {
     width: 354px;
+    gap: 20px;
   }
 
   .services-item {
     width: 353px;
     height: 173px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .services-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .services-text {
@@ -540,11 +559,10 @@
     transform: none;
     text-align: center;
     width: 100%;
-    padding: 22px 50px;
-  }
-
-  .display-none-item {
-    display: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    line-height: 1.2;
+    background: rgba(255, 255, 255, 0.9);
   }
 
   .services-btn {
@@ -690,6 +708,12 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .gallery-mobile-scroll-container::-webkit-scrollbar {
+    display: none;
   }
 
   .gallery-mobile-image {
@@ -698,6 +722,7 @@
     object-fit: cover;
     flex-shrink: 0;
     scroll-snap-align: start;
+    border-radius: 8px;
   }
 
   /* //////////////////// прайс лист ////////////////////// */
@@ -734,23 +759,29 @@
 
   .price-item-1 {
     width: 350px;
-    height: 633px;
-    /* background: url('../img/price-list-desktop1.png') no-repeat center
-      calc(100% - -25px) / cover; */
+    height: auto;
+    min-height: 633px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 20px;
   }
 
   .price-item-2 {
     width: 350px;
-    height: 633px;
-    /* background: url('../img/price-list-desktop2.png') no-repeat center
-      calc(100% - -30px) / cover; */
+    height: auto;
+    min-height: 633px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 20px;
   }
 
   .price-item-3 {
     width: 350px;
-    height: 633px;
-    /* background: url('../img/price-list-desktop3.png') no-repeat center
-      calc(100% - -20px) / cover; */
+    height: auto;
+    min-height: 633px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 20px;
   }
 
   .price-list {
@@ -784,17 +815,19 @@
   }
 
   .news-scroll-container {
-    width: 250px;
+    width: 300px;
     height: 650px;
-
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    gap: 30px;
+    gap: 20px;
     padding: 0 10px;
-    margin-left: 59px;
+    margin-left: auto;
+    margin-right: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .news-scroll-container::-webkit-scrollbar {
@@ -1075,6 +1108,22 @@
     display: flex;
     flex-direction: column;
     gap: 34px;
+    padding: 0 20px;
+  }
+
+  .footer-link-container {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .footer-link-img-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .footer-link-icon {
+    width: 24px;
+    height: 24px;
   }
 
   /* ////////////////////////////modal////////////////////////// */
