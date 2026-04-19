@@ -643,12 +643,14 @@ ul {
   transform: translateY(-50%) scale(0.95);
 }
 
+/* Inside the track: negative values sit outside .gallery-slider and get clipped
+   when .gallery-desktop uses overflow-x: hidden (tablet / narrow layouts). */
 .gallery-prev {
-  left: -25px;
+  left: 12px;
 }
 
 .gallery-next {
-  right: -25px;
+  right: 12px;
 }
 
 .gallery-scroll-container {
