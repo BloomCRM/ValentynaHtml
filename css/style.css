@@ -8,6 +8,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* html{
@@ -23,6 +24,7 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   background: #fff;
+  overflow-x: hidden;
 }
 
 a {
