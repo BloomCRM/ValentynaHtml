@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Перукарня Валентина — стрижки, фарбування, укладка в центрі Києва" />
+    <title>@ViewData["Title"] — Перукарня Валентина</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="~/site.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="/">Валентина</a>
+            <nav class="site-nav" aria-label="Головне меню">
+                <a href="#services">Послуги</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#prices">Ціни</a>
+                <a href="#contacts">Контакти</a>
+            </nav>
+            <a class="btn btn-primary btn-booking"
+               href="@(ViewData["BookingUrl"] ?? "#")"
+               target="_blank" rel="noopener">
+                Записатись
+            </a>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© @DateTime.Now.Year Перукарня Валентина · Київ, вул. Богдана Хмельницького, 94</p>
+            <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" rel="noopener">
+                Instagram
+            </a>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

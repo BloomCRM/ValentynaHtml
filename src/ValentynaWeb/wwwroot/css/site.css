@@ -1,0 +1,168 @@
+/* =========================================================
+   ValentynaWeb — базові стилі
+   TODO: перенести та очистити з legacy/css/style.css
+   ========================================================= */
+
+:root {
+    --color-bg:       #0e0e0e;
+    --color-surface:  #181818;
+    --color-accent:   #c9a96e;   /* золотистий — бренд */
+    --color-text:     #f0ede8;
+    --color-muted:    #8a8480;
+    --font-main:      'Inter', system-ui, sans-serif;
+    --radius:         8px;
+    --container-max:  1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: .625rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity .2s;
+}
+.btn:hover { opacity: .85; }
+.btn-primary {
+    background: var(--color-accent);
+    color: #000;
+}
+.btn-lg { padding: .875rem 2rem; font-size: 1.1rem; }
+
+/* Header */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14, 14, 14, .92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #2a2a2a;
+}
+.site-header .container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 64px;
+}
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-right: auto;
+}
+.site-nav { display: flex; gap: 1.5rem; }
+.site-nav a {
+    color: var(--color-muted);
+    text-decoration: none;
+    font-size: .95rem;
+    transition: color .2s;
+}
+.site-nav a:hover { color: var(--color-text); }
+
+/* Hero */
+.hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(ellipse at 60% 50%, #1c1507 0%, var(--color-bg) 70%);
+}
+.hero__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+.hero__title span { color: var(--color-accent); }
+.hero__subtitle {
+    color: var(--color-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Sections */
+.section { padding-block: 5rem; }
+.section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 2.5rem;
+    color: var(--color-accent);
+}
+
+/* Services grid */
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+.service-card {
+    background: var(--color-surface);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.service-card__name { font-size: 1.1rem; font-weight: 700; }
+.service-card__desc { color: var(--color-muted); font-size: .9rem; flex: 1; }
+.service-card__price { color: var(--color-accent); font-weight: 600; }
+
+/* Price table */
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.price-table th, .price-table td {
+    padding: .75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #2a2a2a;
+}
+.price-table th { color: var(--color-accent); font-weight: 600; }
+
+/* Contacts */
+.contacts__info { font-style: normal; line-height: 2; margin-bottom: 2rem; }
+.contacts__info a { color: var(--color-accent); }
+
+/* Footer */
+.site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid #2a2a2a;
+    padding-block: 2rem;
+}
+.site-footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: .875rem;
+    color: var(--color-muted);
+}
+.site-footer a { color: var(--color-accent); text-decoration: none; }
+
+/* Responsive */
+@media (max-width: 640px) {
+    .site-nav, .btn-booking { display: none; }
+    .services__grid { grid-template-columns: 1fr; }
+}

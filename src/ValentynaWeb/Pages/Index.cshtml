@@ -1,0 +1,92 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Головна";
+    ViewData["BookingUrl"] = Model.BookingUrl;
+}
+
+<!-- HERO ----------------------------------------------------------------->
+<section class="hero">
+    <div class="container">
+        <h1 class="hero__title">Перукарня<br><span>Валентина</span></h1>
+        <p class="hero__subtitle">Стрижки · Фарбування · Укладка<br>Центр Києва, вул. Богдана Хмельницького, 94</p>
+        <a class="btn btn-primary btn-lg"
+           href="@Model.BookingUrl"
+           target="_blank" rel="noopener">
+            Записатись онлайн
+        </a>
+    </div>
+</section>
+
+<!-- ПОСЛУГИ -------------------------------------------------------------->
+<section id="services" class="section services">
+    <div class="container">
+        <h2 class="section__title">Послуги</h2>
+        <div class="services__grid">
+            @foreach (var service in Model.Services)
+            {
+                <div class="service-card">
+                    <h3 class="service-card__name">@service.Name</h3>
+                    <p class="service-card__desc">@service.Description</p>
+                    <span class="service-card__price">від @service.PriceFrom грн</span>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ГАЛЕРЕЯ -------------------------------------------------------------->
+<section id="gallery" class="section gallery">
+    <div class="container">
+        <h2 class="section__title">Галерея</h2>
+        <p class="gallery__instagram">
+            Більше робіт в
+            <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" rel="noopener">
+                &#64;valentyna_perukarnia
+            </a>
+        </p>
+    </div>
+</section>
+
+<!-- ЦІНИ ----------------------------------------------------------------->
+<section id="prices" class="section prices">
+    <div class="container">
+        <h2 class="section__title">Ціни</h2>
+        <table class="price-table">
+            <thead>
+                <tr><th>Послуга</th><th>Ціна (грн)</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model.Services)
+                {
+                    <tr>
+                        <td>@service.Name</td>
+                        <td>від @service.PriceFrom</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- КОНТАКТИ ------------------------------------------------------------->
+<section id="contacts" class="section contacts">
+    <div class="container">
+        <h2 class="section__title">Контакти</h2>
+        <address class="contacts__info">
+            <p>📍 Київ, вул. Богдана Хмельницького, 94</p>
+            <p>🕐 Пн–Сб: 09:00–20:00</p>
+            <a href="https://www.instagram.com/valentyna_perukarnia/"
+               target="_blank" rel="noopener">
+                Instagram
+            </a>
+        </address>
+        <div class="contacts__map">
+            <iframe
+                src="https://maps.google.com/maps?q=50.4485265,30.4995412&z=16&output=embed"
+                width="100%" height="350" style="border:0;" allowfullscreen
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>

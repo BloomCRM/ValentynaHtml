@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+
+  # -------------------------------------------------------
+  # ASP.NET Core app
+  # -------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: valentyna_app
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    expose:
+      - "8080"
+    networks:
+      - internal
+    # Секрети / локальні overrides — НЕ комітяться
+    # env_file: .env
+
+  # -------------------------------------------------------
+  # Caddy — reverse proxy + auto HTTPS
+  # -------------------------------------------------------
+  caddy:
+    image: caddy:2-alpine
+    container_name: valentyna_caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal
+    depends_on:
+      - app
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
