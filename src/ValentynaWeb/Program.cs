@@ -1,11 +1,15 @@
+using ValentynaWeb.Content;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHealthChecks();
+builder.Services.AddOutputCache(o => o.AddBasePolicy(b => b.Expire(TimeSpan.FromMinutes(5))));
+builder.Services.AddLocalization(o => o.ResourcesPath = "Resources");
+builder.Services.AddSingleton<IContentProvider, JsonContentProvider>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -14,11 +18,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseOutputCache();
 app.UseAuthorization();
-
 app.MapRazorPages();
+app.MapHealthChecks("/health");
 
 app.Run();

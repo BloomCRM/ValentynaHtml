@@ -274,139 +274,31 @@
       Ми Перукарня Валентина. Інклюзивна перукарня, де є місце для кожного. Місцева перукарня, що робить стиль без меж.
     </p>
     <div class="price-cards">
-      <div class="price-item-1">
-        <div class="price-item-title-container">
-          <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
-          <p class="price-item-title" data-translate="price-cuts">Стрижки</p>
+      @foreach (var category in Model.ServiceCategories)
+      {
+        <div class="@category.CssClass">
+          <div class="price-item-title-container">
+            <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
+            <p class="price-item-title">@category.Name</p>
+          </div>
+          <ul class="price-list">
+            @foreach (var service in category.Services)
+            {
+              <li class="@category.RowCssClass">
+                @if (service.IsGroupHeader)
+                {
+                  <p class="service-name-group">@service.Name</p>
+                }
+                else
+                {
+                  <span class="service-name">@service.Name</span>
+                  <span class="service-price">@service.PriceDisplay</span>
+                }
+              </li>
+            }
+          </ul>
         </div>
-        <ul class="price-list">
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="short-cut">Коротка стрижка</span>
-            <span class="service-price">1100 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="male-cut">Чоловіча стрижка</span>
-            <span class="service-price">1100 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="shoulder-cut">Стрижка волосся довжиною до плечей (2 довжина)</span>
-            <span class="service-price">1400 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="back-cut">Стрижка волосся довжиною до лопаток (3 довжина)</span>
-            <span class="service-price">1600 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="long-cut">Стрижка довжиною нижче лопаток (4 довжина)</span>
-            <span class="service-price">1800 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="bangs-cut">Стрижка чубчика</span>
-            <span class="service-price">500 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="machine-cut">Стрижка машинкою</span>
-            <span class="service-price">800 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="beard-cut">Стрижка бороди</span>
-            <span class="service-price">600 грн</span>
-          </li>
-          <li class="price-list-row-1">
-            <span class="service-name" data-translate="male-beard">Чоловіча стрижка + борода</span>
-            <span class="service-price">1600 грн</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="price-item-2">
-        <div class="price-item-title-container">
-          <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
-          <p class="price-item-title" data-translate="price-coloring">Фарбування</p>
-        </div>
-        <ul class="price-list">
-          <li class="price-list-row">
-            <span class="service-name" data-translate="roots">Коріння</span>
-            <span class="service-price">2000-2500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="highlights-roots">Висвітлення коренів та тонування</span>
-            <span class="service-price">3000-4500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="toning">Тонування</span>
-            <span class="service-price">1500-4000 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="single-color">Однотонне фарбування</span>
-            <span class="service-price">2500-6000 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="black-exit">Вихід з чорного/виправлення невдалого фарбування</span>
-            <span class="service-price">4500-12000 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="highlights">Пасма (ціна залежить від кількості пасм)</span>
-            <span class="service-price">1500-2500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="complex-techniques">Складні техніки фарбування</span>
-            <span class="service-price">4500-13000 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="consultation">Консультація перед фарбуванням або укладкою 3го рівня</span>
-            <span class="service-price" data-translate="free">БЕЗКОШТОВНО</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="price-item-3">
-        <div class="price-item-title-container">
-          <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
-          <p class="price-item-title" data-translate="price-care">Миття, укладки та догляд</p>
-        </div>
-        <ul class="price-list">
-          <li class="price-list-row">
-            <span class="service-name" data-translate="hair-wash">Миття голови</span>
-            <span class="service-price">500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="styling-1">Укладка 1го рівня</span>
-            <span class="service-price">800 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="styling-2">Укладка 2го рівня</span>
-            <span class="service-price">1000-1500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="styling-3">Укладка 3го рівня</span>
-            <span class="service-price"><span data-translate="from-price">Від</span> 1500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="care-k18">Догляд К18</span>
-            <span class="service-price">1200 грн</span>
-          </li>
-          <li class="price-list-row">
-            <p class="service-name-group" data-translate="care-oil-therapy">Догляд LA Biosthetique oil therapy:</p>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="length-1">1 Довжина</span>
-            <span class="service-price">1100 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="length-2">2 Довжина</span>
-            <span class="service-price">1300 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="length-3">3 Довжина</span>
-            <span class="service-price">1500 грн</span>
-          </li>
-          <li class="price-list-row">
-            <span class="service-name" data-translate="length-4">4 Довжина</span>
-            <span class="service-price">1700 грн</span>
-          </li>
-        </ul>
-      </div>
+      }
     </div>
     <a href="@Model.BookingUrl" target="_blank" class="price-button" data-translate="hero-book">Записатися</a>
   </div>

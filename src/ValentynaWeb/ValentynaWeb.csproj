@@ -8,4 +8,10 @@
     <AssemblyName>ValentynaWeb</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Update="Content\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
