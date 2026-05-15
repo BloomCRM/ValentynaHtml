@@ -1,0 +1,521 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Валентина — перукарня";
+}
+
+<header class="hero-background" id="home">
+  <!-- Хедер -->
+  <div class="header">
+    <div class="logo-container">
+      <p class="logo"><span data-translate="logo-main">ВАЛЕНТИНА</span> <span class="logo-span" data-translate="logo-sub">перукарня</span></p>
+      <div class="mobile-language-switch">
+        <button class="lang-btn active" data-lang="ua">UA</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button type="button" class="menu-burger" id="burger-btn">
+        <svg class="menu-burger-icon">
+          <use href="#menu-burger"></use>
+        </svg>
+      </button>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <button type="button" class="close-button" id="close-btn">
+          <svg class="menu-close-icon">
+            <use href="#menu-close"></use>
+          </svg>
+        </button>
+        <div class="mobile-menu-container">
+          <p class="logo-mobile">
+            <span data-translate="logo-main">ВАЛЕНТИНА</span> <span class="logo-span" data-translate="logo-sub">перукарня</span>
+          </p>
+          <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+              <li><a href="#home" class="mobile-nav-link" data-translate="nav-home">Головна</a></li>
+              <li><a href="#services" class="mobile-nav-link" data-translate="nav-services">Послуги</a></li>
+              <li><a href="#about" class="mobile-nav-link" data-translate="nav-about">Про нас</a></li>
+              <li><a href="#price" class="mobile-nav-link" data-translate="nav-price">Прайс</a></li>
+              <li><a href="#gallery" class="mobile-nav-link" data-translate="nav-gallery">Галерея</a></li>
+              <li><a href="#booking" class="mobile-nav-link" data-translate="nav-contacts">Контакти</a></li>
+            </ul>
+          </nav>
+          <a href="@Model.BookingUrl" class="mobile-book-btn" data-translate="hero-book">Записатися</a>
+          <div class="mobile-contacts">
+            <div class="mobile-contacts-img">
+              <svg class="mobile-phone-icon">
+                <use href="#phone-modal"></use>
+              </svg>
+            </div>
+            <a href="tel:+380989985522" class="mobile-phone">+38 (098) 998-55-22</a>
+          </div>
+          <div class="footer-link-container">
+            <div class="footer-link-img-container">
+              <a href="https://facebook.com" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#facebook"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#youtube"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#instagram"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://web.telegram.org" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#telegram2"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-container-inner">
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="#home" class="nav-link" data-translate="nav-home">Головна</a></li>
+            <li><a href="#about" class="nav-link" data-translate="nav-about">Про нас</a></li>
+            <li><a href="#price" class="nav-link" data-translate="nav-price">Прайс</a></li>
+            <li><a href="#gallery" class="nav-link" data-translate="nav-gallery">Галерея</a></li>
+            <li><a href="#booking" class="nav-link" data-translate="nav-contacts">Контакти</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="nav-actions">
+        <div class="language-switch">
+          <button class="lang-btn active" data-lang="ua">UA</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="https://t.me/valentyna_perukarnia" target="_blank" rel="noopener noreferrer" class="nav-button">
+          <span data-translate="telegram-btn">написати в Telegram</span>
+          <svg class="icon"><use href="#telegram"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Херо -->
+  <section class="hero">
+    <div class="hero-content container">
+      <h1 class="hero-title" data-translate="hero-title">Час бути собою</h1>
+      <div class="hero-buttons">
+        <a href="@Model.BookingUrl" target="_blank" class="first-button" data-translate="hero-book">Записатися</a>
+        <a href="#services" class="second-button" data-translate="hero-services">Перейти до послуг</a>
+      </div>
+    </div>
+  </section>
+</header>
+
+<section class="services" id="services">
+  <h2 class="services-title" data-translate="services-title">ПОСЛУГИ</h2>
+  <ul class="services-lisl">
+    <li class="services-item">
+      <picture>
+        <source media="(max-width: 767px)" srcset="~/img/cuts.jpg 1x, ~/img/cuts.jpg 2x" />
+        <img src="~/img/cuts.jpg" alt="Стрижки" />
+      </picture>
+      <p class="services-text" data-translate="services-cuts">СТРИЖКИ</p>
+    </li>
+    <li class="services-item">
+      <picture>
+        <source media="(max-width: 767px)" srcset="~/img/ukladka2.JPG 1x, ~/img/ukladka2.JPG 2x" />
+        <img src="~/img/ukladka2.JPG" alt="Укладки" />
+      </picture>
+      <p class="services-text" data-translate="services-styling">УКЛАДКИ</p>
+    </li>
+    <li class="services-item">
+      <picture>
+        <source media="(max-width: 767px)" srcset="~/img/doglyad2.JPG 1x, ~/img/doglyad2.JPG 2x" />
+        <img src="~/img/doglyad2.JPG" alt="Догляд" />
+      </picture>
+      <p class="services-text" data-translate="services-care">ДОГЛЯД</p>
+    </li>
+    <li class="services-item">
+      <picture>
+        <source media="(max-width: 767px)" srcset="~/img/tas.png 1x, ~/img/tas.png 2x" />
+        <img src="~/img/tas.png" alt="ПРОЦЕДУРИ" />
+      </picture>
+      <p class="services-text" data-translate="services-chemical">ХІМ ТА БІО ЗАВИВКА</p>
+    </li>
+    <li class="services-item">
+      <picture>
+        <source media="(max-width: 767px)" srcset="~/img/doglyad.JPG 1x, ~/img/doglyad.JPG 2x" />
+        <img src="~/img/doglyad.JPG" alt="Фарбування" />
+      </picture>
+      <p class="services-text" data-translate="services-coloring">ФАРБУВАННЯ</p>
+    </li>
+  </ul>
+  <a href="@Model.BookingUrl" target="_blank" class="services-btn" data-translate="hero-book">Записатися</a>
+</section>
+
+<section class="about" id="about">
+  <h2 class="about-title" data-translate="about-title">ПРО НАС</h2>
+  <div class="about-container">
+    <p class="about-logo">
+      <span data-translate="logo-main">ВАЛЕНТИНА</span> <span class="about-logo-span" data-translate="logo-sub">перукарня</span>
+    </p>
+    <div class="about-text-container">
+      <p class="about-text about-text-desktop" data-translate="about-text-desktop">
+        Я створив місце, де зібрав усе, що люблю і вмію. Хочу зробити
+        найкращу перукарню в Києві, і вкладаю в цей проєкт 101% себе. Це
+        місце, де можна стати щасливішим. За годину (а з фарбуванням і за
+        4-7 годин) можна змінити не просто зачіску, а настрій людини. У нас
+        класна музика, затишна атмосфера, смачна кава – все, щоб ти
+        почувався комфортно. Люблю динамічні стрижки та експерименти. Мій
+        досвід дозволяє створювати форму, яка природно виглядає та гарно
+        відростає. Волосся – це не просто стрижка, а частина образу, яка
+        потребує уваги. Тому догляд, стайлінг і сушка феном – must-have, щоб
+        розкрити його потенціал.
+      </p>
+      <p class="about-text about-text-mobile" data-translate="about-text-mobile">
+        Я створив місце, де зібрав усе, що люблю і вмію. Хочу зробити
+        найкращу перукарню в Києві, і вкладаю в цей проєкт 101% себе. Це
+        місце, де можна стати щасливішим. За годину (а з фарбуванням і за
+        4-7 годин) можна змінити не просто зачіску, а настрій людини. У нас
+        класна музика, затишна атмосфера, смачна кава – все, щоб ти
+        почувався комфортно. Люблю динамічні стрижки та експерименти. Мій
+        досвід дозволяє створювати форму, яка природно виглядає та гарно
+        відростає.
+      </p>
+      <div class="about-author">
+        <img src="~/img/avatar.png" alt="Фото Валентина" class="author-avatar" />
+        <div class="about-author-info">
+          <p class="author-name" data-translate="author-name">Валентин Галицький</p>
+          <p class="author-role" data-translate="author-role">Засновник Перукарні Валентина</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cosmetics">
+  <div class="cosmetics-container">
+    <div class="cosmetics-text">
+      <h2 class="cosmetics-title" data-translate="cosmetics-title">Косметика, яку ми використовуємо</h2>
+      <p class="cosmetics-description" data-translate="cosmetics-description">
+        Засоби для догляду за волоссям пропонують індивідуальну систему
+        догляду, створену спеціально для вас. Використовуючи натуральні
+        інгредієнти, науково доведено, що ця преміальна лінія забезпечує
+        найкращий догляд за вашим волоссям. ми надаємо професійні
+        рекомендації щодо догляду за волоссям, допомагаючи вам обрати
+        ідеальні засоби, які відповідають вашому типу та стилю волосся
+      </p>
+    </div>
+    <img src="~/img/cosmetics.png" alt="cosmetics" class="cosmetics-image" />
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <h2 class="gallery-title" data-translate="gallery-title">ГАЛЕРЕЯ РОБІТ</h2>
+  <div class="gallery-container">
+    <div class="gallery-desktop">
+      <div class="gallery-slider">
+        <button class="gallery-nav-btn gallery-prev" aria-label="Previous">&#8249;</button>
+        <div class="gallery-scroll-container">
+          <div class="gallery-slide active">
+            <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 3.png" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 4.jpg" alt="gallery" class="gallery-desktop-image" />
+          </div>
+          <div class="gallery-slide">
+            <img src="~/img/gallery 5.png" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 6.png" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 7.jpg" alt="gallery" class="gallery-desktop-image" />
+            <img src="~/img/gallery 8.png" alt="gallery" class="gallery-desktop-image" />
+          </div>
+        </div>
+        <button class="gallery-nav-btn gallery-next" aria-label="Next">&#8250;</button>
+      </div>
+      <div class="gallery-indicators">
+        <button class="gallery-indicator active" data-slide="0"></button>
+        <button class="gallery-indicator" data-slide="1"></button>
+      </div>
+    </div>
+
+    <a href="https://www.instagram.com/valentyna_perukarnia/" class="gallery-link" target="_blank" rel="noopener noreferrer">
+      <span data-translate="gallery-more">More photos in Instagram</span>
+      <svg class="gallery-icon"><use href="#instagram"></use></svg>
+    </a>
+
+    <div class="gallery-mobile">
+      <div class="gallery-mobile-scroll-container">
+        <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 3.png" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 4.jpg" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 5.png" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 6.png" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 7.jpg" alt="gallery" class="gallery-mobile-image" />
+        <img src="~/img/gallery 8.png" alt="gallery" class="gallery-mobile-image" />
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img class="lightbox-image" id="lightbox-image" src="" alt="Gallery image" />
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<section class="price" id="price">
+  <div class="price-container">
+    <h2 class="price-title" data-translate="price-title">ПОСЛУГИ ТА ЦІНИ</h2>
+    <p class="price-description" data-translate="price-description">
+      Ми Перукарня Валентина. Інклюзивна перукарня, де є місце для кожного. Місцева перукарня, що робить стиль без меж.
+    </p>
+    <div class="price-cards">
+      @foreach (var category in Model.ServiceCategories)
+      {
+        <div class="@category.CssClass">
+          <div class="price-item-title-container">
+            <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
+            <p class="price-item-title">@category.Name</p>
+          </div>
+          <ul class="price-list">
+            @foreach (var service in category.Services)
+            {
+              <li class="@category.RowCssClass">
+                @if (service.IsGroupHeader)
+                {
+                  <p class="service-name-group">@service.Name</p>
+                }
+                else
+                {
+                  <span class="service-name">@service.Name</span>
+                  <span class="service-price">@service.PriceDisplay</span>
+                }
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+    <a href="@Model.BookingUrl" target="_blank" class="price-button" data-translate="hero-book">Записатися</a>
+  </div>
+</section>
+
+<section class="news">
+  <div class="news-container">
+    <h2 class="news-title" data-translate="news-title">ПОДІЇ ТА НОВИТИ У ПЕРУКАРНІ ВАЛЕНТИНА</h2>
+    <p class="news-subtitle" data-translate="news-subtitle">
+      Завітайте до нас на цікаві події та користуйтесь акційними пропозиціями
+    </p>
+    <div class="news-scroll-container">
+      <div class="news-card">
+        <div class="news-img-1"></div>
+        <h2 class="news-card-title" data-translate="news-music">МУЗИЧНИЙ ВЕЧІР</h2>
+        <p class="news-card-description" data-translate="news-music-desc">
+          9 березня о 18:00 у перукарні «Валентина» відбудеться затишний
+          музичний вечір. За інструментом – талановитий Міша Качур.
+          Приходьте насолодитися живою музикою та приємною атмосферою!
+        </p>
+        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
+        <div class="card-line"></div>
+        <p class="date" data-translate="news-date-1">8 березня 2025</p>
+      </div>
+      <div class="news-card">
+        <div class="news-img-2"></div>
+        <h2 class="news-card-title" data-translate="news-valentine">ДЕНЬ ЗАКОХАНИХ У ВАЛЕНТИНІ</h2>
+        <p class="news-card-description" data-translate="news-valentine-desc">
+          Запрошуємо вас 14 лютого на святкування Дня Закоханих у перукарні
+          «Валентина»! На вас чекають смачні мочі, гарячий рамен і музична
+          атмосфера від DJ Emergencyloop. 30% прибутку буде передано на
+          підтримку ЗСУ
+        </p>
+        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
+        <div class="card-line"></div>
+        <p class="date" data-translate="news-date-2">14 лютого 2025</p>
+      </div>
+      <div class="news-card">
+        <div class="news-img-3"></div>
+        <h2 class="news-card-title" data-translate="news-filter">ФІЛЬТР ЗА ДОНАТ</h2>
+        <p class="news-card-description" data-translate="news-filter-desc">
+          До 14 лютого у «Валентині» триває благодійна акція «Фільтр за
+          донат» у співпраці з CaféBoutique. Усі зібрані кошти підуть на
+          підтримку FPV-лабораторії. Приєднуйтесь та зробіть свій внесок у
+          важливу справу!
+        </p>
+        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
+        <div class="card-line"></div>
+        <p class="date" data-translate="news-date-2">14 лютого 2025</p>
+      </div>
+    </div>
+    <div class="scroll-indicators">
+      <span class="dot activ"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section-picture">
+  <div class="section-img"></div>
+</section>
+
+<section class="reviews">
+  <div class="reviews-container">
+    <h2 class="reviews-title" data-translate="reviews-title">ВІДГУКИ НАШИХ КЛІЄНТІВ</h2>
+    <p class="reviews-subtitle" data-translate="reviews-subtitle">
+      Зазирніть у наше портфоліо вражаючих перевтілень та знайдіть натхнення
+      для свого нового образу
+    </p>
+    <p class="reviews-subtitle-tablet" data-translate="reviews-subtitle-tablet">
+      Наші клієнти – наш головний пріоритет! Довіра, якість та стиль – те,
+      що ми створюємо разом. Ознайомтесь із враженнями наших гостей і
+      приєднуйтесь до спільноти задоволених клієнтів
+    </p>
+    <div class="reviews-cards">
+      <div class="review-card">
+        <div class="review-header">
+          <img src="~/img/avatar1.png" alt="Avatar" class="review-avatar" />
+          <div class="review-info">
+            <p class="review-name">Natalia Pushkarova</p>
+            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
+          </div>
+        </div>
+        <p class="review-text" data-translate="review-1">
+          Вперше відвідала цю перукарню – і це було найкраще рішення!
+          Майстер врахував усі мої побажання, підібрав ідеальний відтінок
+          фарбування, а атмосфера просто чудова! Дякую за професіоналізм!
+        </p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <img src="~/img/avatar2.png" alt="Avatar" class="review-avatar" />
+          <div class="review-info">
+            <p class="review-name">Ivan Legkyi</p>
+            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
+          </div>
+        </div>
+        <p class="review-text" data-translate="review-2">
+          Дуже стильна стрижка! Майстер відразу зрозумів, що мені потрібно,
+          та зробив усе ідеально. Окрема подяка за дружню атмосферу та
+          смачну каву. Однозначно повернусь
+        </p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <img src="~/img/avatar3.png" alt="Avatar" class="review-avatar" />
+          <div class="review-info">
+            <p class="review-name">Kateryna Topolya</p>
+            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
+          </div>
+        </div>
+        <p class="review-text" data-translate="review-3">
+          Це місце, де справді люблять свою справу! Відчувається увага до
+          деталей – від підбору стрижки до рекомендацій по догляду. Вийшла з
+          салону з відчуттям оновлення! Рекомендую всім!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-dots">
+    <span class="dot-review active"></span>
+    <span class="dot-review"></span>
+    <span class="dot-review"></span>
+  </div>
+</section>
+
+<footer class="footer" id="booking">
+  <div class="footer-container">
+    <div class="footer-bottom">
+      <div class="footer-column">
+        <h2 class="footer-title" data-translate="footer-title">Перукарня Валентина</h2>
+        <p class="footer-text left" data-translate="footer-text">
+          Створюємо стиль, який підкреслює вашу індивідуальність. Наша
+          команда професіоналів допоможе вам знайти ідеальний образ.
+        </p>
+      </div>
+      <div class="footer-column">
+        <h2 class="footer-title" data-translate="footer-links-title">Швидкі посилання</h2>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link" data-translate="nav-home">Головна</a></li>
+          <li><a href="#" class="footer-link" data-translate="nav-about">Про нас</a></li>
+          <li><a href="#" class="footer-link" data-translate="nav-price">Прайс</a></li>
+          <li><a href="#" class="footer-link" data-translate="nav-gallery">Галерея</a></li>
+          <li><a href="#" class="footer-link" data-translate="reviews-title">Відгуки</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h2 class="footer-title" data-translate="footer-schedule-title">Графік роботи</h2>
+        <p class="footer-text" data-translate="footer-schedule-weekdays">Пн-Пт 10:00 - 20:00</p>
+        <p class="footer-text" data-translate="footer-schedule-weekend">Сб-Нд 11:00 - 18:00</p>
+      </div>
+    </div>
+
+    <div class="footer-top-container">
+      <div class="footer-top-container-info">
+        <div class="footer-column">
+          <h2 class="footer-link-title" data-translate="footer-social-title">Ми в соцмережах</h2>
+          <div class="footer-link-container">
+            <div class="footer-link-img-container">
+              <a href="https://facebook.com" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#facebook"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#youtube"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#instagram"></use></svg>
+              </a>
+            </div>
+            <div class="footer-link-img-container">
+              <a href="https://t.me/valentyna_perukarnia" target="_blank" class="footer-svg-link">
+                <svg class="footer-link-icon"><use href="#telegram2"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h2 class="footer-link-title" data-translate="footer-location-title">Місцезнаходження</h2>
+          <p class="footer-text left" data-translate="footer-address">вул. Богдана Хмельницького 94, Київ</p>
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/place/%D0%9F%D0%B5%D1%80%D1%83%D0%BA%D0%B0%D1%80%D0%BD%D1%8F+%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD%D0%B0/@@50.4485265,30.4995412,17z" target="_blank">
+        <img src="~/img/map.png" alt="Мапа як дістатися" class="footer-map" />
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-container-mobile">
+    <a href="https://maps.app.goo.gl/BBhDLBSZe6BwSAXX9" target="_blank">
+      <img src="~/img/map.png" alt="Мапа як дістатися" class="footer-mobile-map" />
+    </a>
+    <div class="footer-link-container">
+      <div class="footer-link-img-container">
+        <a href="https://facebook.com" target="_blank" class="footer-svg-link">
+          <svg class="footer-link-icon"><use href="#facebook"></use></svg>
+        </a>
+      </div>
+      <div class="footer-link-img-container">
+        <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
+          <svg class="footer-link-icon"><use href="#youtube"></use></svg>
+        </a>
+      </div>
+      <div class="footer-link-img-container">
+        <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
+          <svg class="footer-link-icon"><use href="#instagram"></use></svg>
+        </a>
+      </div>
+      <div class="footer-link-img-container">
+        <a href="https://t.me/valentyna_perukarnia" target="_blank" class="footer-svg-link">
+          <svg class="footer-link-icon"><use href="#telegram2"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

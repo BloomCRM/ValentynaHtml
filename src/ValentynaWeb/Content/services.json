@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "id": "cuts",
+      "name": "Стрижки",
+      "cssClass": "price-item-1",
+      "rowCssClass": "price-list-row-1",
+      "services": [
+        { "name": "Коротка стрижка",                                          "priceDisplay": "1100 грн" },
+        { "name": "Чоловіча стрижка",                                         "priceDisplay": "1100 грн" },
+        { "name": "Стрижка волосся довжиною до плечей (2 довжина)",            "priceDisplay": "1400 грн" },
+        { "name": "Стрижка волосся довжиною до лопаток (3 довжина)",           "priceDisplay": "1600 грн" },
+        { "name": "Стрижка довжиною нижче лопаток (4 довжина)",                "priceDisplay": "1800 грн" },
+        { "name": "Стрижка чубчика",                                           "priceDisplay": "500 грн"  },
+        { "name": "Стрижка машинкою",                                          "priceDisplay": "800 грн"  },
+        { "name": "Стрижка бороди",                                            "priceDisplay": "600 грн"  },
+        { "name": "Чоловіча стрижка + борода",                                 "priceDisplay": "1600 грн" }
+      ]
+    },
+    {
+      "id": "coloring",
+      "name": "Фарбування",
+      "cssClass": "price-item-2",
+      "rowCssClass": "price-list-row",
+      "services": [
+        { "name": "Коріння",                                                        "priceDisplay": "2000-2500 грн"  },
+        { "name": "Висвітлення коренів та тонування",                               "priceDisplay": "3000-4500 грн"  },
+        { "name": "Тонування",                                                      "priceDisplay": "1500-4000 грн"  },
+        { "name": "Однотонне фарбування",                                           "priceDisplay": "2500-6000 грн"  },
+        { "name": "Вихід з чорного/виправлення невдалого фарбування",               "priceDisplay": "4500-12000 грн" },
+        { "name": "Пасма (ціна залежить від кількості пасм)",                       "priceDisplay": "1500-2500 грн"  },
+        { "name": "Складні техніки фарбування",                                     "priceDisplay": "4500-13000 грн" },
+        { "name": "Консультація перед фарбуванням або укладкою 3го рівня",          "priceDisplay": "БЕЗКОШТОВНО"    }
+      ]
+    },
+    {
+      "id": "care",
+      "name": "Миття, укладки та догляд",
+      "cssClass": "price-item-3",
+      "rowCssClass": "price-list-row",
+      "services": [
+        { "name": "Миття голови",                              "priceDisplay": "500 грн"        },
+        { "name": "Укладка 1го рівня",                         "priceDisplay": "800 грн"        },
+        { "name": "Укладка 2го рівня",                         "priceDisplay": "1000-1500 грн"  },
+        { "name": "Укладка 3го рівня",                         "priceDisplay": "Від 1500 грн"   },
+        { "name": "Догляд К18",                                "priceDisplay": "1200 грн"       },
+        { "name": "Догляд LA Biosthetique oil therapy:",        "isGroupHeader": true            },
+        { "name": "1 Довжина",                                 "priceDisplay": "1100 грн"       },
+        { "name": "2 Довжина",                                 "priceDisplay": "1300 грн"       },
+        { "name": "3 Довжина",                                 "priceDisplay": "1500 грн"       },
+        { "name": "4 Довжина",                                 "priceDisplay": "1700 грн"       }
+      ]
+    }
+  ]
+}

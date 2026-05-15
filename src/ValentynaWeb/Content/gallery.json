@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "imageUrl": "/img/gallery 11.jpg", "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 2.jpg",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 3.png",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 4.jpg",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 5.png",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 6.png",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 7.jpg",  "alt": "Робота перукарні Валентина" },
+    { "imageUrl": "/img/gallery 8.png",  "alt": "Робота перукарні Валентина" }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Перукарня Валентина",
+  "address": "вул. Богдана Хмельницького 94, Київ",
+  "phone": "+380989985522",
+  "email": "info@valentynah.com",
+  "latitude": 50.4485265,
+  "longitude": 30.4995412,
+  "timeZone": "Europe/Kyiv",
+  "currency": "UAH",
+  "slogan": "Час бути собою",
+  "openingHours": [
+    { "days": ["Mon", "Tue", "Wed", "Thu", "Fri"], "open": "10:00", "close": "20:00" },
+    { "days": ["Sat", "Sun"], "open": "11:00", "close": "18:00" }
+  ],
+  "socials": {
+    "instagram": "https://www.instagram.com/valentyna_perukarnia/",
+    "telegram": "https://t.me/valentyna_perukarnia",
+    "googleMaps": "https://maps.app.goo.gl/BBhDLBSZe6BwSAXX9"
+  },
+  "founder": {
+    "name": "Валентин Галицький",
+    "role": "Засновник Перукарні Валентина",
+    "avatarUrl": "/img/avatar.png"
+  }
+}
