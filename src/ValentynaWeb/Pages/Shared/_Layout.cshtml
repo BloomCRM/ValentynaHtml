@@ -1,3 +1,5 @@
+@inject ValentynaWeb.Content.IContentProvider Content
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -24,6 +26,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     @await RenderSectionAsync("Styles", required: false)
+    @await Html.PartialAsync("_JsonLd")
 </head>
 <body>
 
@@ -95,6 +98,21 @@
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    @{
+        var bookingUrl = Configuration["Booking:ExternalUrl"] ?? "#";
+        var telegramUrl = Content.Salon.Socials.Telegram ?? "https://t.me/valentyna_perukarnia";
+    }
+
+    <a href="@bookingUrl" target="_blank" rel="noopener" class="sticky-book-btn" aria-label="Записатися онлайн">
+        Записатися
+    </a>
+
+    <a href="@telegramUrl" target="_blank" rel="noopener" class="telegram-float-btn" aria-label="Написати у Telegram">
+        <svg width="28" height="28" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.8 11C19.8 13.3339 18.8729 15.5722 17.2225 17.2225C15.5722 18.8729 13.3339 19.8 11 19.8C8.66609 19.8 6.42778 18.8729 4.77746 17.2225C3.12714 15.5722 2.2 13.3339 2.2 11C2.2 8.66609 3.12714 6.42778 4.77746 4.77746C6.42778 3.12714 8.66609 2.2 11 2.2C13.3339 2.2 15.5722 3.12714 17.2225 4.77746C18.8729 6.42778 19.8 8.66609 19.8 11ZM11 22C17.0753 22 22 17.0753 22 11C22 4.9247 17.0753 0 11 0C4.9247 0 0 4.9247 0 11C0 17.0753 4.9247 22 11 22ZM11.3938 8.1202C10.3246 8.56533 8.18657 9.48677 4.9797 10.8845C4.4583 11.0913 4.1855 11.2937 4.1613 11.4917C4.1195 11.8261 4.5386 11.9581 5.1095 12.1374L5.3493 12.2144C5.9103 12.397 6.6671 12.6104 7.0598 12.6192C7.4162 12.6265 7.81367 12.4799 8.2522 12.1792C11.2486 10.1552 12.7952 9.13257 12.892 9.1113C12.9613 9.0959 13.0559 9.0761 13.1197 9.1333C13.1846 9.1905 13.178 9.2983 13.1714 9.328C13.1296 9.5051 11.484 11.0352 10.6326 11.8261C10.3803 12.0637 10.1299 12.3031 9.8813 12.5444C9.3599 13.0471 8.9683 13.4244 9.9033 14.0404C10.8504 14.6652 11.8063 15.2878 12.7303 15.9467C13.1857 16.2723 13.5949 16.5627 14.1009 16.5176C14.3946 16.4901 14.6982 16.214 14.8522 15.389C15.2174 13.442 15.9335 9.2202 16.0985 7.48C16.1081 7.33565 16.1018 7.19068 16.0798 7.0477C16.0668 6.93262 16.0111 6.82662 15.9236 6.7507C15.7916 6.6429 15.5881 6.6209 15.4979 6.622C15.0843 6.6297 14.4496 6.8497 11.3949 8.1202" fill="white"/>
+        </svg>
+    </a>
 
 </body>
 </html>

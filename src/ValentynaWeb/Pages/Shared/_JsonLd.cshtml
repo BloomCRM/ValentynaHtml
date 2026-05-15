@@ -1,0 +1,54 @@
+@inject ValentynaWeb.Content.IContentProvider ContentProvider
+@using System.Text.Json
+@using System.Text.Json.Nodes
+@{
+    var s = ContentProvider.Salon;
+
+    var hours = new JsonArray();
+    foreach (var h in s.OpeningHours)
+    {
+        var days = new JsonArray();
+        foreach (var d in h.Days) days.Add(d);
+        hours.Add(new JsonObject
+        {
+            ["@type"]      = "OpeningHoursSpecification",
+            ["dayOfWeek"]  = days,
+            ["opens"]      = h.Open,
+            ["closes"]     = h.Close
+        });
+    }
+
+    var sameAs = new JsonArray();
+    if (s.Socials.Instagram  != null) sameAs.Add(s.Socials.Instagram);
+    if (s.Socials.Telegram   != null) sameAs.Add(s.Socials.Telegram);
+    if (s.Socials.GoogleMaps != null) sameAs.Add(s.Socials.GoogleMaps);
+
+    var ld = new JsonObject
+    {
+        ["@context"]  = "https://schema.org",
+        ["@type"]     = "HairSalon",
+        ["name"]      = s.Name,
+        ["url"]       = $"https://{Context.Request.Host}/",
+        ["telephone"] = s.Phone,
+        ["priceRange"] = "₴₴",
+        ["address"] = new JsonObject
+        {
+            ["@type"]          = "PostalAddress",
+            ["streetAddress"]  = s.Address,
+            ["addressLocality"] = "Київ",
+            ["postalCode"]     = "02000",
+            ["addressCountry"] = "UA"
+        },
+        ["geo"] = new JsonObject
+        {
+            ["@type"]     = "GeoCoordinates",
+            ["latitude"]  = s.Latitude,
+            ["longitude"] = s.Longitude
+        },
+        ["openingHoursSpecification"] = hours,
+        ["sameAs"] = sameAs
+    };
+
+    var json = ld.ToJsonString(new JsonSerializerOptions { WriteIndented = false });
+}
+<script type="application/ld+json">@Html.Raw(json)</script>
