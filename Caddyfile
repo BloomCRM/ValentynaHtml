@@ -1,10 +1,9 @@
 # =========================================================
-# Caddyfile — new.valentynah.com (тестовий домен Phase 1)
+# Caddyfile — valentynah.com (production)
 # Caddy автоматично отримує TLS-сертифікат від Let's Encrypt
-# На тижні 5 замінити на valentynah.com після DNS-переключення
 # =========================================================
 
-new.valentynah.com {
+valentynah.com, www.valentynah.com {
 
     # Reverse proxy до ASP.NET Core контейнера
     reverse_proxy app:8080
