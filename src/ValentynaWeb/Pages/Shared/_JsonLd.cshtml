@@ -49,6 +49,6 @@
         ["sameAs"] = sameAs
     };
 
-    var json = ld.ToJsonString(new JsonSerializerOptions { WriteIndented = false });
+    var json = ld.ToJsonString();
 }
 <script type="application/ld+json">@Html.Raw(json)</script>
