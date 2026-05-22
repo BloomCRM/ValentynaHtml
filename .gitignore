@@ -32,3 +32,4 @@ logs/
 *.nupkg
 *.dll
 *.pdb
+.claude/
