@@ -18,7 +18,7 @@ QUALITY = 82
 TOP_N = 15
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-IMG_DIR = ROOT / "src" / "ValentynaWeb" / "wwwroot" / "img"
+IMG_DIR = ROOT / "ValentynaWeb" / "wwwroot" / "img"
 OUT_DIR = IMG_DIR / "webp"
 
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG"}

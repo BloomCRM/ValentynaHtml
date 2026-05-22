@@ -7,11 +7,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Копіюємо csproj окремо — кешування шару залежностей
-COPY src/ValentynaWeb/ValentynaWeb.csproj ./ValentynaWeb/
+COPY ValentynaWeb/ValentynaWeb.csproj ./ValentynaWeb/
 RUN dotnet restore ./ValentynaWeb/ValentynaWeb.csproj
 
 # Копіюємо весь код і публікуємо
-COPY src/ValentynaWeb/ ./ValentynaWeb/
+COPY ValentynaWeb/ ./ValentynaWeb/
 WORKDIR /src/ValentynaWeb
 RUN dotnet publish -c Release -o /app/publish
 
