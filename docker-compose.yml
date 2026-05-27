@@ -1,9 +1,9 @@
-version: "3.9"
-
 services:
 
   # -------------------------------------------------------
   # ASP.NET Core app
+  # Caddy живе у окремому репо vkostyrko/caddy і роутить
+  # через зовнішню Docker-мережу "web" за container_name.
   # -------------------------------------------------------
   app:
     build:
@@ -17,33 +17,10 @@ services:
     expose:
       - "8080"
     networks:
-      - internal
+      - web
     # Секрети / локальні overrides — НЕ комітяться
     # env_file: .env
 
-  # -------------------------------------------------------
-  # Caddy — reverse proxy + auto HTTPS
-  # -------------------------------------------------------
-  caddy:
-    image: caddy:2-alpine
-    container_name: valentyna_caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - internal
-    depends_on:
-      - app
-
 networks:
-  internal:
-    driver: bridge
-
-volumes:
-  caddy_data:
-  caddy_config:
+  web:
+    external: true
