@@ -14,7 +14,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
-      # Ключ лежить у /opt/valentyna/.env на сервері (не в репо; rsync його не чіпає)
+      # Ключ — з /opt/valentyna/.env, який деплой пише з GitHub Secret GOOGLE_PLACES_API_KEY
       GooglePlaces__ApiKey: ${GOOGLE_PLACES_API_KEY:-}
     expose:
       - "8080"

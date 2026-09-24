@@ -40,6 +40,16 @@ jobs:
             --exclude='.env' \
             ./ ${{ secrets.HETZNER_USER }}@${{ secrets.HETZNER_HOST }}:/opt/valentyna/
 
+      # .env на сервері повністю керується з GitHub Secrets — руками не редагувати.
+      # Секрет іде через stdin, а не в командному рядку ssh, щоб не світився в логах/ps.
+      - name: Write .env from GitHub Secrets
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: |
+          printf 'GOOGLE_PLACES_API_KEY=%s\n' "$GOOGLE_PLACES_API_KEY" | \
+            ssh ${{ secrets.HETZNER_USER }}@${{ secrets.HETZNER_HOST }} \
+            "umask 077 && cat > /opt/valentyna/.env"
+
       - name: Deploy on server
         run: |
           ssh ${{ secrets.HETZNER_USER }}@${{ secrets.HETZNER_HOST }} \
