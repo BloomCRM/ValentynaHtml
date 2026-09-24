@@ -1,0 +1,17 @@
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Env
+@{
+    // GA4 лише в Production, щоб локальні/тестові запуски не псували статистику.
+    // Measurement ID не секрет — він і так видно в HTML сторінки.
+    var measurementId = Configuration["Analytics:MeasurementId"];
+}
+@if (Env.IsProduction() && !string.IsNullOrWhiteSpace(measurementId))
+{
+    <script async src="https://www.googletagmanager.com/gtag/js?id=@measurementId"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '@measurementId');
+    </script>
+}

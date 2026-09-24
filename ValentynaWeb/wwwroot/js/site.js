@@ -247,6 +247,32 @@ const translations = {
   }
 };
 
+// Google Analytics: події на головні дії клієнта.
+// Enhanced measurement у GA4 сам рахує перегляди/скрол/зовнішні переходи,
+// але не tel:-посилання і не розрізняє, куди саме пішов клієнт.
+function analyticsEventFor(link) {
+  const href = link.href;
+  if (href.startsWith('tel:')) return 'phone_click';
+  if (link.closest('.reviews-summary, .review-card')) return 'reviews_click';
+  if (/wlaunch\.net/.test(href)) return 'booking_click';
+  if (/t\.me\/|telegram\.org/.test(href)) return 'telegram_click';
+  if (/instagram\.com/.test(href)) return 'instagram_click';
+  if (/maps\.app\.goo\.gl|google\.[a-z.]+\/maps|maps\.google\./.test(href)) return 'maps_click';
+  return null;
+}
+
+document.addEventListener('click', e => {
+  const link = e.target.closest('a[href]');
+  if (!link || typeof gtag !== 'function') return;
+  const eventName = analyticsEventFor(link);
+  if (!eventName) return;
+  const section = link.closest('section, header, footer, [id]');
+  gtag('event', eventName, {
+    link_url: link.href,
+    link_location: section ? (section.id || section.className.split(' ')[0] || section.tagName.toLowerCase()) : 'page'
+  });
+});
+
 // Language switching functionality
 const langButtons = document.querySelectorAll('.lang-btn');
 
