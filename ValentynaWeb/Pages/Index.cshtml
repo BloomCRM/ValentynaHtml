@@ -267,7 +267,7 @@
         <div class="@category.CssClass">
           <div class="price-item-title-container">
             <svg class="price-icon"><use href="#price-item-icon" class="price-icon-svg"></use></svg>
-            <p class="price-item-title">@category.Name</p>
+            <p class="price-item-title" data-translate="@category.TranslateKey">@category.Name</p>
           </div>
           <ul class="price-list">
             @foreach (var service in category.Services)
@@ -275,12 +275,23 @@
               <li class="@category.RowCssClass">
                 @if (service.IsGroupHeader)
                 {
-                  <p class="service-name-group">@service.Name</p>
+                  <p class="service-name-group" data-translate="@service.TranslateKey">@service.Name</p>
                 }
                 else
                 {
-                  <span class="service-name">@service.Name</span>
-                  <span class="service-price">@service.PriceDisplay</span>
+                  <span class="service-name" data-translate="@service.TranslateKey">@service.Name</span>
+                  @if (service.PriceTranslateKey != null)
+                  {
+                    <span class="service-price" data-translate="@service.PriceTranslateKey">@service.PriceDisplay</span>
+                  }
+                  else if (service.PriceFrom)
+                  {
+                    <span class="service-price"><span data-translate="from-price">Від</span> @service.PriceDisplay</span>
+                  }
+                  else
+                  {
+                    <span class="service-price">@service.PriceDisplay</span>
+                  }
                 }
               </li>
             }
