@@ -120,8 +120,9 @@ const translations = {
     'footer-text': 'Створюємо стиль, який підкреслює вашу індивідуальність. Наша команда професіоналів допоможе вам знайти ідеальний образ.',
     'footer-links-title': 'Швидкі посилання',
     'footer-schedule-title': 'Графік роботи',
-    'footer-schedule-weekdays': 'Пн-Пт 10:00 - 20:00',
-    'footer-schedule-weekend': 'Сб-Нд 11:00 - 18:00',
+    'schedule-daily': 'Щодня',
+    'schedule-mon-fri': 'Пн-Пт',
+    'schedule-sat-sun': 'Сб-Нд',
     'footer-social-title': 'Ми в соцмережах',
     'footer-location-title': 'Місцезнаходження',
     'footer-address': 'вул. Богдана Хмельницького 94, Київ'
@@ -235,8 +236,9 @@ const translations = {
     'footer-text': 'We create style that emphasizes your individuality. Our team of professionals will help you find the perfect look.',
     'footer-links-title': 'Quick Links',
     'footer-schedule-title': 'Working Hours',
-    'footer-schedule-weekdays': 'Mon-Fri 10:00 - 20:00',
-    'footer-schedule-weekend': 'Sat-Sun 11:00 - 18:00',
+    'schedule-daily': 'Daily',
+    'schedule-mon-fri': 'Mon-Fri',
+    'schedule-sat-sun': 'Sat-Sun',
     'footer-social-title': 'We are on social media',
     'footer-location-title': 'Location',
     'footer-address': 'Bohdana Khmelnytskoho 94, Kyiv'

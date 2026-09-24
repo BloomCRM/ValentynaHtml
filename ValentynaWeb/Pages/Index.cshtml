@@ -46,7 +46,7 @@
                 <use href="#phone-modal"></use>
               </svg>
             </div>
-            <a href="tel:+380989985522" class="mobile-phone">+38 (098) 998-55-22</a>
+            <a href="tel:@Model.Salon.Phone" class="mobile-phone">@Model.PhoneDisplay</a>
           </div>
           <div class="footer-link-container">
             <div class="footer-link-img-container">
@@ -436,8 +436,10 @@
       </div>
       <div class="footer-column">
         <h2 class="footer-title" data-translate="footer-schedule-title">Графік роботи</h2>
-        <p class="footer-text" data-translate="footer-schedule-weekdays">Пн-Пт 10:00 - 20:00</p>
-        <p class="footer-text" data-translate="footer-schedule-weekend">Сб-Нд 11:00 - 18:00</p>
+        @foreach (var line in Model.Schedule)
+        {
+          <p class="footer-text"><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</p>
+        }
       </div>
     </div>
 
