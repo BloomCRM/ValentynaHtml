@@ -8,11 +8,13 @@ public class IndexModel : PageModel
 {
     private readonly IConfiguration _config;
     private readonly IContentProvider _content;
+    private readonly IReviewsProvider _reviews;
 
-    public IndexModel(IConfiguration config, IContentProvider content)
+    public IndexModel(IConfiguration config, IContentProvider content, IReviewsProvider reviews)
     {
         _config = config;
         _content = content;
+        _reviews = reviews;
     }
 
     public string BookingUrl { get; private set; } = "#";
@@ -20,8 +22,9 @@ public class IndexModel : PageModel
     public SalonContent Salon { get; private set; } = new();
     public string PhoneDisplay { get; private set; } = "";
     public IReadOnlyList<ScheduleLine> Schedule { get; private set; } = [];
+    public ReviewsContent Reviews { get; private set; } = new();
 
-    public void OnGet()
+    public async Task OnGetAsync()
     {
         BookingUrl = _config["Booking:ExternalUrl"]
             ?? "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
@@ -30,7 +33,17 @@ public class IndexModel : PageModel
         Salon = _content.Salon;
         PhoneDisplay = FormatPhone(Salon.Phone);
         Schedule = Salon.OpeningHours.Select(ToScheduleLine).ToList();
+        Reviews = await _reviews.GetAsync();
     }
+
+    // Ключ перекладу під українську множину: 1 відгук / 2 відгуки / 5 відгуків
+    public static (string Key, string Label) ReviewsCountLabel(int n) =>
+        (n % 10, n % 100) switch
+        {
+            (1, not 11) => ("reviews-count-one", "відгук у Google Maps"),
+            (>= 2 and <= 4, not (>= 12 and <= 14)) => ("reviews-count-few", "відгуки у Google Maps"),
+            _ => ("reviews-count-many", "відгуків у Google Maps")
+        };
 
     public record ScheduleLine(string TranslateKey, string Days, string Time);
 

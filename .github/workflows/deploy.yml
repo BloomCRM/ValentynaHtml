@@ -37,6 +37,7 @@ jobs:
             --exclude='**/obj/' \
             --exclude='**/.vs/' \
             --exclude='.claude/' \
+            --exclude='.env' \
             ./ ${{ secrets.HETZNER_USER }}@${{ secrets.HETZNER_HOST }}:/opt/valentyna/
 
       - name: Deploy on server

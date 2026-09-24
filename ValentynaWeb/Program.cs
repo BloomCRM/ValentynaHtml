@@ -8,6 +8,15 @@ builder.Services.AddOutputCache(o => o.AddBasePolicy(b => b.Expire(TimeSpan.From
 builder.Services.AddLocalization(o => o.ResourcesPath = "Resources");
 builder.Services.AddSingleton<IContentProvider, JsonContentProvider>();
 
+builder.Services.AddMemoryCache();
+builder.Services.Configure<GooglePlacesOptions>(builder.Configuration.GetSection("GooglePlaces"));
+builder.Services.AddHttpClient(PlacesReviewsProvider.HttpClientName, c =>
+{
+    c.BaseAddress = new Uri("https://places.googleapis.com/v1/");
+    c.Timeout = TimeSpan.FromSeconds(5);
+});
+builder.Services.AddSingleton<IReviewsProvider, PlacesReviewsProvider>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

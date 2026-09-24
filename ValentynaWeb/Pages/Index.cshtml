@@ -362,55 +362,68 @@
       що ми створюємо разом. Ознайомтесь із враженнями наших гостей і
       приєднуйтесь до спільноти задоволених клієнтів
     </p>
+    @if (Model.Reviews.Rating is double rating && Model.Reviews.TotalCount is int total)
+    {
+      var countLabel = IndexModel.ReviewsCountLabel(total);
+      <a class="reviews-summary" href="@Model.Reviews.ProfileUrl" target="_blank" rel="noopener">
+        <span class="reviews-summary-rating">@rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</span>
+        <span class="reviews-summary-stars" aria-hidden="true">★★★★★</span>
+        <span>@total <span data-translate="@countLabel.Key">@countLabel.Label</span></span>
+      </a>
+    }
     <div class="reviews-cards">
-      <div class="review-card">
-        <div class="review-header">
-          <img src="~/img/avatar1.png" alt="Avatar" class="review-avatar" />
-          <div class="review-info">
-            <p class="review-name">Natalia Pushkarova</p>
-            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
+      @foreach (var review in Model.Reviews.Reviews)
+      {
+        <div class="review-card" data-lang="@review.Language" hidden="@(review.Language == "en")">
+          <div class="review-header">
+            @if (!string.IsNullOrEmpty(review.AvatarUrl))
+            {
+              <img src="@Url.Content(review.AvatarUrl)" alt="" class="review-avatar" width="60" height="60" loading="lazy" referrerpolicy="no-referrer" />
+            }
+            else
+            {
+              <span class="review-avatar review-avatar-initial" aria-hidden="true">@(review.AuthorName.Length > 0 ? review.AuthorName[..1].ToUpperInvariant() : "?")</span>
+            }
+            <div class="review-info">
+              @if (!string.IsNullOrEmpty(review.AuthorUrl))
+              {
+                <a class="review-name" href="@review.AuthorUrl" target="_blank" rel="noopener nofollow">@review.AuthorName</a>
+              }
+              else
+              {
+                <p class="review-name">@review.AuthorName</p>
+              }
+              @if (review.Rating >= 5)
+              {
+                <img src="~/img/stars.png" alt="5/5" class="review-stars" />
+              }
+              else
+              {
+                <span class="review-stars-text" aria-label="@review.Rating/5">@(new string('★', review.Rating) + new string('☆', 5 - review.Rating))</span>
+              }
+              @if (!string.IsNullOrEmpty(review.RelativeDate))
+              {
+                <time class="review-date" datetime="@review.PublishedAt?.ToString("o")">@review.RelativeDate</time>
+              }
+            </div>
           </div>
+          <p class="review-text">@review.Text</p>
+          @if (!string.IsNullOrEmpty(review.GoogleUrl))
+          {
+            <a class="review-more" href="@review.GoogleUrl" target="_blank" rel="noopener" data-translate="reviews-read-more">Читати на Google</a>
+          }
         </div>
-        <p class="review-text" data-translate="review-1">
-          Вперше відвідала цю перукарню – і це було найкраще рішення!
-          Майстер врахував усі мої побажання, підібрав ідеальний відтінок
-          фарбування, а атмосфера просто чудова! Дякую за професіоналізм!
-        </p>
-      </div>
-      <div class="review-card">
-        <div class="review-header">
-          <img src="~/img/avatar2.png" alt="Avatar" class="review-avatar" />
-          <div class="review-info">
-            <p class="review-name">Ivan Legkyi</p>
-            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
-          </div>
-        </div>
-        <p class="review-text" data-translate="review-2">
-          Дуже стильна стрижка! Майстер відразу зрозумів, що мені потрібно,
-          та зробив усе ідеально. Окрема подяка за дружню атмосферу та
-          смачну каву. Однозначно повернусь
-        </p>
-      </div>
-      <div class="review-card">
-        <div class="review-header">
-          <img src="~/img/avatar3.png" alt="Avatar" class="review-avatar" />
-          <div class="review-info">
-            <p class="review-name">Kateryna Topolya</p>
-            <img src="~/img/stars.png" alt="5 stars" class="review-stars" />
-          </div>
-        </div>
-        <p class="review-text" data-translate="review-3">
-          Це місце, де справді люблять свою справу! Відчувається увага до
-          деталей – від підбору стрижки до рекомендацій по догляду. Вийшла з
-          салону з відчуттям оновлення! Рекомендую всім!
-        </p>
-      </div>
+      }
     </div>
   </div>
   <div class="reviews-dots">
-    <span class="dot-review active"></span>
-    <span class="dot-review"></span>
-    <span class="dot-review"></span>
+    @{ var firstDot = true; }
+    @foreach (var review in Model.Reviews.Reviews)
+    {
+      var active = firstDot && review.Language != "en";
+      if (active) { firstDot = false; }
+      <span class="dot-review@(active ? " active" : "")" data-lang="@review.Language" hidden="@(review.Language == "en")"></span>
+    }
   </div>
 </section>
 

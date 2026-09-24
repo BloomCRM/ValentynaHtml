@@ -111,9 +111,10 @@ const translations = {
     'reviews-title': 'ВІДГУКИ НАШИХ КЛІЄНТІВ',
     'reviews-subtitle': 'Зазирніть у наше портфоліо вражаючих перевтілень та знайдіть натхнення для свого нового образу',
     'reviews-subtitle-tablet': 'Наші клієнти – наш головний пріоритет! Довіра, якість та стиль – те, що ми створюємо разом. Ознайомтесь із враженнями наших гостей і приєднуйтесь до спільноти задоволених клієнтів',
-    'review-1': 'Вперше відвідала цю перукарню – і це було найкраще рішення! Майстер врахував усі мої побажання, підібрав ідеальний відтінок фарбування, а атмосфера просто чудова! Дякую за професіоналізм!',
-    'review-2': 'Дуже стильна стрижка! Майстер відразу зрозумів, що мені потрібно, та зробив усе ідеально. Окрема подяка за дружню атмосферу та смачну каву. Однозначно повернусь',
-    'review-3': 'Це місце, де справді люблять свою справу! Відчувається увага до деталей – від підбору стрижки до рекомендацій по догляду. Вийшла з салону з відчуттям оновлення! Рекомендую всім!',
+    'reviews-count-one': 'відгук у Google Maps',
+    'reviews-count-few': 'відгуки у Google Maps',
+    'reviews-count-many': 'відгуків у Google Maps',
+    'reviews-read-more': 'Читати на Google',
     
     // Footer
     'footer-title': 'Перукарня Валентина',
@@ -227,9 +228,10 @@ const translations = {
     'reviews-title': 'OUR CLIENTS\' REVIEWS',
     'reviews-subtitle': 'Take a look at our portfolio of amazing transformations and find inspiration for your new look',
     'reviews-subtitle-tablet': 'Our clients are our top priority! Trust, quality and style - that\'s what we create together. Check out our guests\' impressions and join the community of satisfied clients',
-    'review-1': 'I visited this hair salon for the first time - and it was the best decision! The master took into account all my wishes, picked the perfect shade for coloring, and the atmosphere is just wonderful! Thank you for your professionalism!',
-    'review-2': 'Very stylish haircut! The master immediately understood what I needed and did everything perfectly. Special thanks for the friendly atmosphere and delicious coffee. I will definitely return',
-    'review-3': 'This is a place where they truly love their work! Attention to detail is felt - from choosing a haircut to care recommendations. I left the salon feeling renewed! I recommend to everyone!',
+    'reviews-count-one': 'review on Google Maps',
+    'reviews-count-few': 'reviews on Google Maps',
+    'reviews-count-many': 'reviews on Google Maps',
+    'reviews-read-more': 'Read on Google',
     
     // Footer
     'footer-title': 'Valentyna Hair Salon',
@@ -248,6 +250,31 @@ const translations = {
 // Language switching functionality
 const langButtons = document.querySelectorAll('.lang-btn');
 
+// Відгуки з Google: картки мовою версії сайту (data-lang="ua"/"en"; без data-lang — в обох)
+// і відносна дата поточною мовою
+function switchReviewsLanguage(lang) {
+  document.querySelectorAll('.review-card[data-lang], .dot-review[data-lang]').forEach(el => {
+    el.hidden = el.dataset.lang !== lang;
+  });
+
+  const cards = document.querySelector('.reviews-cards');
+  if (cards) cards.scrollLeft = 0;
+  document.querySelectorAll('.dot-review:not([hidden])').forEach((dot, i) => {
+    dot.classList.toggle('active', i === 0);
+  });
+
+  const rtf = new Intl.RelativeTimeFormat(lang === 'en' ? 'en' : 'uk', { numeric: 'auto' });
+  document.querySelectorAll('.review-date[datetime]').forEach(el => {
+    const published = new Date(el.getAttribute('datetime'));
+    if (isNaN(published)) return;
+    const days = Math.round((published - Date.now()) / 86400000);
+    el.textContent = Math.abs(days) >= 365 ? rtf.format(Math.round(days / 365), 'year')
+      : Math.abs(days) >= 30 ? rtf.format(Math.round(days / 30), 'month')
+      : Math.abs(days) >= 7 ? rtf.format(Math.round(days / 7), 'week')
+      : rtf.format(days, 'day');
+  });
+}
+
 function switchLanguage(lang) {
   // Update active button
   langButtons.forEach(btn => {
@@ -265,6 +292,8 @@ function switchLanguage(lang) {
     }
   });
   
+  switchReviewsLanguage(lang);
+
   // Update HTML lang attribute
   document.documentElement.lang = lang;
   
@@ -314,9 +343,10 @@ reviewContainer.addEventListener('scroll', () => {
   const cardWidth = reviewContainer.offsetWidth;
   const index = Math.round(scrollLeft / cardWidth);
 
-  reviewDots.forEach(dot => dot.classList.remove('active'));
-  if (reviewDots[index]) {
-    reviewDots[index].classList.add('active');
+  const visibleDots = [...reviewDots].filter(dot => !dot.hidden);
+  visibleDots.forEach(dot => dot.classList.remove('active'));
+  if (visibleDots[index]) {
+    visibleDots[index].classList.add('active');
   }
 });
 

@@ -1257,7 +1257,7 @@ ul {
   color: #000;
   text-align: center;
 
-  margin-bottom: 134px;
+  margin-bottom: 94px;
 }
 
 .reviews-subtitle-tablet {
@@ -1267,12 +1267,17 @@ ul {
 .reviews-cards {
   width: 1334px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 94px;
+  row-gap: 40px;
 }
 
 .review-card {
   width: 382px;
-  height: 217px;
+  min-height: 217px;
+  display: flex;
+  flex-direction: column;
   background: rgba(80, 80, 80, 0.91);
   padding: 16px 30px 24px 16px;
 }
@@ -1286,6 +1291,19 @@ ul {
 .review-avatar {
   width: 60px;
   height: 60px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d9d9d9;
+  color: #505050;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
 }
 
 .review-info {
@@ -1305,12 +1323,69 @@ ul {
   height: 14px;
 }
 
+.review-stars-text {
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #fbbc04;
+}
+
+.review-date {
+  margin-top: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .review-text {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.42857;
   color: #fff;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-card[hidden],
+.dot-review[hidden] {
+  display: none;
+}
+
+.review-more {
+  margin-top: auto;
+  padding-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.reviews-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+}
+
+.reviews-summary-rating {
+  font-weight: 600;
+}
+
+.reviews-summary-stars {
+  color: #fbbc04;
+  letter-spacing: 2px;
 }
 
 /* //////////////////////// booking //////////////////////// */
@@ -2046,7 +2121,7 @@ ul {
 
   .review-card {
     width: 232px;
-    height: 245px;
+    min-height: 245px;
     padding: 18px 0px 10px 9px;
   }
 
@@ -2914,6 +2989,8 @@ ul {
   .reviews-cards {
     width: 232px;
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -2927,7 +3004,7 @@ ul {
   .review-card {
     flex: 0 0 232px;
     width: 232px;
-    height: 245px;
+    min-height: 245px;
     padding: 18px 0px 10px 9px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
