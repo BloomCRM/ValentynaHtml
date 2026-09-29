@@ -130,13 +130,17 @@ ValentynaHtml/
 Усе планування і ТЗ — у папці на OneDrive:
 `C:\Users\Volodymyr\OneDrive\Documents\Claude\Projects\Перукарня Вадентина\`
 
+Структура папки (phase-based):
+- `README.md` — навігація по проекту.
+- `Roadmap.html` — візуальний дашборд (відкривається у браузері).
 - `ТЗ_index.md` — індекс усіх ТЗ зі статусом.
-- `Roadmap.html` — візуальний дашборд, відкривається у браузері.
-- `ТЗ-2_старт_сайту_valentyna-web.md` — поточне ТЗ (тижні 1–2, ~92% готово).
-- `Сайт_valentynah_аналіз_і_покращення.md` — вимоги до сайту, готові сніпети JSON-LD, robots, sitemap, head.
-- `План_розвитку_Перукарня_Валентина.md` — стратегічний план.
-- `ER_діаграма_CRM.md` — модель Bloom CRM (для Phase 2).
-- `Bloom_архітектура_мультитенантності.md` — Tenant/Shop, RLS, API (Phase 2).
+- `Бачення/План_розвитку_Перукарня_Валентина.md` — стратегічний план.
+- `Архітектура/` — лише README-вказівник: архітектурні доки Bloom з 10.06.2026 живуть у git — `F:\Projects\Bloom\docs\architecture\` (код-конвенції, мультитенантність, ціноутворення, ER-діаграма).
+- `Phase1_Сайт/ТЗ-2_старт_сайту_valentyna-web.md` — поточне ТЗ (тижні 1–2, ~92% готово).
+- `Phase1_Сайт/Сайт_valentynah_аналіз_і_покращення.md` — вимоги до сайту, готові сніпети JSON-LD, robots, sitemap, head.
+- `Phase2_Bloom/ТЗ-5_старт_Bloom_CRM.md` — старт Bloom solution (в роботі).
+- `Phase2_Bloom/ТЗ-6.5_async_reliability_foundation.md` — outbox/inbox/idempotency фундамент.
+- `_archive/` — одноразові промпти і застарілі workaround-документи.
 
 ---
 
