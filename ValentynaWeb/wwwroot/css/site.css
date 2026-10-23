@@ -3813,8 +3813,9 @@ ul {
     background-image: url('../img/section-img-desktop.webp');
   }
 
-  /* Перемикач мови — по центру меню */
+  /* Перемикач мови — по лівому краю пунктів меню (той самий відступ, що в .mobile-nav-list) */
   .mobile-language-switch {
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 36px;
   }
 }
