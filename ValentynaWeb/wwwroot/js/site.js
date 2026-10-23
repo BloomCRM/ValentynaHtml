@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Lightbox();
 });
 
-// Горизонтальні слайдери (.js-scroller): під ними стрілки ‹ › і крапки за кількістю карток,
+// Горизонтальні слайдери (.js-scroller): стрілки ‹ › по боках, під ними крапки за кількістю карток,
 // усе ховається, коли картки влазять без прокрутки. data-autoplay="мс" — гортає сам по колу
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -429,8 +429,14 @@ document.querySelectorAll('.js-scroller').forEach(scroller => {
     return btn;
   };
 
-  dotsBox.removeAttribute('aria-hidden');
-  dotsBox.appendChild(arrow('Назад', '‹', prev));
+  // стрілки — по боках стрічки, як у десктопній галереї: обгортаємо скролер у рамку
+  const frame = document.createElement('div');
+  frame.className = 'scroller-frame';
+  scroller.before(frame);
+  frame.append(arrow('Назад', '‹', prev), scroller, arrow('Далі', '›', next));
+  frame.firstChild.classList.add('scroller-arrow-prev');
+  frame.lastChild.classList.add('scroller-arrow-next');
+
   const dots = cards.map((card, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
@@ -441,10 +447,10 @@ document.querySelectorAll('.js-scroller').forEach(scroller => {
     dotsBox.appendChild(dot);
     return dot;
   });
-  dotsBox.appendChild(arrow('Далі', '›', next));
-
   const update = () => {
-    dotsBox.hidden = scroller.scrollWidth <= scroller.clientWidth + 1;
+    const fits = scroller.scrollWidth <= scroller.clientWidth + 1;
+    dotsBox.hidden = fits;
+    frame.classList.toggle('is-static', fits);
     const left = scroller.scrollLeft;
     active = 0;
     cards.forEach((card, i) => {
@@ -462,7 +468,7 @@ document.querySelectorAll('.js-scroller').forEach(scroller => {
   const delay = Number(scroller.dataset.autoplay);
   if (delay && !reduceMotion) {
     let paused = false;
-    const area = scroller.parentElement;
+    const area = frame.parentElement;
     ['pointerenter', 'focusin', 'touchstart'].forEach(e => area.addEventListener(e, () => { paused = true; }, { passive: true }));
     ['pointerleave', 'focusout'].forEach(e => area.addEventListener(e, () => { paused = false; }));
     setInterval(() => {

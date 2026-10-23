@@ -3691,3 +3691,130 @@ ul {
     height: 220px;
   }
 }
+
+/* ////////////////// Правки за відгуком, частина 3 ////////////////// */
+
+/* Стрілки слайдерів — по боках стрічки, як у десктопній галереї */
+.scroller-frame {
+  position: relative;
+}
+
+.scroller-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  color: #5a5a5a;
+  font-size: 26px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.scroller-arrow:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.scroller-arrow-prev {
+  left: 12px;
+}
+
+.scroller-arrow-next {
+  right: 12px;
+}
+
+.scroller-frame.is-static .scroller-arrow {
+  display: none;
+}
+
+/* «Про нас» — заголовок на плашці замість логотипа */
+.about {
+  padding-top: 0;
+}
+
+.about-logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: 'Chutz', sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.07em;
+}
+
+/* Кнопки «Записатися» — фірмовий пильно-рожевий замість білого/сірого */
+.first-button,
+.services-btn,
+.price-button,
+.mobile-book-btn {
+  border: 1px solid #ad776b;
+  background: #ad776b;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.first-button:hover,
+.first-button:focus,
+.services-btn:hover,
+.services-btn:focus,
+.price-button:hover,
+.price-button:focus,
+.mobile-book-btn:hover,
+.mobile-book-btn:focus {
+  background: #8f5f55;
+  border-color: #8f5f55;
+  box-shadow: none;
+}
+
+/* Десктопна галерея: 4 фото влазять у ширину екрана, тож права стрілка видима */
+.gallery-slider {
+  width: 100%;
+  max-width: 1640px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.gallery-slide > * {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 389px;
+}
+
+.gallery-desktop-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .about-logo-title {
+    font-size: 30px;
+    color: #ddcdb3;
+  }
+
+  /* Мобільна галерея: стрічка з першого фото, без зайвого відступу знизу */
+  .gallery-mobile-scroll-container {
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  /* Картинка після подій: на телефоні була 396px і розтягувалась — беремо велику */
+  .section-img {
+    background-image: url('../img/section-img-desktop.webp');
+  }
+
+  /* Перемикач мови — по центру меню */
+  .mobile-language-switch {
+    justify-content: center;
+  }
+}
