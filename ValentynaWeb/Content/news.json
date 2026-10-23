@@ -3,20 +3,32 @@
     {
       "title": "МУЗИЧНИЙ ВЕЧІР",
       "description": "9 березня о 18:00 у перукарні «Валентина» відбудеться затишний музичний вечір. За інструментом – талановитий Міша Качур. Приходьте насолодитися живою музикою та приємною атмосферою!",
-      "date": "8 березня 2025",
-      "imageCssClass": "news-img-1"
+      "date": "9 березня 2025",
+      "eventDate": "2025-03-09",
+      "image": "img/news-desktop1.png",
+      "titleKey": "news-music",
+      "descriptionKey": "news-music-desc",
+      "dateKey": "news-date-1"
     },
     {
       "title": "ДЕНЬ ЗАКОХАНИХ У ВАЛЕНТИНІ",
       "description": "Запрошуємо вас 14 лютого на святкування Дня Закоханих у перукарні «Валентина»! На вас чекають смачні мочі, гарячий рамен і музична атмосфера від DJ Emergencyloop. 30% прибутку буде передано на підтримку ЗСУ",
       "date": "14 лютого 2025",
-      "imageCssClass": "news-img-2"
+      "eventDate": "2025-02-14",
+      "image": "img/news-desktop2.png",
+      "titleKey": "news-valentine",
+      "descriptionKey": "news-valentine-desc",
+      "dateKey": "news-date-2"
     },
     {
       "title": "ФІЛЬТР ЗА ДОНАТ",
       "description": "До 14 лютого у «Валентині» триває благодійна акція «Фільтр за донат» у співпраці з CaféBoutique. Усі зібрані кошти підуть на підтримку FPV-лабораторії. Приєднуйтесь та зробіть свій внесок у важливу справу!",
       "date": "14 лютого 2025",
-      "imageCssClass": "news-img-3"
+      "eventDate": "2025-02-14",
+      "image": "img/news-desktop3.png",
+      "titleKey": "news-filter",
+      "descriptionKey": "news-filter-desc",
+      "dateKey": "news-date-2"
     }
   ]
 }

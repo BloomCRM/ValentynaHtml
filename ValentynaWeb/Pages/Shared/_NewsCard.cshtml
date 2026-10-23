@@ -1,0 +1,12 @@
+@model ValentynaWeb.Content.Models.NewsItem
+
+<article class="news-card">
+  @if (!string.IsNullOrEmpty(Model.Image))
+  {
+    <img src="@Url.Content("~/" + Model.Image)" alt="@Model.Title" class="news-card-img" loading="lazy" />
+  }
+  <h2 class="news-card-title" data-translate="@Model.TitleKey">@Model.Title</h2>
+  <p class="news-card-description" data-translate="@Model.DescriptionKey">@Model.Description</p>
+  <div class="card-line"></div>
+  <p class="date" data-translate="@Model.DateKey">@Model.Date</p>
+</article>

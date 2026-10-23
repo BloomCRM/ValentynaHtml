@@ -23,9 +23,16 @@ public class IndexModel : PageModel
     public string PhoneDisplay { get; private set; } = "";
     public IReadOnlyList<ScheduleLine> Schedule { get; private set; } = [];
     public ReviewsContent Reviews { get; private set; } = new();
+    public IReadOnlyList<NewsItem> UpcomingNews { get; private set; } = [];
+    public IReadOnlyList<NewsItem> PastNews { get; private set; } = [];
 
     public async Task OnGetAsync()
     {
+        var today = KyivToday();
+        var news = _content.News.Items;
+        UpcomingNews = news.Where(n => n.EventDate >= today).OrderBy(n => n.EventDate).ToList();
+        PastNews = news.Where(n => n.EventDate < today).OrderByDescending(n => n.EventDate).ToList();
+
         BookingUrl = _config["Booking:ExternalUrl"]
             ?? "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
 
@@ -44,6 +51,15 @@ public class IndexModel : PageModel
             (>= 2 and <= 4, not (>= 12 and <= 14)) => ("reviews-count-few", "відгуки у Google Maps"),
             _ => ("reviews-count-many", "відгуків у Google Maps")
         };
+
+    // Сервер у Docker живе в UTC, а "сьогодні" для подій — за київським часом
+    private static DateOnly KyivToday()
+    {
+        var now = TimeZoneInfo.TryFindSystemTimeZoneById("Europe/Kyiv", out var kyiv)
+            ? TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, kyiv)
+            : DateTimeOffset.UtcNow;
+        return DateOnly.FromDateTime(now.DateTime);
+    }
 
     public record ScheduleLine(string TranslateKey, string Days, string Time);
 

@@ -3237,3 +3237,265 @@ ul {
     bottom: 30px;
   }
 }
+
+/* ////////////////// Правки за відгуком (жовтень 2026) ////////////////// */
+/* Блок в кінці файлу навмисно: перекриває legacy-правила з усіх media-запитів */
+
+/* Заголовки секцій — один розмір і капс */
+.services-title,
+.about-title,
+.cosmetics-title,
+.gallery-title,
+.price-title,
+.news-title,
+.reviews-title {
+  font-size: 40px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+/* Горизонтальні слайдери: спільне */
+.js-scroller {
+  position: relative;
+}
+
+.scroller-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.scroller-dots[hidden] {
+  display: none;
+}
+
+.scroller-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 0;
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.scroller-dot.active {
+  background: #000;
+}
+
+/* Події: дві стрічки (найближчі / минулі), картки більші */
+.news-subtitle {
+  line-height: 1.3;
+}
+
+.news-group-title {
+  font-family: 'Chutz', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.07em;
+  color: #000;
+  margin: 40px 0 20px;
+}
+
+.news-scroll-container {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 10px 20px;
+  box-sizing: border-box;
+}
+
+.news-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.news-card {
+  flex: 0 0 380px;
+  width: auto;
+  height: auto;
+  border-left: none;
+  scroll-snap-align: start;
+  background: #fff;
+}
+
+.news-card-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  margin-bottom: 24px;
+}
+
+.news-card-title {
+  width: auto;
+  font-size: 20px;
+  margin: 0 24px 16px;
+  padding: 0;
+  text-align: left;
+}
+
+.news-card-description {
+  width: auto;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 24px 24px;
+  flex-grow: 1;
+}
+
+.news-card .date {
+  width: auto;
+  font-size: 14px;
+  padding-left: 24px;
+}
+
+.news-empty {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #5a5a5a;
+  padding: 24px;
+  border: 1px dashed #ccc;
+  border-radius: 3px;
+}
+
+.news-empty a {
+  color: #b1976b;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Instagram під галереєю — тепер і на мобільному */
+.gallery-link {
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .services-title,
+  .about-title,
+  .cosmetics-title,
+  .gallery-title,
+  .price-title,
+  .news-title,
+  .reviews-title {
+    font-size: 36px;
+  }
+
+  .news-card {
+    flex-basis: 320px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .services-title,
+  .about-title,
+  .cosmetics-title,
+  .gallery-title,
+  .price-title,
+  .news-title,
+  .reviews-title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .cosmetics-title {
+    text-align: center;
+  }
+
+  .gallery-link {
+    display: flex;
+    width: 100%;
+    max-width: 333px;
+    box-sizing: border-box;
+    padding: 19px 20px;
+  }
+
+  /* Прайс: категорії гортаються вбік, сусідня картка визирає справа */
+  .price-container {
+    width: 100%;
+  }
+
+  .price-title,
+  .price-description {
+    padding: 0 16px;
+  }
+
+  .price-cards {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 16px 40px;
+    scroll-padding: 0 16px;
+    margin-bottom: 0;
+  }
+
+  .price-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .price-cards > div {
+    flex: 0 0 86%;
+    width: auto;
+    min-height: 0;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+  }
+
+  .price-dots {
+    margin: 0 0 40px;
+  }
+
+  /* Події на мобільному: картка майже на всю ширину */
+  .news {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  .news-container {
+    width: 100%;
+  }
+
+  .news-title {
+    width: auto;
+    margin-left: 0;
+  }
+
+  .news-group-title {
+    font-size: 18px;
+    text-align: center;
+    margin: 28px 0 12px;
+  }
+
+  .news-scroll-container {
+    height: auto;
+    width: auto;
+    margin: 0 -16px;
+    padding: 10px 16px 20px;
+    scroll-padding: 0 16px;
+    gap: 16px;
+  }
+
+  .news-card {
+    flex: 0 0 86%;
+  }
+
+  .news-card-title {
+    font-size: 18px;
+  }
+}

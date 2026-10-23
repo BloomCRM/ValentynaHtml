@@ -50,22 +50,12 @@
           </div>
           <div class="footer-link-container">
             <div class="footer-link-img-container">
-              <a href="https://facebook.com" target="_blank" class="footer-svg-link">
-                <svg class="footer-link-icon"><use href="#facebook"></use></svg>
-              </a>
-            </div>
-            <div class="footer-link-img-container">
-              <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
-                <svg class="footer-link-icon"><use href="#youtube"></use></svg>
-              </a>
-            </div>
-            <div class="footer-link-img-container">
               <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
                 <svg class="footer-link-icon"><use href="#instagram"></use></svg>
               </a>
             </div>
             <div class="footer-link-img-container">
-              <a href="https://web.telegram.org" target="_blank" class="footer-svg-link">
+              <a href="https://t.me/valentyna_perukarnia" target="_blank" class="footer-svg-link">
                 <svg class="footer-link-icon"><use href="#telegram2"></use></svg>
               </a>
             </div>
@@ -127,10 +117,7 @@
       <p class="services-text" data-translate="services-care">ДОГЛЯД</p>
     </li>
     <li class="services-item">
-      <picture>
-        <source media="(max-width: 767px)" srcset="~/img/tas.png 1x, ~/img/tas.png 2x" />
-        <img src="~/img/tas.png" alt="ПРОЦЕДУРИ" loading="lazy" />
-      </picture>
+      <responsive-img src="img/tas-mobile" alt="Хім та біо завивка" sizes="(max-width:767px) 100vw, 20vw" />
       <p class="services-text" data-translate="services-chemical">ХІМ ТА БІО ЗАВИВКА</p>
     </li>
     <li class="services-item">
@@ -226,11 +213,6 @@
       </div>
     </div>
 
-    <a href="https://www.instagram.com/valentyna_perukarnia/" class="gallery-link" target="_blank" rel="noopener noreferrer">
-      <span data-translate="gallery-more">More photos in Instagram</span>
-      <svg class="gallery-icon"><use href="#instagram"></use></svg>
-    </a>
-
     <div class="gallery-mobile">
       <div class="gallery-mobile-scroll-container">
         <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-mobile-image" />
@@ -243,6 +225,11 @@
         <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
       </div>
     </div>
+
+    <a href="https://www.instagram.com/valentyna_perukarnia/" class="gallery-link" target="_blank" rel="noopener noreferrer">
+      <span data-translate="gallery-more">Більше фото в Instagram</span>
+      <svg class="gallery-icon"><use href="#instagram"></use></svg>
+    </a>
   </div>
 
   <div class="lightbox-modal" id="lightbox-modal">
@@ -261,7 +248,7 @@
     <p class="price-description" data-translate="price-description">
       Ми Перукарня Валентина. Інклюзивна перукарня, де є місце для кожного. Місцева перукарня, що робить стиль без меж.
     </p>
-    <div class="price-cards">
+    <div class="price-cards js-scroller">
       @foreach (var category in Model.ServiceCategories)
       {
         <div class="@category.CssClass">
@@ -299,61 +286,47 @@
         </div>
       }
     </div>
+    <div class="scroller-dots price-dots" aria-hidden="true"></div>
     <a href="@Model.BookingUrl" target="_blank" class="price-button" data-translate="hero-book">Записатися</a>
   </div>
 </section>
 
 <section class="news">
   <div class="news-container">
-    <h2 class="news-title" data-translate="news-title">ПОДІЇ ТА НОВИТИ У ПЕРУКАРНІ ВАЛЕНТИНА</h2>
+    <h2 class="news-title" data-translate="news-title">ПОДІЇ ТА НОВИНИ У ПЕРУКАРНІ ВАЛЕНТИНА</h2>
     <p class="news-subtitle" data-translate="news-subtitle">
       Завітайте до нас на цікаві події та користуйтесь акційними пропозиціями
     </p>
-    <div class="news-scroll-container">
-      <div class="news-card">
-        <div class="news-img-1"></div>
-        <h2 class="news-card-title" data-translate="news-music">МУЗИЧНИЙ ВЕЧІР</h2>
-        <p class="news-card-description" data-translate="news-music-desc">
-          9 березня о 18:00 у перукарні «Валентина» відбудеться затишний
-          музичний вечір. За інструментом – талановитий Міша Качур.
-          Приходьте насолодитися живою музикою та приємною атмосферою!
-        </p>
-        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
-        <div class="card-line"></div>
-        <p class="date" data-translate="news-date-1">8 березня 2025</p>
+    <h3 class="news-group-title" data-translate="news-upcoming">НАЙБЛИЖЧІ ПОДІЇ</h3>
+    @if (Model.UpcomingNews.Count > 0)
+    {
+      <div class="news-scroll-container js-scroller">
+        @foreach (var item in Model.UpcomingNews)
+        {
+          <partial name="_NewsCard" model="item" />
+        }
       </div>
-      <div class="news-card">
-        <div class="news-img-2"></div>
-        <h2 class="news-card-title" data-translate="news-valentine">ДЕНЬ ЗАКОХАНИХ У ВАЛЕНТИНІ</h2>
-        <p class="news-card-description" data-translate="news-valentine-desc">
-          Запрошуємо вас 14 лютого на святкування Дня Закоханих у перукарні
-          «Валентина»! На вас чекають смачні мочі, гарячий рамен і музична
-          атмосфера від DJ Emergencyloop. 30% прибутку буде передано на
-          підтримку ЗСУ
-        </p>
-        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
-        <div class="card-line"></div>
-        <p class="date" data-translate="news-date-2">14 лютого 2025</p>
+      <div class="scroller-dots" aria-hidden="true"></div>
+    }
+    else
+    {
+      <p class="news-empty">
+        <span data-translate="news-empty">Нові події вже готуємо — стежте за анонсами в Instagram</span>
+        <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" rel="noopener noreferrer">@@valentyna_perukarnia</a>
+      </p>
+    }
+
+    @if (Model.PastNews.Count > 0)
+    {
+      <h3 class="news-group-title" data-translate="news-past">МИНУЛІ ПОДІЇ</h3>
+      <div class="news-scroll-container js-scroller">
+        @foreach (var item in Model.PastNews)
+        {
+          <partial name="_NewsCard" model="item" />
+        }
       </div>
-      <div class="news-card">
-        <div class="news-img-3"></div>
-        <h2 class="news-card-title" data-translate="news-filter">ФІЛЬТР ЗА ДОНАТ</h2>
-        <p class="news-card-description" data-translate="news-filter-desc">
-          До 14 лютого у «Валентині» триває благодійна акція «Фільтр за
-          донат» у співпраці з CaféBoutique. Усі зібрані кошти підуть на
-          підтримку FPV-лабораторії. Приєднуйтесь та зробіть свій внесок у
-          важливу справу!
-        </p>
-        <button type="button" class="news-button" data-translate="news-details">Детальніше»</button>
-        <div class="card-line"></div>
-        <p class="date" data-translate="news-date-2">14 лютого 2025</p>
-      </div>
-    </div>
-    <div class="scroll-indicators">
-      <span class="dot activ"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+      <div class="scroller-dots" aria-hidden="true"></div>
+    }
   </div>
 </section>
 
@@ -473,16 +446,6 @@
           <h2 class="footer-link-title" data-translate="footer-social-title">Ми в соцмережах</h2>
           <div class="footer-link-container">
             <div class="footer-link-img-container">
-              <a href="https://facebook.com" target="_blank" class="footer-svg-link">
-                <svg class="footer-link-icon"><use href="#facebook"></use></svg>
-              </a>
-            </div>
-            <div class="footer-link-img-container">
-              <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
-                <svg class="footer-link-icon"><use href="#youtube"></use></svg>
-              </a>
-            </div>
-            <div class="footer-link-img-container">
               <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
                 <svg class="footer-link-icon"><use href="#instagram"></use></svg>
               </a>
@@ -510,16 +473,6 @@
       <responsive-img src="img/map" alt="Мапа як дістатися" img-class="footer-mobile-map" sizes="100vw" />
     </a>
     <div class="footer-link-container">
-      <div class="footer-link-img-container">
-        <a href="https://facebook.com" target="_blank" class="footer-svg-link">
-          <svg class="footer-link-icon"><use href="#facebook"></use></svg>
-        </a>
-      </div>
-      <div class="footer-link-img-container">
-        <a href="https://www.youtube.com" target="_blank" class="footer-svg-link">
-          <svg class="footer-link-icon"><use href="#youtube"></use></svg>
-        </a>
-      </div>
       <div class="footer-link-img-container">
         <a href="https://www.instagram.com/valentyna_perukarnia/" target="_blank" class="footer-svg-link">
           <svg class="footer-link-icon"><use href="#instagram"></use></svg>

@@ -52,7 +52,7 @@ const translations = {
     
     // Gallery
     'gallery-title': 'ГАЛЕРЕЯ РОБІТ',
-    'gallery-more': 'More photos in Instagram',
+    'gallery-more': 'Більше фото в Instagram',
     
     // Price
     'price-title': 'ПОСЛУГИ ТА ЦІНИ',
@@ -117,7 +117,7 @@ const translations = {
     'from-price': 'Від',
     
     // News
-    'news-title': 'ПОДІЇ ТА НОВИТИ У ПЕРУКАРНІ ВАЛЕНТИНА',
+    'news-title': 'ПОДІЇ ТА НОВИНИ У ПЕРУКАРНІ ВАЛЕНТИНА',
     'news-subtitle': 'Завітайте до нас на цікаві події та користуйтесь акційними пропозиціями',
     'news-music': 'МУЗИЧНИЙ ВЕЧІР',
     'news-music-desc': '9 березня о 18:00 у перукарні «Валентина» відбудеться затишний музичний вечір. За інструментом – талановитий Міша Качур. Приходьте насолодитися живою музикою та приємною атмосферою!',
@@ -126,7 +126,10 @@ const translations = {
     'news-filter': 'ФІЛЬТР ЗА ДОНАТ',
     'news-filter-desc': 'До 14 лютого у «Валентині» триває благодійна акція «Фільтр за донат» у співпраці з CaféBoutique. Усі зібрані кошти підуть на підтримку FPV-лабораторії. Приєднуйтесь та зробіть свій внесок у важливу справу!',
     'news-details': 'Детальніше»',
-    'news-date-1': '8 березня 2025',
+    'news-upcoming': 'НАЙБЛИЖЧІ ПОДІЇ',
+    'news-past': 'МИНУЛІ ПОДІЇ',
+    'news-empty': 'Нові події вже готуємо — стежте за анонсами в Instagram',
+    'news-date-1': '9 березня 2025',
     'news-date-2': '14 лютого 2025',
     
     // Reviews
@@ -265,7 +268,10 @@ const translations = {
     'news-filter': 'FILTER FOR DONATION',
     'news-filter-desc': 'Until February 14th, the charity campaign "Filter for donation" continues at Valentyna in cooperation with CaféBoutique. All collected funds will go to support the FPV laboratory. Join and make your contribution to an important cause!',
     'news-details': 'Details»',
-    'news-date-1': 'March 8, 2025',
+    'news-upcoming': 'UPCOMING EVENTS',
+    'news-past': 'PAST EVENTS',
+    'news-empty': 'New events are on the way — follow the announcements on Instagram',
+    'news-date-1': 'March 9, 2025',
     'news-date-2': 'February 14, 2025',
     
     // Reviews
@@ -390,19 +396,38 @@ document.addEventListener('DOMContentLoaded', () => {
   new Lightbox();
 });
 
-const container = document.querySelector('.news-scroll-container');
-const dots = document.querySelectorAll('.dot');
+// Горизонтальні слайдери (події, прайс на мобільному): крапки під .js-scroller
+// генеруються за кількістю карток і ховаються, коли все влазить без прокрутки
+document.querySelectorAll('.js-scroller').forEach(scroller => {
+  const dotsBox = scroller.nextElementSibling;
+  if (!dotsBox || !dotsBox.classList.contains('scroller-dots')) return;
 
-container.addEventListener('scroll', () => {
-  const scrollLeft = container.scrollLeft;
-  const cardWidth = container.offsetWidth;
+  const cards = [...scroller.children];
+  const dots = cards.map((card, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'scroller-dot';
+    dot.tabIndex = -1;
+    dot.addEventListener('click', () => {
+      scroller.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+    });
+    dotsBox.appendChild(dot);
+    return dot;
+  });
 
-  const index = Math.round(scrollLeft / cardWidth);
+  const update = () => {
+    dotsBox.hidden = scroller.scrollWidth <= scroller.clientWidth + 1;
+    const left = scroller.scrollLeft;
+    let active = 0;
+    cards.forEach((card, i) => {
+      if (Math.abs(card.offsetLeft - left) < Math.abs(cards[active].offsetLeft - left)) active = i;
+    });
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+  };
 
-  dots.forEach(dot => dot.classList.remove('activ'));
-  if (dots[index]) {
-    dots[index].classList.add('activ');
-  }
+  scroller.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 });
 
 const reviewContainer = document.querySelector('.reviews-cards');
