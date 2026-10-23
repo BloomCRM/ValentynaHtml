@@ -411,9 +411,36 @@ document.querySelectorAll('.js-scroller').forEach(scroller => {
   let active = 0;
 
   const atEnd = () => scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 2;
+  // Власна анімація замість scrollTo({behavior:'smooth'}): частина мобільних браузерів
+  // плавну прокрутку контейнера ігнорує, і стрічка стоїть на місці
+  let animation = 0;
   const goTo = i => {
     const index = (i + cards.length) % cards.length;
-    scroller.scrollTo({ left: cards[index].offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+    // зупиняємось там, де стала б і прив'язка (scroll-snap) з урахуванням scroll-padding
+    const pad = parseFloat(getComputedStyle(scroller).scrollPaddingLeft) || 0;
+    const target = Math.max(0, Math.min(cards[index].offsetLeft - pad, scroller.scrollWidth - scroller.clientWidth));
+    cancelAnimationFrame(animation);
+    if (reduceMotion) {
+      scroller.scrollLeft = target;
+      return;
+    }
+    const start = scroller.scrollLeft;
+    const startTime = performance.now();
+    const duration = 450;
+    scroller.style.scrollSnapType = 'none';
+    scroller.style.scrollBehavior = 'auto';
+    const step = now => {
+      const p = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      scroller.scrollLeft = start + (target - start) * eased;
+      if (p < 1) {
+        animation = requestAnimationFrame(step);
+      } else {
+        scroller.style.scrollSnapType = '';
+        scroller.style.scrollBehavior = '';
+      }
+    };
+    animation = requestAnimationFrame(step);
   };
   // з кінця стрічки «далі» повертає на початок, з початку «назад» — у кінець
   const next = () => (atEnd() ? goTo(0) : goTo(active + 1));

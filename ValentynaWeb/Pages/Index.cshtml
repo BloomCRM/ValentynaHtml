@@ -219,7 +219,7 @@
     </div>
 
     <div class="gallery-mobile">
-      <div class="gallery-mobile-scroll-container js-scroller">
+      <div class="gallery-mobile-scroll-container js-scroller" data-autoplay="4000">
         <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-mobile-image" />
         <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-mobile-image" />
         <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
@@ -306,7 +306,7 @@
     <h3 class="news-group-title" data-translate="news-upcoming">НАЙБЛИЖЧІ ПОДІЇ</h3>
     @if (Model.UpcomingNews.Count > 0)
     {
-      <div class="news-scroll-container js-scroller">
+      <div class="news-scroll-container js-scroller" data-autoplay="5000">
         @foreach (var item in Model.UpcomingNews)
         {
           <partial name="_NewsCard" model="item" />
@@ -325,7 +325,7 @@
     @if (Model.PastNews.Count > 0)
     {
       <h3 class="news-group-title" data-translate="news-past">МИНУЛІ ПОДІЇ</h3>
-      <div class="news-scroll-container js-scroller">
+      <div class="news-scroll-container js-scroller" data-autoplay="5000">
         @foreach (var item in Model.PastNews)
         {
           <partial name="_NewsCard" model="item" />
