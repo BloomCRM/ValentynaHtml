@@ -3819,3 +3819,150 @@ ul {
     margin-left: 36px;
   }
 }
+
+/* ////////////////// Перший екран — варіант В «Фото і довіра» ////////////////// */
+
+/* затемнення лише знизу, де текст; верх фото лишається живим */
+.hero-background {
+  background-image:
+    linear-gradient(180deg, rgba(31, 27, 25, 0.3) 0%, rgba(31, 27, 25, 0) 28%, rgba(31, 27, 25, 0.2) 50%, rgba(31, 27, 25, 0.9) 84%),
+    url('../img/main1.jpg');
+}
+
+.hero-trust {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0 56px 110px; /* знизу справа кругла кнопка Telegram */
+  text-align: left;
+}
+
+.hero-trust-content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  align-items: end;
+  gap: 48px;
+}
+
+.hero-trust-title {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(56px, 7.5vw, 120px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: #fff;
+}
+
+.hero-trust-facts {
+  display: grid;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #eee6dc;
+}
+
+.hero-trust-rating {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #eee6dc;
+}
+
+.hero-trust-rating b {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-trust-stars {
+  color: #f2c14e;
+  letter-spacing: 2px;
+}
+
+.hero-trust-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 22px 0 0;
+}
+
+.hero-trust-buttons .first-button,
+.hero-trust-buttons .second-button {
+  width: auto;
+  height: 52px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+.hero-trust-buttons .second-button {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 600;
+}
+
+.hero-trust-buttons .second-button:hover,
+.hero-trust-buttons .second-button:focus {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+@media screen and (max-width: 1199px) {
+  .hero-trust {
+    padding: 0 40px 56px;
+  }
+
+  .hero-trust-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero-trust-side {
+    max-width: 420px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero-background {
+    background-position: center 30%;
+  }
+
+  /* знизу липка кнопка «Записатися» (56px) і кругла Telegram над нею — кнопки першого екрана мають бути вище */
+  .hero-trust {
+    padding: 0 20px 150px;
+  }
+
+  .hero-trust-content {
+    gap: 18px;
+  }
+
+  .hero-trust-title {
+    font-size: 17vw;
+    line-height: 0.9;
+  }
+
+  .hero-trust-side {
+    max-width: none;
+  }
+
+  .hero-trust-facts {
+    font-size: 15px;
+  }
+
+  .hero-trust-buttons {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+
+  .hero-trust-buttons .first-button,
+  .hero-trust-buttons .second-button {
+    width: auto;
+  }
+}

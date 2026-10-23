@@ -89,13 +89,31 @@
     </div>
   </div>
 
-  <!-- Херо -->
-  <section class="hero">
-    <div class="hero-content container">
-      <h1 class="hero-title" data-translate="hero-title">Час бути собою</h1>
-      <div class="hero-buttons">
-        <a href="@Model.BookingUrl" target="_blank" class="first-button" data-translate="hero-book">Записатися</a>
-        <a href="#services" class="second-button" data-translate="hero-services">Перейти до послуг</a>
+  <!-- Херо (варіант В): слоган унизу фото + факти, що знімають сумнів «чи варто» і «де це» -->
+  <section class="hero hero-trust">
+    <div class="hero-trust-content">
+      <h1 class="hero-title hero-trust-title" data-translate="hero-title">Час бути собою</h1>
+      <div class="hero-trust-side">
+        <div class="hero-trust-facts">
+          @if (Model.Reviews.Rating is double heroRating && Model.Reviews.TotalCount is int heroTotal)
+          {
+            var heroCount = IndexModel.ReviewsCountLabel(heroTotal);
+            <a class="hero-trust-rating" href="@Model.Reviews.ProfileUrl" target="_blank" rel="noopener">
+              <b>@heroRating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</b>
+              <span class="hero-trust-stars" aria-hidden="true">★★★★★</span>
+              <span>@heroTotal <span data-translate="@heroCount.Key">@heroCount.Label</span></span>
+            </a>
+          }
+          <p data-translate="footer-address">@Model.Salon.Address</p>
+          @foreach (var line in Model.Schedule)
+          {
+            <p><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</p>
+          }
+        </div>
+        <div class="hero-buttons hero-trust-buttons">
+          <a href="@Model.BookingUrl" target="_blank" class="first-button" data-translate="hero-book">Записатися</a>
+          <a href="#price" class="second-button" data-translate="hero-prices">Ціни</a>
+        </div>
       </div>
     </div>
   </section>

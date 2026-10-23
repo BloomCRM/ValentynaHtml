@@ -25,6 +25,7 @@ const translations = {
     'hero-title': 'Час бути собою',
     'hero-book': 'Записатися',
     'hero-services': 'Перейти до послуг',
+    'hero-prices': 'Ціни',
     'telegram-btn': 'написати в Telegram',
     
     // Logo
@@ -168,6 +169,7 @@ const translations = {
     'hero-title': 'Time to be yourself',
     'hero-book': 'Book Now',
     'hero-services': 'View Services',
+    'hero-prices': 'Prices',
     'telegram-btn': 'write in Telegram',
     
     // Logo
