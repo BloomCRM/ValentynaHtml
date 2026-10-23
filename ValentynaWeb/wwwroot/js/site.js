@@ -329,7 +329,8 @@ const langButtons = document.querySelectorAll('.lang-btn');
 // Відгуки з Google: картки мовою версії сайту (data-lang="ua"/"en"; без data-lang — в обох)
 // і відносна дата поточною мовою
 function switchReviewsLanguage(lang) {
-  document.querySelectorAll('.review-card[data-lang], .dot-review[data-lang]').forEach(el => {
+  // Відгуки без мови (fallback з reviews.json) показуємо завжди
+  document.querySelectorAll('.review-card[data-lang]:not([data-lang=""]), .dot-review[data-lang]:not([data-lang=""])').forEach(el => {
     el.hidden = el.dataset.lang !== lang;
   });
 

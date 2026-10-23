@@ -9,10 +9,6 @@
   <div class="header">
     <div class="logo-container">
       <p class="logo"><span data-translate="logo-main">ВАЛЕНТИНА</span> <span class="logo-span" data-translate="logo-sub">перукарня</span></p>
-      <div class="mobile-language-switch">
-        <button class="lang-btn active" data-lang="ua">UA</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-      </div>
       <button type="button" class="menu-burger" id="burger-btn">
         <svg class="menu-burger-icon">
           <use href="#menu-burger"></use>
@@ -29,6 +25,10 @@
           <p class="logo-mobile">
             <span data-translate="logo-main">ВАЛЕНТИНА</span> <span class="logo-span" data-translate="logo-sub">перукарня</span>
           </p>
+          <div class="mobile-language-switch">
+            <button class="lang-btn active" data-lang="ua">UA</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
           <nav class="mobile-nav">
             <ul class="mobile-nav-list">
               <li><a href="#home" class="mobile-nav-link" data-translate="nav-home">Головна</a></li>
@@ -181,7 +181,15 @@
         ідеальні засоби, які відповідають вашому типу та стилю волосся
       </p>
     </div>
-    <responsive-img src="img/cosmetics" alt="cosmetics" img-class="cosmetics-image" sizes="(max-width:767px) 100vw, 50vw" />
+    <div class="cosmetics-slider">
+      <div class="cosmetics-scroll js-scroller">
+        @for (var i = 1; i <= 5; i++)
+        {
+          <responsive-img src="@($"img/cosmetics-{i}")" alt="Косметика Keune, яку ми використовуємо" img-class="cosmetics-photo" sizes="(max-width:767px) 80vw, 300px" />
+        }
+      </div>
+      <div class="scroller-dots" aria-hidden="true"></div>
+    </div>
   </div>
 </section>
 
@@ -214,7 +222,7 @@
     </div>
 
     <div class="gallery-mobile">
-      <div class="gallery-mobile-scroll-container">
+      <div class="gallery-mobile-scroll-container js-scroller">
         <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-mobile-image" />
         <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-mobile-image" />
         <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
@@ -224,6 +232,7 @@
         <img src="~/img/gallery 7.jpg" alt="gallery" class="gallery-mobile-image" />
         <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
       </div>
+      <div class="scroller-dots" aria-hidden="true"></div>
     </div>
 
     <a href="https://www.instagram.com/valentyna_perukarnia/" class="gallery-link" target="_blank" rel="noopener noreferrer">

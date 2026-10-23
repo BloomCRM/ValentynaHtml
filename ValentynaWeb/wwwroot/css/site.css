@@ -3499,3 +3499,132 @@ ul {
     font-size: 18px;
   }
 }
+
+/* ////////////////// Правки за відгуком, частина 2 ////////////////// */
+
+/* Косметика: замість одного фото — слайдер вертикальних фото, більших */
+.cosmetics-text {
+  flex: 1 1 0;
+}
+
+.cosmetics-slider {
+  flex: 0 0 620px;
+  min-width: 0;
+}
+
+.cosmetics-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cosmetics-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.cosmetics-scroll > picture {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+}
+
+.cosmetics-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Мапа: прибираємо сірий «затемнений» вигляд (кольорова — окремим кроком) */
+.footer-map,
+.footer-mobile-map {
+  filter: brightness(1.12) contrast(0.85);
+}
+
+/* Іконки соцмереж завжди круглі — не стискаються у флексі */
+.footer-link-img-container {
+  flex-shrink: 0;
+  aspect-ratio: 1;
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .cosmetics-slider {
+    flex-basis: 360px;
+  }
+
+  .cosmetics-scroll > picture {
+    flex-basis: 260px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cosmetics {
+    width: auto;
+    max-width: none;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .cosmetics-container {
+    align-items: stretch;
+  }
+
+  .cosmetics-slider {
+    flex: none;
+    margin: 0 -16px;
+  }
+
+  .cosmetics-scroll {
+    gap: 12px;
+    padding: 0 16px;
+    scroll-padding: 0 16px;
+  }
+
+  .cosmetics-scroll > picture {
+    flex: 0 0 80%;
+  }
+
+  /* Галерея на мобільному гортається зліва направо (була стовпчиком через flex-wrap) */
+  .gallery-container,
+  .gallery-mobile {
+    max-width: none;
+  }
+
+  .gallery-mobile-scroll-container {
+    flex-wrap: nowrap;
+    width: auto;
+    height: auto;
+    gap: 12px;
+    padding: 0 16px;
+    scroll-padding: 0 16px;
+  }
+
+  .gallery-mobile-scroll-container > * {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  /* однаковий розмір для <img> і <picture> (responsive-img) у стрічці */
+  .gallery-mobile-scroll-container > .gallery-mobile-image {
+    width: 86%;
+  }
+
+  .gallery-mobile-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gallery-mobile-image:hover {
+    transform: none;
+  }
+
+  /* Перемикач мови — всередині бургер-меню */
+  .mobile-language-switch {
+    position: static;
+    margin: 8px 0 24px;
+  }
+}
