@@ -117,7 +117,7 @@ const translations = {
     'from-price': 'Від',
     
     // News
-    'news-title': 'ПОДІЇ ТА НОВИНИ У ПЕРУКАРНІ ВАЛЕНТИНА',
+    'news-title': 'ПОДІЇ ТА НОВИНИ',
     'news-subtitle': 'Завітайте до нас на цікаві події та користуйтесь акційними пропозиціями',
     'news-music': 'МУЗИЧНИЙ ВЕЧІР',
     'news-music-desc': '9 березня о 18:00 у перукарні «Валентина» відбудеться затишний музичний вечір. За інструментом – талановитий Міша Качур. Приходьте насолодитися живою музикою та приємною атмосферою!',
@@ -151,7 +151,8 @@ const translations = {
     'schedule-sat-sun': 'Сб-Нд',
     'footer-social-title': 'Ми в соцмережах',
     'footer-location-title': 'Місцезнаходження',
-    'footer-address': 'вул. Богдана Хмельницького 94, Київ'
+    'footer-address': 'вул. Богдана Хмельницького 94, Київ',
+    'footer-map-open': 'Прокласти маршрут у Google Maps',
   },
   
   en: {
@@ -259,7 +260,7 @@ const translations = {
     'from-price': 'From',
     
     // News
-    'news-title': 'EVENTS & NEWS AT VALENTYNA HAIR SALON',
+    'news-title': 'EVENTS & NEWS',
     'news-subtitle': 'Visit us for interesting events and take advantage of promotional offers',
     'news-music': 'MUSIC EVENING',
     'news-music-desc': 'On March 9th at 18:00, a cozy music evening will take place at Valentyna Hair Salon. At the instrument - talented Misha Kachur. Come enjoy live music and pleasant atmosphere!',
@@ -293,7 +294,8 @@ const translations = {
     'schedule-sat-sun': 'Sat-Sun',
     'footer-social-title': 'We are on social media',
     'footer-location-title': 'Location',
-    'footer-address': 'Bohdana Khmelnytskoho 94, Kyiv'
+    'footer-address': 'Bohdana Khmelnytskoho 94, Kyiv',
+    'footer-map-open': 'Get directions in Google Maps',
   }
 };
 
@@ -397,38 +399,76 @@ document.addEventListener('DOMContentLoaded', () => {
   new Lightbox();
 });
 
-// Горизонтальні слайдери (події, прайс на мобільному): крапки під .js-scroller
-// генеруються за кількістю карток і ховаються, коли все влазить без прокрутки
+// Горизонтальні слайдери (.js-scroller): під ними стрілки ‹ › і крапки за кількістю карток,
+// усе ховається, коли картки влазять без прокрутки. data-autoplay="мс" — гортає сам по колу
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.querySelectorAll('.js-scroller').forEach(scroller => {
   const dotsBox = scroller.nextElementSibling;
   if (!dotsBox || !dotsBox.classList.contains('scroller-dots')) return;
 
   const cards = [...scroller.children];
+  let active = 0;
+
+  const atEnd = () => scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 2;
+  const goTo = i => {
+    const index = (i + cards.length) % cards.length;
+    scroller.scrollTo({ left: cards[index].offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  // з кінця стрічки «далі» повертає на початок, з початку «назад» — у кінець
+  const next = () => (atEnd() ? goTo(0) : goTo(active + 1));
+  const prev = () => (scroller.scrollLeft <= 2 ? goTo(cards.length - 1) : goTo(active - 1));
+
+  const arrow = (label, symbol, onClick) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'scroller-arrow';
+    btn.setAttribute('aria-label', label);
+    btn.textContent = symbol;
+    btn.addEventListener('click', onClick);
+    return btn;
+  };
+
+  dotsBox.removeAttribute('aria-hidden');
+  dotsBox.appendChild(arrow('Назад', '‹', prev));
   const dots = cards.map((card, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'scroller-dot';
     dot.tabIndex = -1;
-    dot.addEventListener('click', () => {
-      scroller.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
-    });
+    dot.setAttribute('aria-hidden', 'true');
+    dot.addEventListener('click', () => goTo(i));
     dotsBox.appendChild(dot);
     return dot;
   });
+  dotsBox.appendChild(arrow('Далі', '›', next));
 
   const update = () => {
     dotsBox.hidden = scroller.scrollWidth <= scroller.clientWidth + 1;
     const left = scroller.scrollLeft;
-    let active = 0;
+    active = 0;
     cards.forEach((card, i) => {
       if (Math.abs(card.offsetLeft - left) < Math.abs(cards[active].offsetLeft - left)) active = i;
     });
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+    // коли видно кілька карток, остання ніколи не стає «першою» — підсвічуємо її в кінці
+    const shown = atEnd() && left > 2 ? cards.length - 1 : active;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === shown));
   };
 
   scroller.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
+
+  const delay = Number(scroller.dataset.autoplay);
+  if (delay && !reduceMotion) {
+    let paused = false;
+    const area = scroller.parentElement;
+    ['pointerenter', 'focusin', 'touchstart'].forEach(e => area.addEventListener(e, () => { paused = true; }, { passive: true }));
+    ['pointerleave', 'focusout'].forEach(e => area.addEventListener(e, () => { paused = false; }));
+    setInterval(() => {
+      if (!paused && !document.hidden && !dotsBox.hidden) next();
+    }, delay);
+  }
 });
 
 const reviewContainer = document.querySelector('.reviews-cards');

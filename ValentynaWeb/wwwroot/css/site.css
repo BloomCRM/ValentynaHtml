@@ -3628,3 +3628,66 @@ ul {
     margin: 8px 0 24px;
   }
 }
+
+/* Мапа: жива кольорова Google-карта замість сірого скриншота */
+.footer-map,
+.footer-mobile-map {
+  filter: none;
+}
+
+.footer-map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.footer-map-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #ad776b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* стрілки слайдерів — поруч із крапками, на тач-екранах зайві (там свайп) */
+.scroller-dots {
+  align-items: center;
+}
+
+.scroller-arrow {
+  width: 36px;
+  height: 36px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0 8px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.scroller-arrow:hover {
+  border-color: #000;
+}
+
+@media (hover: none) {
+  .scroller-arrow {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer-map-embed iframe {
+    height: 220px;
+  }
+}
