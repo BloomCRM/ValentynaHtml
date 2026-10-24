@@ -40,6 +40,7 @@ const translations = {
     'services-care': 'ДОГЛЯД',
     'services-chemical': 'ХІМ ТА БІО ЗАВИВКА',
     'services-coloring': 'ФАРБУВАННЯ',
+    'services-brows': 'БРОВИ',
     
     // About
     'about-title': 'ПРО НАС',
@@ -185,6 +186,7 @@ const translations = {
     'services-care': 'HAIR CARE',
     'services-chemical': 'CHEMICAL & BIO PERM',
     'services-coloring': 'COLORING',
+    'services-brows': 'BROWS',
     
     // About
     'about-title': 'ABOUT US',
