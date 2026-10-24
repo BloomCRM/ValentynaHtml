@@ -25,9 +25,12 @@ public class IndexModel : PageModel
     public ReviewsContent Reviews { get; private set; } = new();
     public IReadOnlyList<NewsItem> UpcomingNews { get; private set; } = [];
     public IReadOnlyList<NewsItem> PastNews { get; private set; } = [];
+    public IReadOnlyList<ServicePhotoCategory> ServicePhotos { get; private set; } = [];
 
     public async Task OnGetAsync()
     {
+        ServicePhotos = _content.ServicePhotos.Categories;
+
         var today = KyivToday();
         var news = _content.News.Items;
         UpcomingNews = news.Where(n => n.EventDate >= today).OrderBy(n => n.EventDate).ToList();
@@ -51,6 +54,10 @@ public class IndexModel : PageModel
             (>= 2 and <= 4, not (>= 12 and <= 14)) => ("reviews-count-few", "відгуки у Google Maps"),
             _ => ("reviews-count-many", "відгуків у Google Maps")
         };
+
+    // "img/gallery 3" → "/img/webp/gallery-3" (до цього JS дописує -768.webp / -1280.webp), як у ResponsiveImageTagHelper
+    public static string WebpBase(string path) =>
+        "/img/webp/" + Path.GetFileNameWithoutExtension(path).Replace(" ", "-");
 
     // Сервер у Docker живе в UTC, а "сьогодні" для подій — за київським часом
     private static DateOnly KyivToday()

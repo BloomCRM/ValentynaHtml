@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "title": "Стрижки",
+      "titleKey": "services-cuts",
+      "cover": "img/cuts",
+      "photos": ["img/cuts", "img/haircut", "img/haircut-mobile", "img/gallery 3"]
+    },
+    {
+      "title": "Укладки",
+      "titleKey": "services-styling",
+      "cover": "img/ukladka2",
+      "photos": ["img/ukladka2", "img/styling-mobile", "img/gallery 8"]
+    },
+    {
+      "title": "Догляд",
+      "titleKey": "services-care",
+      "cover": "img/doglyad2",
+      "photos": ["img/doglyad2", "img/cosmetics-2", "img/cosmetics-1"]
+    },
+    {
+      "title": "Хім та біо завивка",
+      "titleKey": "services-chemical",
+      "cover": "img/tas-mobile",
+      "photos": ["img/tas-mobile", "img/gallery 3"]
+    },
+    {
+      "title": "Фарбування",
+      "titleKey": "services-coloring",
+      "cover": "img/doglyad",
+      "photos": ["img/doglyad", "img/color-mobile", "img/highlights-mobile"]
+    }
+  ]
+}

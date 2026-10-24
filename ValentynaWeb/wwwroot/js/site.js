@@ -26,6 +26,7 @@ const translations = {
     'hero-book': 'Записатися',
     'hero-services': 'Перейти до послуг',
     'hero-prices': 'Ціни',
+    'stories-next': 'Далі',
     'telegram-btn': 'написати в Telegram',
     
     // Logo
@@ -170,6 +171,7 @@ const translations = {
     'hero-book': 'Book Now',
     'hero-services': 'View Services',
     'hero-prices': 'Prices',
+    'stories-next': 'Next',
     'telegram-btn': 'write in Telegram',
     
     // Logo

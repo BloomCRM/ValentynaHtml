@@ -23,6 +23,7 @@ public class JsonContentProvider : IContentProvider, IDisposable
         Watch<ReviewsContent>("reviews.json");
         Watch<GalleryContent>("gallery.json");
         Watch<NewsContent>("news.json");
+        Watch<ServicePhotosContent>("service-photos.json");
     }
 
     private void Watch<T>(string fileName) where T : new()
@@ -64,6 +65,7 @@ public class JsonContentProvider : IContentProvider, IDisposable
     public ReviewsContent Reviews => Get<ReviewsContent>("reviews.json");
     public GalleryContent Gallery => Get<GalleryContent>("gallery.json");
     public NewsContent News => Get<NewsContent>("news.json");
+    public ServicePhotosContent ServicePhotos => Get<ServicePhotosContent>("service-photos.json");
 
     public void Dispose() => _fileProvider.Dispose();
 }

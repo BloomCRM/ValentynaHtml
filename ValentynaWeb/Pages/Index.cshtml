@@ -121,28 +121,23 @@
 
 <section class="services" id="services">
   <h2 class="services-title" data-translate="services-title">ПОСЛУГИ</h2>
+  @* Картки з Content/service-photos.json; клік відкриває фото послуги у форматі сторіз *@
   <ul class="services-lisl">
-    <li class="services-item">
-      <responsive-img src="img/cuts" alt="Стрижки" sizes="(max-width:767px) 100vw, 20vw" />
-      <p class="services-text" data-translate="services-cuts">СТРИЖКИ</p>
-    </li>
-    <li class="services-item">
-      <responsive-img src="img/ukladka2" alt="Укладки" sizes="(max-width:767px) 100vw, 20vw" />
-      <p class="services-text" data-translate="services-styling">УКЛАДКИ</p>
-    </li>
-    <li class="services-item">
-      <responsive-img src="img/doglyad2" alt="Догляд" sizes="(max-width:767px) 100vw, 20vw" />
-      <p class="services-text" data-translate="services-care">ДОГЛЯД</p>
-    </li>
-    <li class="services-item">
-      <responsive-img src="img/tas-mobile" alt="Хім та біо завивка" sizes="(max-width:767px) 100vw, 20vw" />
-      <p class="services-text" data-translate="services-chemical">ХІМ ТА БІО ЗАВИВКА</p>
-    </li>
-    <li class="services-item">
-      <responsive-img src="img/doglyad" alt="Фарбування" sizes="(max-width:767px) 100vw, 20vw" />
-      <p class="services-text" data-translate="services-coloring">ФАРБУВАННЯ</p>
-    </li>
+    @for (var i = 0; i < Model.ServicePhotos.Count; i++)
+    {
+      var cat = Model.ServicePhotos[i];
+      <li class="services-item">
+        <button type="button" class="services-open" data-story-index="@i" aria-label="@cat.Title: @cat.Photos.Count фото">
+          <responsive-img src="@cat.Cover" alt="@cat.Title" sizes="(max-width:767px) 100vw, 20vw" />
+          <span class="services-count" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="14" height="14" rx="2" /><path d="M7 3h12a2 2 0 0 1 2 2v12" /></svg>@cat.Photos.Count
+          </span>
+          <span class="services-text" data-translate="@cat.TitleKey">@cat.Title</span>
+        </button>
+      </li>
+    }
   </ul>
+  <partial name="_ServiceStories" model="Model" />
   <a href="@Model.BookingUrl" target="_blank" class="services-btn" data-translate="hero-book">Записатися</a>
 </section>
 
@@ -506,3 +501,7 @@
     </div>
   </div>
 </footer>
+
+@section Scripts {
+  <script src="~/js/service-stories.js" asp-append-version="true"></script>
+}

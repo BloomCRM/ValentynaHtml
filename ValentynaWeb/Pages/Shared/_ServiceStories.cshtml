@@ -1,0 +1,43 @@
+@model ValentynaWeb.Pages.IndexModel
+@* Перегляд фото послуги у форматі сторіз (js/service-stories.js).
+   Телефон: на весь екран, тап зліва — назад, по центру — пауза, справа — далі.
+   Десктоп: кадр 4:5 по центру на розмитому фоні, стрілки по боках. *@
+@{
+    var storiesData = Model.ServicePhotos.Select(c => new
+    {
+        title = c.Title,
+        titleKey = c.TitleKey,
+        cover = IndexModel.WebpBase(c.Cover),
+        photos = c.Photos.Select(IndexModel.WebpBase)
+    });
+}
+<script type="application/json" id="service-stories-data">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(storiesData))</script>
+
+<dialog class="ss" id="service-stories" aria-label="Фото послуги">
+  <div class="ss-bg" id="ss-bg"></div>
+  <div class="ss-frame">
+    <img class="ss-photo" id="ss-photo" alt="" />
+    <div class="ss-top">
+      <div class="ss-bars" id="ss-bars"></div>
+      <div class="ss-who">
+        <img class="ss-avatar" id="ss-avatar" alt="" />
+        <p class="ss-title" id="ss-title"></p>
+        <button type="button" class="ss-play" id="ss-play" aria-label="Пауза" aria-pressed="false">
+          <svg class="ss-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></svg>
+          <svg class="ss-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z" /></svg>
+        </button>
+        <button type="button" class="ss-close" id="ss-close" aria-label="Закрити">×</button>
+      </div>
+    </div>
+    <button type="button" class="ss-tap ss-tap-prev" id="ss-tap-prev" aria-label="Попереднє фото"></button>
+    <button type="button" class="ss-tap ss-tap-toggle" id="ss-tap-toggle" aria-label="Пауза або відтворення"></button>
+    <button type="button" class="ss-tap ss-tap-next" id="ss-tap-next" aria-label="Наступне фото"></button>
+    <div class="ss-flash" id="ss-flash" aria-hidden="true"></div>
+    <div class="ss-bottom">
+      <a class="ss-book" href="@Model.BookingUrl" target="_blank" rel="noopener" data-translate="hero-book">Записатися</a>
+      <button type="button" class="ss-next-cat" id="ss-next-cat"></button>
+    </div>
+  </div>
+  <button type="button" class="ss-side ss-side-prev" id="ss-side-prev" aria-label="Попереднє фото">‹</button>
+  <button type="button" class="ss-side ss-side-next" id="ss-side-next" aria-label="Наступне фото">›</button>
+</dialog>

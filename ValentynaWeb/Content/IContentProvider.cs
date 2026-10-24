@@ -10,4 +10,5 @@ public interface IContentProvider
     ReviewsContent Reviews { get; }
     GalleryContent Gallery { get; }
     NewsContent News { get; }
+    ServicePhotosContent ServicePhotos { get; }
 }
