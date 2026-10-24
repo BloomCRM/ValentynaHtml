@@ -27,9 +27,9 @@
       "titleKey": "services-care",
       "cover": "img/doglyad2",
       "photos": [
-        "img/doglyad2",
-        "img/cosmetics-2",
-        "img/cosmetics-1"
+        "img/care-1",
+        "img/care-2",
+        "img/care-3"
       ]
     },
     {
@@ -46,9 +46,11 @@
       "titleKey": "services-coloring",
       "cover": "img/doglyad",
       "photos": [
-        "img/doglyad",
-        "img/color-mobile",
-        "img/highlights-mobile"
+        "img/coloring-1",
+        "img/coloring-2",
+        "img/coloring-3",
+        "img/coloring-4",
+        "img/coloring-5"
       ]
     },
     {
@@ -56,7 +58,9 @@
       "titleKey": "services-brows",
       "cover": "img/brows-1",
       "photos": [
-        "img/brows-1"
+        "img/brows-1",
+        "img/brows-2",
+        "img/brows-3"
       ]
     }
   ]
