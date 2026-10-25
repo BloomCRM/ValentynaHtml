@@ -119,6 +119,21 @@
   // клік по темному фону навколо кадру (десктоп) — закрити
   dialog.addEventListener('click', e => { if (e.target === dialog || e.target.id === 'ss-bg') dialog.close(); });
   dialog.addEventListener('close', () => cancelAnimationFrame(frame));
+
+  // Safari на iPhone ігнорує частину touch-action: глушимо зум двома пальцями і подвійним тапом у сторіз
+  dialog.addEventListener('gesturestart', e => e.preventDefault());
+  dialog.addEventListener('dblclick', e => e.preventDefault());
+  let lastTouchEnd = 0;
+  dialog.addEventListener('touchend', e => {
+    const now = Date.now();
+    if (now - lastTouchEnd < 350) {
+      e.preventDefault();
+      // preventDefault гасить і click, тому другий швидкий тап обробляємо самі
+      const zone = e.target.closest('.ss-tap, .ss-side, .ss-play, .ss-next-cat, .ss-close, .ss-book');
+      if (zone) zone.click();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
   dialog.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') next();
     if (e.key === 'ArrowLeft') prev();
