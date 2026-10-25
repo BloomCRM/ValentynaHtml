@@ -4324,3 +4324,62 @@ ul {
     transition: none;
   }
 }
+
+/* ////////////////// Плашки «ВАЛЕНТИНА перукарня» і «ПРО НАС» ////////////////// */
+/* Плашка без фіксованої висоти: рівні відступи над і під текстом, по краях зливається з фоном.
+   Фон і розмиття — у ::before з маскою-градієнтом, щоб сам текст лишався чітким. */
+
+.header {
+  padding-top: 0;
+}
+
+/* меню компенсувало старі 46px відступу шапки — тепер шапка вже на самому верху */
+.mobile-menu {
+  margin-top: 0;
+}
+
+.logo-container,
+.about-logo-title {
+  position: relative;
+  isolation: isolate; /* ::before з z-index -1 лишається під текстом, а не під усією сторінкою */
+  height: auto;
+  background: none;
+  backdrop-filter: none;
+}
+
+.logo-container::before,
+.about-logo-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--band-bg, rgba(40, 38, 36, 0.5));
+  backdrop-filter: blur(40px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+
+.logo-container {
+  padding: 23px 0 33px; /* підібрано вимірюванням меж літер: над і під текстом по ~29px */
+}
+
+.about-container {
+  padding-top: 0;
+}
+
+.about-logo-title {
+  --band-bg: rgba(255, 255, 255, 0.32);
+  padding: 32px 0 32px; /* над і під літерами по ~38px */
+  line-height: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .logo-container {
+    padding: 17px 0 27px;
+  }
+
+  .about-logo-title {
+    --band-bg: rgba(40, 38, 36, 0.5);
+    padding: 25px 0 23px;
+  }
+}
