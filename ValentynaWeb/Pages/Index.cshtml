@@ -353,6 +353,9 @@
   <div class="section-img"></div>
 </section>
 
+@* Відгуки — лише актуальні з Google API; поки API нічого не віддав, блок не показуємо *@
+@if (Model.Reviews.Reviews.Count > 0)
+{
 <section class="reviews">
   <div class="reviews-container">
     <h2 class="reviews-title" data-translate="reviews-title">ВІДГУКИ НАШИХ КЛІЄНТІВ</h2>
@@ -424,6 +427,7 @@
     }
   </div>
 </section>
+}
 
 <footer class="footer" id="booking">
   <div class="footer-container">

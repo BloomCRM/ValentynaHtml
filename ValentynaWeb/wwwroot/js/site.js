@@ -513,7 +513,8 @@ document.querySelectorAll('.js-scroller').forEach(scroller => {
 const reviewContainer = document.querySelector('.reviews-cards');
 const reviewDots = document.querySelectorAll('.dot-review');
 
-reviewContainer.addEventListener('scroll', () => {
+// блоку відгуків може не бути: його показуємо лише з даними Google API
+reviewContainer?.addEventListener('scroll', () => {
   // активна — видима картка, найближча до лівого краю стрічки (картки вужчі за стрічку)
   const left = reviewContainer.scrollLeft;
   const cards = [...reviewContainer.querySelectorAll('.review-card:not([hidden])')];

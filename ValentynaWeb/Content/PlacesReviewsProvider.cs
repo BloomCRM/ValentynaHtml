@@ -17,7 +17,8 @@ public class GooglePlacesOptions
 
 /// <summary>
 /// Відгуки з Google Places API (New) — тимчасово, до схвалення Business Profile API.
-/// Без ApiKey/PlaceId або при помилці API — відгуки з reviews.json.
+/// Лише актуальні відгуки з API, без резервних з файлу. При збої Google — остання вдала відповідь API;
+/// якщо її ще немає (або немає ApiKey/PlaceId) — порожньо, і блок «Відгуки» на сторінці не показується.
 /// </summary>
 public class PlacesReviewsProvider : IReviewsProvider
 {
@@ -31,6 +32,7 @@ public class PlacesReviewsProvider : IReviewsProvider
     private readonly IContentProvider _content;
     private readonly ILogger<PlacesReviewsProvider> _logger;
     private readonly SemaphoreSlim _fetchLock = new(1, 1);
+    private ReviewsContent? _lastGood;
 
     public PlacesReviewsProvider(
         IHttpClientFactory httpClientFactory,
@@ -50,7 +52,7 @@ public class PlacesReviewsProvider : IReviewsProvider
     {
         var o = _options.CurrentValue;
         if (string.IsNullOrWhiteSpace(o.ApiKey) || string.IsNullOrWhiteSpace(o.PlaceId))
-            return _content.Reviews;
+            return new ReviewsContent();
 
         if (_cache.TryGetValue(CacheKey, out ReviewsContent? cached) && cached != null)
             return cached;
@@ -66,13 +68,15 @@ public class PlacesReviewsProvider : IReviewsProvider
             {
                 var fetched = await FetchAsync(o);
                 _cache.Set(CacheKey, fetched, TimeSpan.FromHours(o.CacheHours));
+                if (fetched.Reviews.Count > 0) _lastGood = fetched;
                 return fetched;
             }
             catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException or JsonException)
             {
-                _logger.LogWarning(ex, "Google Places reviews fetch failed, falling back to reviews.json");
-                _cache.Set(CacheKey, _content.Reviews, FailureCacheDuration);
-                return _content.Reviews;
+                _logger.LogWarning(ex, "Google Places reviews fetch failed, showing last successful API result");
+                var stale = _lastGood ?? new ReviewsContent();
+                _cache.Set(CacheKey, stale, FailureCacheDuration);
+                return stale;
             }
         }
         finally
@@ -96,7 +100,7 @@ public class PlacesReviewsProvider : IReviewsProvider
 
         List<Review> reviews = (ukReviews.Count, enReviews.Count) switch
         {
-            (0, 0) => _content.Reviews.Reviews,
+            (0, 0) => [],
             (_, 0) => ukReviews.Select(r => { r.Language = null; return r; }).ToList(),
             (0, _) => enReviews.Select(r => { r.Language = null; return r; }).ToList(),
             _ => [.. ukReviews, .. enReviews]
@@ -106,7 +110,7 @@ public class PlacesReviewsProvider : IReviewsProvider
         {
             Rating = uk.Rating,
             TotalCount = uk.UserRatingCount,
-            ProfileUrl = uk.GoogleMapsUri ?? _content.Reviews.ProfileUrl,
+            ProfileUrl = uk.GoogleMapsUri ?? _content.Salon.Socials.GoogleMaps,
             Reviews = reviews
         };
     }

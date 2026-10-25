@@ -20,7 +20,6 @@ public class JsonContentProvider : IContentProvider, IDisposable
         Watch<SalonContent>("salon.json");
         Watch<ServicesContent>("services.json");
         Watch<MastersContent>("masters.json");
-        Watch<ReviewsContent>("reviews.json");
         Watch<GalleryContent>("gallery.json");
         Watch<NewsContent>("news.json");
         Watch<ServicePhotosContent>("service-photos.json");
@@ -62,7 +61,6 @@ public class JsonContentProvider : IContentProvider, IDisposable
     public SalonContent Salon => Get<SalonContent>("salon.json");
     public ServicesContent Services => Get<ServicesContent>("services.json");
     public MastersContent Masters => Get<MastersContent>("masters.json");
-    public ReviewsContent Reviews => Get<ReviewsContent>("reviews.json");
     public GalleryContent Gallery => Get<GalleryContent>("gallery.json");
     public NewsContent News => Get<NewsContent>("news.json");
     public ServicePhotosContent ServicePhotos => Get<ServicePhotosContent>("service-photos.json");
