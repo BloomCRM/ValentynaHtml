@@ -4507,3 +4507,33 @@ ul {
     margin-top: 32px;
   }
 }
+
+/* ////////////////// Галерея робіт: фото-фон (розмитий інтер'єр салону) ////////////////// */
+/* Повертає чергування «фото-фон / білий» по сторінці. Фон уже розмитий у файлі — без CSS blur, щоб не гальмувало.
+   Інші варіанти: img/gallery-bg-curtain.webp (золота шторка), img/gallery-bg-shelves.webp (світлі полиці). */
+.gallery {
+  background: linear-gradient(rgba(20, 17, 16, 0.55), rgba(20, 17, 16, 0.55)), url('../img/gallery-bg-interior.webp') center / cover no-repeat;
+  padding-bottom: 80px;
+}
+
+/* межа білий → фото: відступ і знизу косметики */
+.cosmetics {
+  padding-bottom: 80px;
+}
+
+.gallery-title {
+  color: #ddcdb3;
+}
+
+.gallery .scroller-dot { background: rgba(255, 255, 255, 0.35); }
+.gallery .scroller-dot.active { background: #ddcdb3; }
+.gallery-indicator { background: rgba(255, 255, 255, 0.35); }
+.gallery-indicator:hover { background: rgba(255, 255, 255, 0.6); }
+.gallery-indicator.active { background: #ddcdb3; }
+
+@media screen and (max-width: 767px) {
+  .cosmetics,
+  .gallery {
+    padding-bottom: 56px;
+  }
+}
