@@ -102,7 +102,12 @@
 
   // довге утримання — це пауза, а не тап: після нього фото не перемикаємо.
   // detail === 0 — клік із клавіатури, утримання там не буває
-  const tapOnly = fn => e => { if (e.detail === 0 || performance.now() - downAt < 250) fn(); };
+  // після свайпу чи зуму двома пальцями «хвостовий» клік по зоні тапу ігноруємо
+  let suppressUntil = 0;
+  const tapOnly = fn => e => {
+    if (performance.now() < suppressUntil) return;
+    if (e.detail === 0 || performance.now() - downAt < 250) fn();
+  };
   $('ss-tap-prev').addEventListener('click', tapOnly(prev));
   $('ss-tap-toggle').addEventListener('click', tapOnly(toggle));
   $('ss-tap-next').addEventListener('click', tapOnly(next));
@@ -130,10 +135,100 @@
       e.preventDefault();
       // preventDefault гасить і click, тому другий швидкий тап обробляємо самі
       const zone = e.target.closest('.ss-tap, .ss-side, .ss-play, .ss-next-cat, .ss-close, .ss-book');
-      if (zone) zone.click();
+      if (zone && performance.now() >= suppressUntil) zone.click();
     }
     lastTouchEnd = now;
   }, { passive: false });
+  // Жести на телефоні, як в Instagram:
+  // свайп справа наліво — наступна послуга, зліва направо — попередня, вниз — закрити;
+  // два пальці — збільшити саме фото (сторіз на паузі), відпустили — фото повертається.
+  const frameEl = dialog.querySelector('.ss-frame');
+  const animate = (el, transform, done) => {
+    el.style.transition = reduceMotion ? 'none' : 'transform 0.22s ease, opacity 0.22s ease';
+    el.style.transform = transform;
+    if (reduceMotion || !done) { if (done) done(); return; }
+    el.addEventListener('transitionend', function end() { el.removeEventListener('transitionend', end); done(); });
+  };
+  const resetFrame = () => { frameEl.style.transition = 'none'; frameEl.style.transform = ''; frameEl.style.opacity = ''; };
+
+  const switchCategory = dir => {
+    const target = cat + dir;
+    if (target >= categories.length) { dialog.close(); return; }
+    if (target < 0) { animate(frameEl, 'translateX(0)'); return; } // перша послуга — пружинимо назад
+    animate(frameEl, `translateX(${dir > 0 ? -100 : 100}%)`, () => {
+      go(target, 0);
+      frameEl.style.transition = 'none';
+      frameEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
+      void frameEl.offsetWidth;
+      animate(frameEl, 'translateX(0)');
+    });
+  };
+
+  let gesture = null;
+  const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+
+  frameEl.addEventListener('touchstart', e => {
+    if (e.touches.length === 2) {
+      const [a, b] = e.touches;
+      const r = photoEl.getBoundingClientRect();
+      photoEl.style.transition = 'none';
+      photoEl.style.transformOrigin = `${(a.clientX + b.clientX) / 2 - r.left}px ${(a.clientY + b.clientY) / 2 - r.top}px`;
+      gesture = { type: 'pinch', start: dist(a, b) };
+      holding = true;
+    } else if (e.touches.length === 1 && !gesture) {
+      const t = e.touches[0];
+      gesture = { type: 'pending', x: t.clientX, y: t.clientY, at: performance.now() };
+    }
+  }, { passive: true });
+
+  frameEl.addEventListener('touchmove', e => {
+    if (!gesture) return;
+    if (gesture.type === 'pinch' && e.touches.length === 2) {
+      const scale = Math.min(4, Math.max(1, dist(e.touches[0], e.touches[1]) / gesture.start));
+      photoEl.style.transform = `scale(${scale})`;
+      return;
+    }
+    const t = e.touches[0];
+    const dx = t.clientX - gesture.x, dy = t.clientY - gesture.y;
+    if (gesture.type === 'pending' && Math.hypot(dx, dy) > 10) {
+      gesture.type = Math.abs(dx) > Math.abs(dy) ? 'swipe-x' : (dy > 0 ? 'swipe-down' : 'none');
+      frameEl.style.transition = 'none';
+    }
+    if (gesture.type === 'swipe-x') frameEl.style.transform = `translateX(${dx}px)`;
+    if (gesture.type === 'swipe-down') {
+      frameEl.style.transform = `translateY(${Math.max(0, dy)}px) scale(${1 - Math.min(0.15, dy / 2000)})`;
+      frameEl.style.opacity = String(1 - Math.min(0.5, dy / 600));
+    }
+  }, { passive: true });
+
+  frameEl.addEventListener('touchend', e => {
+    if (!gesture) return;
+    if (gesture.type === 'pinch') {
+      if (e.touches.length > 0) return; // ще тримають один палець
+      photoEl.style.transition = 'transform 0.25s ease';
+      photoEl.style.transform = '';
+      holding = false;
+      suppressUntil = performance.now() + 400;
+      gesture = null;
+      return;
+    }
+    const t = e.changedTouches[0];
+    const dx = t.clientX - gesture.x, dy = t.clientY - gesture.y;
+    const fast = performance.now() - gesture.at < 300;
+    if (gesture.type === 'swipe-x') {
+      suppressUntil = performance.now() + 400;
+      if (Math.abs(dx) > 70 || (fast && Math.abs(dx) > 50)) switchCategory(dx < 0 ? 1 : -1);
+      else animate(frameEl, 'translateX(0)');
+    } else if (gesture.type === 'swipe-down') {
+      suppressUntil = performance.now() + 400;
+      if (dy > 120 || (fast && dy > 50)) dialog.close();
+      else { frameEl.style.opacity = ''; animate(frameEl, 'translateY(0)'); }
+    }
+    gesture = null;
+  });
+
+  dialog.addEventListener('close', () => { resetFrame(); photoEl.style.transform = ''; gesture = null; holding = false; });
+
   dialog.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') next();
     if (e.key === 'ArrowLeft') prev();
