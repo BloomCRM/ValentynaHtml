@@ -514,9 +514,15 @@ const reviewContainer = document.querySelector('.reviews-cards');
 const reviewDots = document.querySelectorAll('.dot-review');
 
 reviewContainer.addEventListener('scroll', () => {
-  const scrollLeft = reviewContainer.scrollLeft;
-  const cardWidth = reviewContainer.offsetWidth;
-  const index = Math.round(scrollLeft / cardWidth);
+  // активна — видима картка, найближча до лівого краю стрічки (картки вужчі за стрічку)
+  const left = reviewContainer.scrollLeft;
+  const cards = [...reviewContainer.querySelectorAll('.review-card:not([hidden])')];
+  let index = 0;
+  cards.forEach((card, i) => {
+    if (Math.abs(card.offsetLeft - left) < Math.abs(cards[index].offsetLeft - left)) index = i;
+  });
+  const atEnd = left + reviewContainer.clientWidth >= reviewContainer.scrollWidth - 2;
+  if (atEnd && left > 2) index = cards.length - 1;
 
   const visibleDots = [...reviewDots].filter(dot => !dot.hidden);
   visibleDots.forEach(dot => dot.classList.remove('active'));

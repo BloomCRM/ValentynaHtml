@@ -370,8 +370,10 @@
       var countLabel = IndexModel.ReviewsCountLabel(total);
       <a class="reviews-summary" href="@Model.Reviews.ProfileUrl" target="_blank" rel="noopener">
         <span class="reviews-summary-rating">@rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</span>
-        <span class="reviews-summary-stars" aria-hidden="true">★★★★★</span>
-        <span>@total <span data-translate="@countLabel.Key">@countLabel.Label</span></span>
+        <span class="reviews-summary-meta">
+          <span class="reviews-summary-stars" aria-hidden="true">★★★★★</span>
+          <span class="reviews-summary-count">@total <span data-translate="@countLabel.Key">@countLabel.Label</span></span>
+        </span>
       </a>
     }
     <div class="reviews-cards">
@@ -396,14 +398,7 @@
               {
                 <p class="review-name">@review.AuthorName</p>
               }
-              @if (review.Rating >= 5)
-              {
-                <img src="~/img/stars.png" alt="5/5" class="review-stars" />
-              }
-              else
-              {
-                <span class="review-stars-text" aria-label="@review.Rating/5">@(new string('★', review.Rating) + new string('☆', 5 - review.Rating))</span>
-              }
+              <span class="review-stars-text" aria-label="@review.Rating/5">@(new string('★', review.Rating) + new string('☆', 5 - review.Rating))</span>
               @if (!string.IsNullOrEmpty(review.RelativeDate))
               {
                 <time class="review-date" datetime="@review.PublishedAt?.ToString("o")">@review.RelativeDate</time>

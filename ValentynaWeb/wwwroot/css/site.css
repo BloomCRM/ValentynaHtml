@@ -4587,3 +4587,193 @@ button,
 .ss * {
   touch-action: none;
 }
+
+/* ////////////////// Відгуки у фірмовому стилі ////////////////// */
+/* Картки — як у прайсі (темні, закруглені, з тінню); ім'я — Chutz у бежевому;
+   аватар з рожевим кільцем, як картки послуг-сторіз; рейтинг угорі — головний акцент. */
+
+.reviews-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 40px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.reviews-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto 48px;
+  color: #1f1b19;
+  text-decoration: none;
+}
+
+.reviews-summary-rating {
+  font-family: 'Chutz', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1;
+}
+
+.reviews-summary-meta {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+
+.reviews-summary-stars {
+  color: #f2c14e;
+  font-size: 22px;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.reviews-summary-count {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #5a5a5a;
+  text-decoration: underline;
+  text-decoration-color: #ad776b;
+  text-underline-offset: 4px;
+}
+
+.reviews-cards {
+  position: relative;
+  width: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.review-card {
+  width: auto;
+  min-height: 0;
+  padding: 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  box-sizing: border-box;
+}
+
+.review-header {
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.review-avatar {
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 0 0 2px #1f1b19, 0 0 0 4px #ad776b;
+}
+
+.review-avatar-initial {
+  background: #3a3532;
+  color: #ddcdb3;
+  font-family: 'Chutz', sans-serif;
+}
+
+.review-info {
+  gap: 4px;
+}
+
+.review-name {
+  font-family: 'Chutz', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  color: #ddcdb3;
+}
+
+.review-stars-text {
+  color: #f2c14e;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.review-date {
+  margin-top: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.review-text {
+  width: auto;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #eee6dc;
+  -webkit-line-clamp: 6;
+}
+
+.review-more {
+  padding-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ddcdb3;
+  text-underline-offset: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .reviews {
+    max-width: none;
+  }
+
+  .reviews-container {
+    width: auto;
+    padding: 0;
+  }
+
+  .reviews-subtitle-tablet {
+    width: auto;
+    padding: 0 16px;
+    margin-bottom: 28px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .reviews-summary {
+    margin-bottom: 24px;
+  }
+
+  .reviews-summary-rating {
+    font-size: 52px;
+  }
+
+  /* стрічка, як інші слайдери: картка майже на всю ширину, сусідня визирає */
+  .reviews-cards {
+    display: flex;
+    width: auto;
+    gap: 12px;
+    margin: 0;
+    padding: 6px 16px 26px;
+    scroll-padding: 0 16px;
+  }
+
+  .review-card {
+    flex: 0 0 86%;
+    width: auto;
+    min-height: 0;
+    padding: 22px;
+    scroll-snap-stop: normal;
+  }
+
+  .review-text {
+    width: auto;
+    font-size: 14px;
+  }
+
+  .reviews-dots {
+    width: auto;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .dot-review {
+    width: 8px;
+    height: 8px;
+  }
+}
