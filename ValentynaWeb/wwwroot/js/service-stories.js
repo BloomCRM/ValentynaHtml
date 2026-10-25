@@ -24,7 +24,14 @@
   const t = (key, fallback) => (typeof translations !== 'undefined' && translations[lang()]?.[key]) || fallback;
   const titleOf = c => (lang() === 'en' ? t(c.titleKey, c.title) : c.title);
 
-  const srcset = base => `${base}-768.webp 768w, ${base}-1280.webp 1280w, ${base}-1920.webp 1920w`;
+  // Розмір фото вибираємо самі під ширину кадру й щільність екрана і ставимо звичайний src.
+  // srcset, змінений скриптом, Safari на iPhone іноді не перечитує — і показує попереднє фото.
+  const photoUrl = base => {
+    // offsetWidth — ширина без урахування повороту куба (посеред анімації кадр стоїть ребром)
+    const need = (dialog.querySelector('.ss-frame').offsetWidth || window.innerWidth) * (window.devicePixelRatio || 1);
+    const width = [480, 768, 1280, 1920].find(w => w >= need) || 1920;
+    return `${base}-${width}.webp`;
+  };
 
   const setStopped = value => {
     stopped = value;
@@ -35,9 +42,8 @@
   const render = () => {
     const c = categories[cat];
     const base = c.photos[photo];
-    photoEl.srcset = srcset(base);
-    photoEl.sizes = '(min-width: 900px) 70vh, 100vw';
-    photoEl.src = `${base}-1280.webp`;
+    photoEl.removeAttribute('srcset');
+    photoEl.src = photoUrl(base);
     photoEl.alt = titleOf(c);
     $('ss-avatar').src = `${c.cover}-480.webp`;
     $('ss-title').textContent = titleOf(c);
@@ -53,7 +59,7 @@
 
     // підвантажуємо наступне фото заздалегідь, щоб не блимало
     const upcoming = c.photos[photo + 1] || categories[cat + 1]?.photos[0];
-    if (upcoming) new Image().src = `${upcoming}-1280.webp`;
+    if (upcoming) new Image().src = photoUrl(upcoming);
   };
 
   const go = (c, p) => {
@@ -147,11 +153,19 @@
     el.style.transition = reduceMotion ? 'none' : `transform ${timing}, opacity ${timing}, filter ${timing}`;
     el.style.transform = transform;
     if (reduceMotion || !done) { if (done) done(); return; }
-    el.addEventListener('transitionend', function end(e) {
-      if (e.propertyName && e.propertyName !== 'transform') return;
+    // Safari іноді не надсилає transitionend (перервана анімація, той самий transform) —
+    // тоді наступна послуга не підставлялась. Запасний таймер гарантує, що done спрацює рівно раз.
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
       el.removeEventListener('transitionend', end);
+      clearTimeout(timer);
       done();
-    });
+    };
+    function end(e) { if (!e.propertyName || e.propertyName === 'transform') finish(); }
+    el.addEventListener('transitionend', end);
+    const timer = setTimeout(finish, parseFloat(timing) * 1000 + 80);
   };
   const resetFrame = () => {
     frameEl.style.transition = 'none';
