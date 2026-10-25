@@ -168,7 +168,7 @@
         відростає.
       </p>
       <div class="about-author">
-        <img src="~/img/avatar.png" alt="Фото Валентина" class="author-avatar" />
+        <img src="~/img/avatar-160.webp" alt="Фото Валентина" class="author-avatar" width="80" height="80" loading="lazy" />
         <div class="about-author-info">
           <p class="author-name" data-translate="author-name">Валентин Галицький</p>
           <p class="author-role" data-translate="author-role">Засновник Перукарні Валентина</p>
@@ -211,16 +211,16 @@
         <button class="gallery-nav-btn gallery-prev" aria-label="Previous">&#8249;</button>
         <div class="gallery-scroll-container">
           <div class="gallery-slide active">
-            <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-desktop-image" />
-            <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-desktop-image" />
-            <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 50vw, 25vw" />
-            <img src="~/img/gallery 4.jpg" alt="gallery" class="gallery-desktop-image" />
+            <responsive-img src="img/gallery 11" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 2" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 4" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
           </div>
           <div class="gallery-slide">
-            <img src="~/img/gallery 5.png" alt="gallery" class="gallery-desktop-image" />
-            <img src="~/img/gallery 6.png" alt="gallery" class="gallery-desktop-image" />
-            <img src="~/img/gallery 7.jpg" alt="gallery" class="gallery-desktop-image" />
-            <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 50vw, 25vw" />
+            <responsive-img src="img/gallery 5" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 6" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 7" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
+            <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-desktop-image" sizes="(max-width:767px) 86vw, 25vw" />
           </div>
         </div>
         <button class="gallery-nav-btn gallery-next" aria-label="Next">&#8250;</button>
@@ -233,14 +233,14 @@
 
     <div class="gallery-mobile">
       <div class="gallery-mobile-scroll-container js-scroller" data-autoplay="4000">
-        <img src="~/img/gallery 11.jpg" alt="gallery" class="gallery-mobile-image" />
-        <img src="~/img/gallery 2.jpg" alt="gallery" class="gallery-mobile-image" />
-        <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
-        <img src="~/img/gallery 4.jpg" alt="gallery" class="gallery-mobile-image" />
-        <img src="~/img/gallery 5.png" alt="gallery" class="gallery-mobile-image" />
-        <img src="~/img/gallery 6.png" alt="gallery" class="gallery-mobile-image" />
-        <img src="~/img/gallery 7.jpg" alt="gallery" class="gallery-mobile-image" />
-        <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-mobile-image" sizes="50vw" />
+        <responsive-img src="img/gallery 11" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 2" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 3" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 4" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 5" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 6" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 7" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
+        <responsive-img src="img/gallery 8" alt="gallery" img-class="gallery-mobile-image" sizes="86vw" />
       </div>
       <div class="scroller-dots" aria-hidden="true"></div>
     </div>
@@ -503,4 +503,9 @@
 
 @section Scripts {
   <script src="~/js/service-stories.js" asp-append-version="true"></script>
+}
+
+@* Фон першого екрана — вантажимо якомога раніше: це перше, що бачить людина *@
+@section Styles {
+  <link rel="preload" as="image" href="~/img/webp/main1-1920.webp" type="image/webp" fetchpriority="high" />
 }

@@ -26,7 +26,17 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+// Кешування статики в браузері: CSS/JS з ?v=хеш (asp-append-version) — на рік, бо при зміні міняється адреса;
+// картинки й шрифти без версії — на добу, далі браузер перепитує сервер через ETag
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.CacheControl = ctx.Context.Request.Query.ContainsKey("v")
+            ? "public, max-age=31536000, immutable"
+            : "public, max-age=86400";
+    }
+});
 app.UseRouting();
 app.UseOutputCache();
 app.UseAuthorization();
