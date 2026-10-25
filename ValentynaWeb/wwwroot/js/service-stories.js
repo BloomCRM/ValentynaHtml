@@ -143,25 +143,51 @@
   // свайп справа наліво — наступна послуга, зліва направо — попередня, вниз — закрити;
   // два пальці — збільшити саме фото (сторіз на паузі), відпустили — фото повертається.
   const frameEl = dialog.querySelector('.ss-frame');
-  const animate = (el, transform, done) => {
-    el.style.transition = reduceMotion ? 'none' : 'transform 0.22s ease, opacity 0.22s ease';
+  const animate = (el, transform, done, timing = '0.22s ease') => {
+    el.style.transition = reduceMotion ? 'none' : `transform ${timing}, opacity ${timing}, filter ${timing}`;
     el.style.transform = transform;
     if (reduceMotion || !done) { if (done) done(); return; }
-    el.addEventListener('transitionend', function end() { el.removeEventListener('transitionend', end); done(); });
+    el.addEventListener('transitionend', function end(e) {
+      if (e.propertyName && e.propertyName !== 'transform') return;
+      el.removeEventListener('transitionend', end);
+      done();
+    });
   };
-  const resetFrame = () => { frameEl.style.transition = 'none'; frameEl.style.transform = ''; frameEl.style.opacity = ''; };
+  const resetFrame = () => {
+    frameEl.style.transition = 'none';
+    frameEl.style.transform = '';
+    frameEl.style.transformOrigin = '';
+    frameEl.style.opacity = '';
+    frameEl.style.filter = '';
+  };
+
+  // «Куб», як в Instagram: поточна послуга — грань, що повертається від пальця навколо свого краю
+  // (і темнішає); на 90° вона ребром до глядача — підміняємо послугу, і нова грань розгортається з глибини.
+  // Тягнемо вліво (наступна) — шарнір справа; вправо (попередня) — шарнір зліва.
+  const cubeTurn = angle => {
+    frameEl.style.transformOrigin = angle <= 0 ? 'right center' : 'left center';
+    frameEl.style.transform = `rotateY(${angle}deg)`;
+    frameEl.style.filter = `brightness(${1 - Math.min(1, Math.abs(angle) / 90) * 0.55})`;
+  };
 
   const switchCategory = dir => {
     const target = cat + dir;
     if (target >= categories.length) { dialog.close(); return; }
-    if (target < 0) { animate(frameEl, 'translateX(0)'); return; } // перша послуга — пружинимо назад
-    animate(frameEl, `translateX(${dir > 0 ? -100 : 100}%)`, () => {
+    if (target < 0) { frameEl.style.filter = ''; animate(frameEl, 'rotateY(0deg)'); return; } // перша послуга — повертаємо грань назад
+    const out = dir > 0 ? -90 : 90;
+    frameEl.style.transformOrigin = dir > 0 ? 'right center' : 'left center';
+    frameEl.style.filter = 'brightness(0.45)';
+    animate(frameEl, `rotateY(${out}deg)`, () => {
       go(target, 0);
+      // нова грань: шарнір з протилежного боку, стартує ребром (±90°) і розгортається до 0
       frameEl.style.transition = 'none';
-      frameEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
+      frameEl.style.transformOrigin = dir > 0 ? 'left center' : 'right center';
+      frameEl.style.transform = `rotateY(${-out}deg)`;
+      frameEl.style.filter = 'brightness(0.45)';
       void frameEl.offsetWidth;
-      animate(frameEl, 'translateX(0)');
-    });
+      frameEl.style.filter = '';
+      animate(frameEl, 'rotateY(0deg)', () => { frameEl.style.transformOrigin = ''; }, '0.24s ease-out');
+    }, '0.18s ease-in');
   };
 
   let gesture = null;
@@ -194,7 +220,10 @@
       gesture.type = Math.abs(dx) > Math.abs(dy) ? 'swipe-x' : (dy > 0 ? 'swipe-down' : 'none');
       frameEl.style.transition = 'none';
     }
-    if (gesture.type === 'swipe-x') frameEl.style.transform = `translateX(${dx}px)`;
+    if (gesture.type === 'swipe-x') {
+      const width = frameEl.getBoundingClientRect().width || window.innerWidth;
+      cubeTurn(Math.max(-90, Math.min(90, (dx / width) * 90)));
+    }
     if (gesture.type === 'swipe-down') {
       frameEl.style.transform = `translateY(${Math.max(0, dy)}px) scale(${1 - Math.min(0.15, dy / 2000)})`;
       frameEl.style.opacity = String(1 - Math.min(0.5, dy / 600));
@@ -218,7 +247,7 @@
     if (gesture.type === 'swipe-x') {
       suppressUntil = performance.now() + 400;
       if (Math.abs(dx) > 70 || (fast && Math.abs(dx) > 50)) switchCategory(dx < 0 ? 1 : -1);
-      else animate(frameEl, 'translateX(0)');
+      else { frameEl.style.filter = ''; animate(frameEl, 'rotateY(0deg)'); }
     } else if (gesture.type === 'swipe-down') {
       suppressUntil = performance.now() + 400;
       if (dy > 120 || (fast && dy > 50)) dialog.close();
