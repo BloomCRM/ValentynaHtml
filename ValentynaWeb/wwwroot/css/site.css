@@ -4537,3 +4537,39 @@ ul {
     padding-bottom: 56px;
   }
 }
+
+/* ////////////////// «ГАЛЕРЕЯ РОБІТ» — плашкою, як «ПРО НАС» ////////////////// */
+/* На всю ширину на самому верху фото-фону; фон плашки по краях зливається з фото (маска-градієнт). */
+.gallery {
+  padding-top: 0;
+}
+
+.gallery-title {
+  position: relative;
+  isolation: isolate;
+  --band-bg: rgba(255, 255, 255, 0.32);
+  margin: 0 0 40px;
+  padding: 32px 0;
+  line-height: 1;
+  color: #000;
+}
+
+.gallery-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--band-bg);
+  backdrop-filter: blur(40px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+
+@media screen and (max-width: 767px) {
+  .gallery-title {
+    --band-bg: rgba(40, 38, 36, 0.5);
+    margin-bottom: 24px;
+    padding: 25px 0 23px;
+    color: #ddcdb3;
+  }
+}
