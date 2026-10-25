@@ -4383,3 +4383,80 @@ ul {
     padding: 25px 0 23px;
   }
 }
+
+/* ////////////////// Єдиний ритм заголовків розділів ////////////////// */
+/* Над заголовком — 80px (телефон 56), від заголовка до контенту — 40px (телефон 24).
+   Між двома білими розділами відступ один (нижній паддінг попереднього = 0);
+   де змінюється фон (сіра галерея, темне «Про нас», фото) — такий самий відступ і всередині знизу. */
+
+.services,
+.about,
+.cosmetics,
+.gallery,
+.price,
+.news,
+.reviews {
+  padding-top: 80px;
+}
+
+.services { padding-bottom: 0; }
+.cosmetics { margin-top: 0; margin-bottom: 0; padding-bottom: 80px; }
+.gallery { padding-bottom: 80px; }
+.price { padding-bottom: 0; }
+.news { padding-bottom: 80px; }
+.section-picture { padding-bottom: 0; }
+
+.services-title,
+.gallery-title,
+.price-title,
+.news-title,
+.reviews-title {
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.cosmetics-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.services-btn {
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 767px) {
+  .services,
+  .about,
+  .cosmetics,
+  .gallery,
+  .price,
+  .news,
+  .reviews {
+    padding-top: 56px;
+  }
+
+  .cosmetics { padding-bottom: 56px; }
+  .gallery { padding-bottom: 56px; }
+  .news { padding-bottom: 56px; }
+
+  .services-title,
+  .gallery-title,
+  .price-title,
+  .news-title,
+  .reviews-title {
+    margin-bottom: 24px;
+  }
+
+  .cosmetics-title {
+    margin-bottom: 16px;
+  }
+
+  /* підзаголовок «Подій» на телефоні схований — перший підрозділ іде одразу під заголовком */
+  .news-group-title:first-of-type {
+    margin-top: 0;
+  }
+
+  .services-btn {
+    margin-top: 32px;
+  }
+}
