@@ -4460,3 +4460,50 @@ ul {
     margin-top: 32px;
   }
 }
+
+/* ////////////////// Галерея робіт: білий фон, як у всіх розділів; крапки під фото ////////////////// */
+.gallery {
+  background-color: #fff;
+  padding-bottom: 0;
+}
+
+/* без сірого фону межа косметика → галерея біла-біла: відступ один */
+.cosmetics {
+  padding-bottom: 0;
+}
+
+/* стрічка фото, під нею крапки, під ними Instagram — стовпчиком, а не в рядок.
+   Лише від 768px: на телефоні десктопна галерея схована */
+@media screen and (min-width: 768px) {
+  .gallery-desktop {
+    display: block;
+  }
+}
+
+.gallery-slider {
+  margin-bottom: 20px;
+}
+
+.gallery-scroll-container {
+  margin-bottom: 0;
+}
+
+.gallery-indicators {
+  height: auto;
+  margin-bottom: 32px;
+}
+
+.gallery-link {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .cosmetics,
+  .gallery {
+    padding-bottom: 0;
+  }
+
+  .gallery-link {
+    margin-top: 32px;
+  }
+}
