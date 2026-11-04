@@ -19,4 +19,10 @@ public class NewsItem
     public string? TitleKey { get; set; }
     public string? DescriptionKey { get; set; }
     public string? DateKey { get; set; }
+
+    /// <summary>EN-тексти прямо тут, поруч з UA — для нових подій ключі в site.js не потрібні.
+    /// В описі абзаци й пункти списку — через \n, на сайті переноси зберігаються.</summary>
+    public string? TitleEn { get; set; }
+    public string? DescriptionEn { get; set; }
+    public string? DateEn { get; set; }
 }

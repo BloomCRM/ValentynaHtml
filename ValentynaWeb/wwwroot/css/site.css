@@ -4811,3 +4811,60 @@ button,
     background-image: url('../img/section-img-1280.webp');
   }
 }
+
+/* ////////////////// Події: довгі описи — скорочено + «Детальніше» ////////////////// */
+/* абзаци й пункти списку з news.json (\n) зберігаються */
+.news-card-description {
+  white-space: pre-line;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+  flex-grow: 0;
+}
+
+.news-card.is-expanded .news-card-description {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.news-more {
+  align-self: flex-start;
+  margin: 0 24px 20px;
+  padding: 6px 0;
+  min-height: 0;
+  border: none;
+  background: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ad776b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.news-more[hidden] {
+  display: none;
+}
+
+.news-more-close,
+.news-card.is-expanded .news-more-open {
+  display: none;
+}
+
+.news-card.is-expanded .news-more-close {
+  display: inline;
+}
+
+/* лінія й дата — завжди внизу картки, навіть коли описи різної довжини */
+.news-card .card-line {
+  margin-top: auto;
+}
+
+/* картки в стрічці не тягнуться під найвищу розгорнуту */
+.news-scroll-container {
+  align-items: flex-start;
+}

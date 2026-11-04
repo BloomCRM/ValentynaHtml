@@ -128,7 +128,8 @@ const translations = {
     'news-valentine-desc': 'Запрошуємо вас 14 лютого на святкування Дня Закоханих у перукарні «Валентина»! На вас чекають смачні мочі, гарячий рамен і музична атмосфера від DJ Emergencyloop. 30% прибутку буде передано на підтримку ЗСУ',
     'news-filter': 'ФІЛЬТР ЗА ДОНАТ',
     'news-filter-desc': 'До 14 лютого у «Валентині» триває благодійна акція «Фільтр за донат» у співпраці з CaféBoutique. Усі зібрані кошти підуть на підтримку FPV-лабораторії. Приєднуйтесь та зробіть свій внесок у важливу справу!',
-    'news-details': 'Детальніше»',
+    'news-details': 'Детальніше',
+    'news-less': 'Згорнути',
     'news-upcoming': 'НАЙБЛИЖЧІ ПОДІЇ',
     'news-past': 'МИНУЛІ ПОДІЇ',
     'news-empty': 'Нові події вже готуємо — стежте за анонсами в Instagram',
@@ -274,7 +275,8 @@ const translations = {
     'news-valentine-desc': 'We invite you on February 14th to celebrate Valentine\'s Day at Valentyna Hair Salon! Delicious mochi, hot ramen and musical atmosphere from DJ Emergencyloop await you. 30% of profits will be donated to support the Armed Forces of Ukraine',
     'news-filter': 'FILTER FOR DONATION',
     'news-filter-desc': 'Until February 14th, the charity campaign "Filter for donation" continues at Valentyna in cooperation with CaféBoutique. All collected funds will go to support the FPV laboratory. Join and make your contribution to an important cause!',
-    'news-details': 'Details»',
+    'news-details': 'Details',
+    'news-less': 'Show less',
     'news-upcoming': 'UPCOMING EVENTS',
     'news-past': 'PAST EVENTS',
     'news-empty': 'New events are on the way — follow the announcements on Instagram',
@@ -376,7 +378,14 @@ function switchLanguage(lang) {
       element.textContent = translations[lang][key];
     }
   });
-  
+
+  // EN-текст прямо в розмітці (події з news.json): UA-оригінал запам'ятовуємо, щоб повернути
+  document.querySelectorAll('[data-i18n-en]').forEach(element => {
+    if (element.dataset.i18nUa === undefined) element.dataset.i18nUa = element.textContent;
+    element.textContent = lang === 'en' ? element.dataset.i18nEn : element.dataset.i18nUa;
+  });
+
+  updateNewsMore();
   switchReviewsLanguage(lang);
 
   // Update HTML lang attribute
@@ -392,6 +401,28 @@ langButtons.forEach(btn => {
     switchLanguage(lang);
   });
 });
+
+// Події: опис скорочений до кількох рядків, «Детальніше» розгортає/згортає.
+// Кнопку показуємо лише тоді, коли текст справді обрізаний (і після зміни мови — перевіряємо знову).
+function updateNewsMore() {
+  document.querySelectorAll('.news-card').forEach(card => {
+    const text = card.querySelector('.news-card-description');
+    const btn = card.querySelector('.news-more');
+    if (!text || !btn || card.classList.contains('is-expanded')) return;
+    btn.hidden = text.scrollHeight <= text.clientHeight + 2;
+  });
+}
+
+document.querySelectorAll('.news-more').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.news-card');
+    const expanded = card.classList.toggle('is-expanded');
+    btn.setAttribute('aria-expanded', String(expanded));
+  });
+});
+
+window.addEventListener('resize', updateNewsMore);
+document.fonts?.ready.then(updateNewsMore);
 
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {

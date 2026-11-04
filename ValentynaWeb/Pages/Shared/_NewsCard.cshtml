@@ -1,12 +1,17 @@
 @model ValentynaWeb.Content.Models.NewsItem
-
+@* Опис показуємо скорочено; «Детальніше» розгортає його (js/site.js, кнопка ховається, якщо текст короткий).
+   EN-текст — або ключ у site.js (data-translate), або прямо з news.json (data-i18n-en). *@
 <article class="news-card">
   @if (!string.IsNullOrEmpty(Model.Image))
   {
     <img src="@Url.Content("~/" + Model.Image)" alt="@Model.Title" class="news-card-img" loading="lazy" />
   }
-  <h2 class="news-card-title" data-translate="@Model.TitleKey">@Model.Title</h2>
-  <p class="news-card-description" data-translate="@Model.DescriptionKey">@Model.Description</p>
+  <h2 class="news-card-title" data-translate="@Model.TitleKey" data-i18n-en="@Model.TitleEn">@Model.Title</h2>
+  <p class="news-card-description" data-translate="@Model.DescriptionKey" data-i18n-en="@Model.DescriptionEn">@Model.Description</p>
+  <button type="button" class="news-more" aria-expanded="false" hidden>
+    <span class="news-more-open" data-translate="news-details">Детальніше</span>
+    <span class="news-more-close" data-translate="news-less">Згорнути</span>
+  </button>
   <div class="card-line"></div>
-  <p class="date" data-translate="@Model.DateKey">@Model.Date</p>
+  <p class="date" data-translate="@Model.DateKey" data-i18n-en="@Model.DateEn">@Model.Date</p>
 </article>
