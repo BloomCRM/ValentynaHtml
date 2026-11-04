@@ -36,8 +36,9 @@
     {
       "title": "Хім та біо завивка",
       "titleKey": "services-chemical",
-      "cover": "img/tas-mobile",
+      "cover": "img/perm-1",
       "photos": [
+        "img/perm-1",
         "img/tas-mobile",
         "img/gallery 3"
       ]
