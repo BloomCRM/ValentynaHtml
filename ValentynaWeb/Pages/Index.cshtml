@@ -2,6 +2,8 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Валентина — перукарня";
+    // Є найближча подія → пульсуюча крапка біля «Події» і плашка в банері; минула — все зникає саме
+    var hasNextEvent = Model.NextEvent is not null;
 }
 
 <header class="hero-background" id="home">
@@ -13,6 +15,10 @@
         <svg class="menu-burger-icon">
           <use href="#menu-burger"></use>
         </svg>
+        @if (hasNextEvent)
+        {
+          <span class="event-dot event-dot-burger" aria-hidden="true"></span>
+        }
       </button>
 
       <div class="mobile-menu" id="mobile-menu">
@@ -36,6 +42,10 @@
               <li><a href="#about" class="mobile-nav-link" data-translate="nav-about">Про нас</a></li>
               <li><a href="#price" class="mobile-nav-link" data-translate="nav-price">Прайс</a></li>
               <li><a href="#gallery" class="mobile-nav-link" data-translate="nav-gallery">Галерея</a></li>
+              <li>
+                <a href="#events" class="mobile-nav-link nav-link-events"><span data-translate="nav-events">Події</span>@if (hasNextEvent)
+                  {<span class="event-dot" aria-hidden="true"></span>}</a>
+              </li>
               <li><a href="#booking" class="mobile-nav-link" data-translate="nav-contacts">Контакти</a></li>
             </ul>
           </nav>
@@ -72,6 +82,10 @@
             <li><a href="#about" class="nav-link" data-translate="nav-about">Про нас</a></li>
             <li><a href="#price" class="nav-link" data-translate="nav-price">Прайс</a></li>
             <li><a href="#gallery" class="nav-link" data-translate="nav-gallery">Галерея</a></li>
+            <li>
+              <a href="#events" class="nav-link nav-link-events"><span data-translate="nav-events">Події</span>@if (hasNextEvent)
+                {<span class="event-dot" aria-hidden="true"></span>}</a>
+            </li>
             <li><a href="#booking" class="nav-link" data-translate="nav-contacts">Контакти</a></li>
           </ul>
         </nav>
@@ -92,7 +106,20 @@
   <!-- Херо (варіант В): слоган унизу фото + факти, що знімають сумнів «чи варто» і «де це» -->
   <section class="hero hero-trust">
     <div class="hero-trust-content">
-      <h1 class="hero-title hero-trust-title" data-translate="hero-title">Час бути собою</h1>
+      <div class="hero-trust-main">
+        @if (Model.NextEvent is { } next)
+        {
+          @* Плашка-«квиток»: ліворуч коли, праворуч що. Веде до розділу подій *@
+          <a href="#events" class="event-chip">
+            <span class="event-chip-when">
+              <span class="event-dot" aria-hidden="true"></span>
+              <span data-i18n-en="@Model.NextEventWhenEn">@Model.NextEventWhen</span>
+            </span>
+            <span class="event-chip-what" data-i18n-en="@(next.ShortTitleEn ?? next.TitleEn)">@(next.ShortTitle ?? next.Title)</span>
+          </a>
+        }
+        <h1 class="hero-title hero-trust-title" data-translate="hero-title">Час бути собою</h1>
+      </div>
       <div class="hero-trust-side">
         <div class="hero-trust-facts">
           @if (Model.Reviews.Rating is double heroRating && Model.Reviews.TotalCount is int heroTotal)
@@ -310,7 +337,7 @@
   </div>
 </section>
 
-<section class="news">
+<section class="news" id="events">
   <div class="news-container">
     <h2 class="news-title" data-translate="news-title">ПОДІЇ ТА НОВИНИ</h2>
     <p class="news-subtitle" data-translate="news-subtitle">

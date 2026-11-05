@@ -25,4 +25,8 @@ public class NewsItem
     public string? TitleEn { get; set; }
     public string? DescriptionEn { get; set; }
     public string? DateEn { get; set; }
+
+    /// <summary>Коротка назва для плашки «найближча подія» в банері; без неї береться Title</summary>
+    public string? ShortTitle { get; set; }
+    public string? ShortTitleEn { get; set; }
 }

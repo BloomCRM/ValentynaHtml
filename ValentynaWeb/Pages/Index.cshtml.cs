@@ -25,6 +25,10 @@ public class IndexModel : PageModel
     public ReviewsContent Reviews { get; private set; } = new();
     public IReadOnlyList<NewsItem> UpcomingNews { get; private set; } = [];
     public IReadOnlyList<NewsItem> PastNews { get; private set; } = [];
+    /// <summary>Найближча подія — для крапки біля «Події» в меню і плашки в банері; null — нічого не показуємо</summary>
+    public NewsItem? NextEvent { get; private set; }
+    public string NextEventWhen { get; private set; } = "";
+    public string NextEventWhenEn { get; private set; } = "";
     public IReadOnlyList<ServicePhotoCategory> ServicePhotos { get; private set; } = [];
 
     public async Task OnGetAsync()
@@ -35,6 +39,9 @@ public class IndexModel : PageModel
         var news = _content.News.Items;
         UpcomingNews = news.Where(n => n.EventDate >= today).OrderBy(n => n.EventDate).ToList();
         PastNews = news.Where(n => n.EventDate < today).OrderByDescending(n => n.EventDate).ToList();
+        NextEvent = UpcomingNews.FirstOrDefault();
+        if (NextEvent is not null)
+            (NextEventWhen, NextEventWhenEn) = EventWhen(NextEvent.EventDate, today);
 
         BookingUrl = _config["Booking:ExternalUrl"]
             ?? "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
@@ -58,6 +65,21 @@ public class IndexModel : PageModel
     // "img/gallery 3" → "/img/webp/gallery-3" (до цього JS дописує -768.webp / -1280.webp), як у ResponsiveImageTagHelper
     public static string WebpBase(string path) =>
         "/img/webp/" + Path.GetFileNameWithoutExtension(path).Replace(" ", "-");
+
+    // Місяці вручну, а не через CultureInfo("uk-UA"): у Docker-образі культура може бути недоступна
+    private static readonly string[] MonthsUa =
+        ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+    private static readonly string[] MonthsEn =
+        ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // «Сьогодні» / «Завтра» / «8 листопада» — коротко, для плашки в банері
+    public static (string Ua, string En) EventWhen(DateOnly date, DateOnly today) =>
+        (date.DayNumber - today.DayNumber) switch
+        {
+            0 => ("Сьогодні", "Today"),
+            1 => ("Завтра", "Tomorrow"),
+            _ => ($"{date.Day} {MonthsUa[date.Month - 1]}", $"{MonthsEn[date.Month - 1]} {date.Day}")
+        };
 
     // Сервер у Docker живе в UTC, а "сьогодні" для подій — за київським часом
     private static DateOnly KyivToday()

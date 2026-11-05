@@ -4868,3 +4868,135 @@ button,
 .news-scroll-container {
   align-items: flex-start;
 }
+
+/* ===== Найближча подія: «Події» в меню, пульсуюча крапка, плашка-«квиток» у банері =====
+   Усе рендериться лише коли в news.json є подія з датою >= сьогодні (Index.cshtml.cs → NextEvent) */
+.nav-link-events {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.event-dot {
+  position: relative;
+  flex: none;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e8a796;
+}
+
+.event-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: event-pulse 2s ease-out infinite;
+}
+
+@keyframes event-pulse {
+  from { transform: scale(1); opacity: 0.7; }
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+.nav-link-events .event-dot {
+  margin-top: 3px;
+}
+
+.event-dot-burger {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.hero-trust-main {
+  min-width: 0;
+}
+
+/* мобільне меню живе всередині .logo-container (isolation: isolate) — без цього плашка з blur малюється поверх відкритого меню */
+.logo-container {
+  z-index: 5;
+}
+
+/* загальне a { min-height: 44px } на телефоні діє на inline-flex, а на звичайні посилання меню — ні */
+.mobile-nav-link.nav-link-events {
+  min-height: 0;
+}
+
+.event-chip {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 0 0 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(24, 16, 14, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #fff;
+  text-decoration: none;
+}
+
+.event-chip-when {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 9px 15px;
+  background: #ad776b;
+  font-family: 'Chutz', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* на кольоровій половинці крапка біла, інакше зливається */
+.event-chip-when .event-dot {
+  background: #fff;
+}
+
+.event-chip-what {
+  min-width: 0;
+  padding: 10px 20px 9px 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.2s;
+}
+
+.event-chip:hover .event-chip-what,
+.event-chip:focus-visible .event-chip-what {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.event-chip:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .event-chip {
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+
+  .event-chip-when {
+    padding: 9px 13px 8px 12px;
+  }
+
+  .event-chip-what {
+    padding: 9px 16px 8px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-dot::after {
+    animation: none;
+    display: none;
+  }
+}

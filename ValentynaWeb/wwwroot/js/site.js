@@ -10,6 +10,11 @@ closeBtn.addEventListener('click', () => {
   mobileMenu.classList.remove('active');
 });
 
+// Пункт меню веде до розділу на цій же сторінці — меню закриваємо, інакше скрол відбувається під ним
+mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+});
+
 // Language translations
 const translations = {
   ua: {
@@ -18,6 +23,7 @@ const translations = {
     'nav-about': 'Про нас',
     'nav-price': 'Прайс',
     'nav-gallery': 'Галерея',
+    'nav-events': 'Події',
     'nav-contacts': 'Контакти',
     'nav-services': 'Послуги',
     
@@ -165,6 +171,7 @@ const translations = {
     'nav-about': 'About',
     'nav-price': 'Prices',
     'nav-gallery': 'Gallery',
+    'nav-events': 'Events',
     'nav-contacts': 'Contacts',
     'nav-services': 'Services',
     
@@ -312,6 +319,7 @@ const translations = {
 // але не tel:-посилання і не розрізняє, куди саме пішов клієнт.
 function analyticsEventFor(link) {
   const href = link.href;
+  if (link.classList.contains('event-chip')) return 'event_banner_click';
   if (href.startsWith('tel:')) return 'phone_click';
   if (link.closest('.reviews-summary, .review-card')) return 'reviews_click';
   if (/wlaunch\.net/.test(href)) return 'booking_click';
