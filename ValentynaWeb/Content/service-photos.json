@@ -8,13 +8,14 @@
         "img/cuts",
         "img/haircut",
         "img/haircut-mobile",
-        "img/gallery 3"
+        "img/gallery 3",
+        "img/cuts-2"
       ]
     },
     {
       "title": "Укладки",
       "titleKey": "services-styling",
-      "cover": "img/ukladka2",
+      "cover": "img/styling-4",
       "photos": [
         "img/styling-1",
         "img/styling-2",
