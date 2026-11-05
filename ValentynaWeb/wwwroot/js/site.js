@@ -321,9 +321,8 @@ function analyticsEventFor(link) {
   return null;
 }
 
-// Подія йде і в GA4 (gtag), і в dataLayer для GTM — там маркетинг вішає на неї конверсії Google Ads
+// Подія йде в dataLayer для GTM — там маркетинг передає її в GA4 і вішає конверсії Google Ads
 function trackEvent(eventName, params) {
-  if (typeof gtag === 'function') gtag('event', eventName, params);
   if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: eventName, ...params });
 }
 

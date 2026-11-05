@@ -99,7 +99,7 @@
     last = performance.now();
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(tick);
-    // trackEvent — з site.js (GA4 + dataLayer для GTM)
+    // trackEvent — з site.js (dataLayer для GTM)
     if (typeof trackEvent === 'function') trackEvent('service_stories_open', { service: categories[index].title });
   };
 
