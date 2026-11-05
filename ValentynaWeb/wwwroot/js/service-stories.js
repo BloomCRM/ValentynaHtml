@@ -99,7 +99,8 @@
     last = performance.now();
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(tick);
-    if (typeof gtag === 'function') gtag('event', 'service_stories_open', { service: categories[index].title });
+    // trackEvent — з site.js (GA4 + dataLayer для GTM)
+    if (typeof trackEvent === 'function') trackEvent('service_stories_open', { service: categories[index].title });
   };
 
   document.querySelectorAll('[data-story-index]').forEach(card => {

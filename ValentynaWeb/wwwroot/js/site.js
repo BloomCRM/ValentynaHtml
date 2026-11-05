@@ -321,13 +321,19 @@ function analyticsEventFor(link) {
   return null;
 }
 
+// Подія йде і в GA4 (gtag), і в dataLayer для GTM — там маркетинг вішає на неї конверсії Google Ads
+function trackEvent(eventName, params) {
+  if (typeof gtag === 'function') gtag('event', eventName, params);
+  if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: eventName, ...params });
+}
+
 document.addEventListener('click', e => {
   const link = e.target.closest('a[href]');
-  if (!link || typeof gtag !== 'function') return;
+  if (!link) return;
   const eventName = analyticsEventFor(link);
   if (!eventName) return;
   const section = link.closest('section, header, footer, [id]');
-  gtag('event', eventName, {
+  trackEvent(eventName, {
     link_url: link.href,
     link_location: section ? (section.id || section.className.split(' ')[0] || section.tagName.toLowerCase()) : 'page'
   });

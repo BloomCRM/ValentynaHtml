@@ -1,9 +1,20 @@
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Env
 @{
-    // GA4 лише в Production, щоб локальні/тестові запуски не псували статистику.
-    // Measurement ID не секрет — він і так видно в HTML сторінки.
+    // GA4 і GTM лише в Production, щоб локальні/тестові запуски не псували статистику.
+    // Measurement ID і Container ID не секрет — вони і так видно в HTML сторінки.
     var measurementId = Configuration["Analytics:MeasurementId"];
+    var gtmContainerId = Configuration["Analytics:GtmContainerId"];
+}
+@if (Env.IsProduction() && !string.IsNullOrWhiteSpace(gtmContainerId))
+{
+    @* Google Tag Manager — теги реклами/конверсій веде маркетинг. GA4 на measurementId уже стоїть нижче,
+       тому в GTM його не дублюємо, інакше перегляди рахуватимуться двічі. *@
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','@gtmContainerId');</script>
 }
 @if (Env.IsProduction() && !string.IsNullOrWhiteSpace(measurementId))
 {
