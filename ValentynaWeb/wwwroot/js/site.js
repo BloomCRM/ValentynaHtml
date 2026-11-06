@@ -25,6 +25,9 @@ const translations = {
     'nav-gallery': 'Галерея',
     'nav-events': 'Події',
     'nav-contacts': 'Контакти',
+    'fab-call': 'Подзвонити',
+    'fab-open': "Зв'язатися з нами",
+    'fab-close': 'Закрити',
     'nav-services': 'Послуги',
     
     // Hero section
@@ -173,6 +176,9 @@ const translations = {
     'nav-gallery': 'Gallery',
     'nav-events': 'Events',
     'nav-contacts': 'Contacts',
+    'fab-call': 'Call us',
+    'fab-open': 'Contact us',
+    'fab-close': 'Close',
     'nav-services': 'Services',
     
     // Hero section
@@ -400,6 +406,7 @@ function switchLanguage(lang) {
 
   updateNewsMore();
   switchReviewsLanguage(lang);
+  updateContactFabLabel(lang);
 
   // Update HTML lang attribute
   document.documentElement.lang = lang;
@@ -801,3 +808,53 @@ class Lightbox {
     this.updateImage();
   }
 }
+
+// Плаваюча кнопка «Зв'язатися»: тап розкриває «Подзвонити» і Telegram, закриття — «×», тап поза нею, Esc або вибір пункту
+// site.js підключено вище за розмітку кнопки (_Layout) — шукаємо її після DOMContentLoaded
+let contactFab = null;
+let contactFabToggle = null;
+
+function currentLang() {
+  return document.documentElement.lang === 'en' ? 'en' : 'ua';
+}
+
+function updateContactFabLabel(lang = currentLang()) {
+  if (!contactFab) return;
+  const open = contactFab.classList.contains('is-open');
+  contactFabToggle.setAttribute('aria-label', translations[lang][open ? 'fab-close' : 'fab-open']);
+}
+
+function setContactFab(open) {
+  contactFab.classList.toggle('is-open', open);
+  contactFabToggle.setAttribute('aria-expanded', String(open));
+  contactFab.querySelectorAll('.contact-fab-item').forEach(item => { item.tabIndex = open ? 0 : -1; });
+  updateContactFabLabel();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  contactFab = document.getElementById('contact-fab');
+  contactFabToggle = document.getElementById('contact-fab-toggle');
+  if (!contactFab) return;
+  updateContactFabLabel();
+
+  contactFabToggle.addEventListener('click', () => {
+    const open = !contactFab.classList.contains('is-open');
+    setContactFab(open);
+    if (open) trackEvent('contact_menu_open', { link_location: 'contact_fab' });
+  });
+
+  contactFab.querySelectorAll('.contact-fab-item').forEach(item => {
+    item.addEventListener('click', () => setContactFab(false));
+  });
+
+  document.addEventListener('click', e => {
+    if (contactFab.classList.contains('is-open') && !contactFab.contains(e.target)) setContactFab(false);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && contactFab.classList.contains('is-open')) {
+      setContactFab(false);
+      contactFabToggle.focus();
+    }
+  });
+});
