@@ -5187,22 +5187,13 @@ button,
   }
 }
 
-/* ===== Банер: «Час бути собою» вище від низу екрана =====
-   Відступ знизу тепер залежить від висоти вікна, а не фіксовані 110px */
-.hero-trust {
-  padding-bottom: max(110px, 24vh);
-}
-
-@media screen and (max-width: 1199px) {
-  .hero-trust {
-    padding-bottom: max(56px, 16vh);
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .hero-trust {
-    /* знизу липка «Записатися» і кнопка «Зв'язатися» */
-    padding-bottom: max(150px, 22vh);
+/* ===== Банер на десктопі: піднімаємо лише слоган =====
+   Адреса, години й кнопки лишаються внизу банера (як були), а «Час бути собою» з плашкою — вище.
+   На телефоні й планшеті все стоїть стовпчиком, тому там нічого не міняємо. */
+@media screen and (min-width: 1200px) {
+  .hero-trust-main {
+    align-self: end;
+    margin-bottom: 14vh;
   }
 }
 
