@@ -4929,7 +4929,7 @@ button,
   display: inline-flex;
   align-items: stretch;
   max-width: 100%;
-  margin: 0 0 22px;
+  margin: 28px 0 0; /* під слоганом: зверху банер лишається вільним */
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   overflow: hidden;
@@ -4981,16 +4981,21 @@ button,
 
 @media screen and (max-width: 767px) {
   .event-chip {
-    margin-bottom: 14px;
-    font-size: 14px;
+    margin-top: 18px;
+    font-size: 13.5px;
   }
 
   .event-chip-when {
-    padding: 9px 13px 8px 12px;
+    gap: 8px;
+    padding: 9px 11px 8px 11px;
   }
 
+  /* довга назва переноситься на другий рядок, а не ховається за трикрапкою */
   .event-chip-what {
-    padding: 9px 16px 8px 12px;
+    padding: 9px 16px 8px 11px;
+    white-space: normal;
+    display: flex;
+    align-items: center;
   }
 }
 
