@@ -5186,3 +5186,46 @@ button,
     margin-right: 4px;
   }
 }
+
+/* ===== Банер: «Час бути собою» вище від низу екрана =====
+   Відступ знизу тепер залежить від висоти вікна, а не фіксовані 110px */
+.hero-trust {
+  padding-bottom: max(110px, 24vh);
+}
+
+@media screen and (max-width: 1199px) {
+  .hero-trust {
+    padding-bottom: max(56px, 16vh);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero-trust {
+    /* знизу липка «Записатися» і кнопка «Зв'язатися» */
+    padding-bottom: max(150px, 22vh);
+  }
+}
+
+/* ===== «Зв'язатися»: підписи читабельні на будь-якому фоні =====
+   Відкрита кнопка затемнює сторінку під собою (тап по затемненню закриває — js/site.js),
+   підписи — білі «таблетки» з темним текстом, а не темне на темному */
+.contact-fab::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(20, 14, 12, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.contact-fab.is-open::before {
+  opacity: 1;
+}
+
+.contact-fab-label {
+  background: #fff;
+  color: #2b2422;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
