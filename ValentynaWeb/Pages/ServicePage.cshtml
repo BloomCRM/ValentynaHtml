@@ -48,7 +48,7 @@
           }
         </div>
         <p class="sp-facts">
-          <span>@Model.Salon.Address</span>
+          <span data-translate="footer-address">@Model.Salon.Address</span>
           @foreach (var line in Model.Schedule)
           {
             <span><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</span>
@@ -100,7 +100,18 @@
               <li>
                 <div class="sp-scale-head">
                   <span data-translate="@row.TranslateKey">@row.Name</span>
-                  <b>@row.PriceText</b>
+                  @if (row.PriceTranslateKey != null)
+                  {
+                    <b data-translate="@row.PriceTranslateKey">@row.PriceText</b>
+                  }
+                  else if (row.IsFrom)
+                  {
+                    <b><span data-translate="from-price">Від</span> @row.PriceText</b>
+                  }
+                  else
+                  {
+                    <b>@row.PriceText</b>
+                  }
                 </div>
                 @if (row.From is int lo && row.To is int hi)
                 {
@@ -227,7 +238,7 @@
       </div>
       <address class="sp-where">
         <b data-i18n-en="Valentyna hair salon">Перукарня Валентина</b>
-        <span>@Model.Salon.Address</span>
+        <span data-translate="footer-address">@Model.Salon.Address</span>
         @foreach (var line in Model.Schedule)
         {
           <span><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</span>
