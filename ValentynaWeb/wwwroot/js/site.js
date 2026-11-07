@@ -404,14 +404,16 @@ function switchLanguage(lang) {
     }
   });
 
-  // EN-текст прямо в розмітці (події з news.json): UA-оригінал запам'ятовуємо, щоб повернути
-  document.querySelectorAll('[data-i18n-en]').forEach(element => {
+  // EN-текст прямо в розмітці (події з news.json): UA-оригінал запам'ятовуємо, щоб повернути.
+  // Порожній атрибут пропускаємо: Razor виводить data-*="" навіть для null, і без цього
+  // текст без EN-перекладу (старі події з ключами data-translate) зникав в англійській версії
+  document.querySelectorAll('[data-i18n-en]:not([data-i18n-en=""])').forEach(element => {
     if (element.dataset.i18nUa === undefined) element.dataset.i18nUa = element.textContent;
     element.textContent = lang === 'en' ? element.dataset.i18nEn : element.dataset.i18nUa;
   });
 
   // EN-адреса посилання (Telegram з англійським готовим текстом): UA-адресу запам'ятовуємо, щоб повернути
-  document.querySelectorAll('[data-i18n-href-en]').forEach(link => {
+  document.querySelectorAll('[data-i18n-href-en]:not([data-i18n-href-en=""])').forEach(link => {
     if (link.dataset.i18nHrefUa === undefined) link.dataset.i18nHrefUa = link.getAttribute('href');
     link.setAttribute('href', lang === 'en' ? link.dataset.i18nHrefEn : link.dataset.i18nHrefUa);
   });
