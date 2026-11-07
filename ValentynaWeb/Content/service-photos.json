@@ -53,6 +53,7 @@
     {
       "title": "Фарбування",
       "titleKey": "services-coloring",
+      "serviceId": "coloring",
       "cover": "img/coloring-cover-2",
       "photos": [
         "img/coloring-cover-2",

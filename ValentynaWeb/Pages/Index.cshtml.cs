@@ -9,6 +9,7 @@ public class IndexModel : PageModel
     private readonly IConfiguration _config;
     private readonly IContentProvider _content;
     private readonly IReviewsProvider _reviews;
+    private ServicePagesContent _servicePages = new();
 
     public IndexModel(IConfiguration config, IContentProvider content, IReviewsProvider reviews)
     {
@@ -31,9 +32,13 @@ public class IndexModel : PageModel
     public string NextEventWhenEn { get; private set; } = "";
     public IReadOnlyList<ServicePhotoCategory> ServicePhotos { get; private set; } = [];
 
+    /// <summary>Опублікована сторінка послуги для категорії (id з services.json) — для посилань з картки прайсу і сторіс; чернетки не показуємо</summary>
+    public ServicePage? PublishedPageFor(string? categoryId) => _servicePages.FindPublishedByCategory(categoryId);
+
     public async Task OnGetAsync()
     {
         ServicePhotos = _content.ServicePhotos.Categories;
+        _servicePages = _content.ServicePages;
 
         var today = KyivToday();
         var news = _content.News.Items;

@@ -329,6 +329,10 @@
               </li>
             }
           </ul>
+          @if (Model.PublishedPageFor(category.Id) is { } servicePage)
+          {
+            <a href="/@servicePage.Slug" class="price-more" data-i18n-en="@servicePage.CardLinkText.EnAttr">@servicePage.CardLinkText.Ua</a>
+          }
         </div>
       }
     </div>

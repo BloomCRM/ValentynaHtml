@@ -16,6 +16,8 @@
   const playBtn = $('ss-play');
   const flash = $('ss-flash');
   const nextCatBtn = $('ss-next-cat');
+  const bookBtn = dialog.querySelector('.ss-book');
+  const bookingUrl = bookBtn.getAttribute('href');
 
   // stopped — пауза кнопкою або тапом по центру; holding — поки тримають палець/мишку
   let cat = 0, photo = 0, elapsed = 0, last = 0, stopped = false, holding = false, frame = 0, downAt = 0;
@@ -52,6 +54,21 @@
     const nextCat = categories[cat + 1];
     nextCatBtn.hidden = !nextCat;
     if (nextCat) nextCatBtn.textContent = `${t('stories-next', 'Далі')}: ${titleOf(nextCat)} ›`;
+
+    // Категорія зі своєю сторінкою (фарбування) веде туди: там ціни й запис через Telegram.
+    // Решта — в онлайн-запис WLaunch, як і було. data-translate міняємо разом із текстом,
+    // щоб перемикач мови в site.js підставляв правильний підпис
+    if (c.pageUrl) {
+      bookBtn.href = c.pageUrl;
+      bookBtn.removeAttribute('target');
+      bookBtn.dataset.translate = 'stories-page';
+      bookBtn.textContent = t('stories-page', 'Ціни та запис');
+    } else {
+      bookBtn.href = bookingUrl;
+      bookBtn.target = '_blank';
+      bookBtn.dataset.translate = 'hero-book';
+      bookBtn.textContent = t('hero-book', 'Записатися');
+    }
 
     barsEl.innerHTML = c.photos.map(() => '<div class="ss-bar"><i></i></div>').join('');
     [...barsEl.children].forEach((b, k) => { b.firstChild.style.width = k < photo ? '100%' : '0'; });

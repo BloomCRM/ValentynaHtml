@@ -5220,3 +5220,29 @@ button,
   color: #2b2422;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
 }
+
+/* Посилання на сторінку послуги внизу картки прайсу («Детальніше про фарбування»).
+   Є лише в категорій з опублікованою сторінкою в service-pages.json */
+.price-more {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 32px;
+  padding: 10px 16px;
+  border: 1px solid #ddcdb3;
+  border-radius: 10px;
+  color: #ddcdb3;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.price-more:hover,
+.price-more:focus-visible {
+  background: rgba(221, 205, 179, 0.1);
+}

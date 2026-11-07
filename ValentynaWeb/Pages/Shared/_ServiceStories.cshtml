@@ -8,7 +8,9 @@
         title = c.Title,
         titleKey = c.TitleKey,
         cover = IndexModel.WebpBase(c.Cover),
-        photos = c.Photos.Select(IndexModel.WebpBase)
+        photos = c.Photos.Select(IndexModel.WebpBase),
+        // своя опублікована сторінка послуги (фарбування): кнопка внизу сторіс веде туди замість WLaunch
+        pageUrl = Model.PublishedPageFor(c.ServiceId) is { } servicePage ? "/" + servicePage.Slug : null
     });
 }
 <script type="application/json" id="service-stories-data">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(storiesData))</script>
