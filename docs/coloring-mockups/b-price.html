@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фарбування волосся у центрі Києва: ціни — Перукарня Валентина</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Варіант Б: ціна і процес першими. Шкала цін показує, де яка послуга. */
+  .hero-b { background: var(--sand); padding: 32px 0 48px; }
+
+  .hero-b-in { display: grid; gap: 32px; }
+
+  .hero-b h1 { font-size: 44px; margin-bottom: 16px; }
+
+  .hero-b .lead { margin-bottom: 24px; }
+
+  .hero-b .btn-main { width: 100%; }
+
+  .hero-b-photo {
+    display: none;
+    margin-top: 32px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .scale-box { background: var(--paper); border-radius: 10px; padding: 20px 16px 8px; }
+
+  .scale-box .price-note { margin: 8px 0 12px; font-size: 14px; }
+
+  @media (min-width: 900px) {
+    .hero-b { padding: 72px 0 88px; }
+    .hero-b-in { grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; }
+    .hero-b h1 { font-size: 80px; }
+    .hero-b .btn-main { width: auto; }
+    .hero-b-photo { display: block; }
+    .scale-box { padding: 28px 32px 12px; }
+  }
+</style>
+</head>
+<body>
+  <div data-s="header"></div>
+
+  <main>
+    <section class="hero-b"><div class="wrap hero-b-in">
+      <div>
+        <h1 class="display">Фарбування волосся</h1>
+        <p class="lead">Ціни від 1&nbsp;500 до 13&nbsp;000&nbsp;грн, залежно від техніки. Надішліть фото в Telegram, і майстер назве точну суму для вашого волосся.</p>
+        <a class="btn btn-main" href="https://t.me/valentyna_perukarnia" target="_blank" rel="noopener"><i data-icon="tg"></i>Дізнатися ціну за фото</a>
+        <img class="hero-b-photo" src="../../ValentynaWeb/wwwroot/img/webp/coloring-10-768.webp" alt="Майстер наносить фарбу на корені">
+      </div>
+      <div class="scale-box" id="prices">
+        <div data-s="scale"></div>
+        <p class="price-note">Ціна залежить від довжини й густоти волосся, його стану і рангу майстра.</p>
+      </div>
+    </div></section>
+
+    <div data-s="steps"></div>
+    <div data-s="works" data-count="8" data-tone="block-sand"></div>
+    <div data-s="masters"></div>
+    <div data-s="reviews"></div>
+    <div data-s="faq"></div>
+    <div data-s="contacts"></div>
+  </main>
+
+  <div data-s="sticky"></div>
+  <script src="shared.js"></script>
+</body>
+</html>

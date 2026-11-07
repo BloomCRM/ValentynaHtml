@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Головна — де з'являться посилання на «Фарбування»</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Макет змін на головній: картка прайсу і сторіс «Фарбування», зараз і після. Стилі скопійовано з site.css (origin/main). */
+  body { background: #fff; padding-bottom: 48px; }
+
+  .hp { display: grid; gap: 56px; padding-block: 32px; }
+  .hp h2 { margin-bottom: 8px; }
+  .hp-desc { max-width: 60ch; color: var(--smoke); margin-bottom: 24px; }
+
+  .pair { display: grid; gap: 28px; }
+  @media (min-width: 760px) { .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; } }
+
+  .tag { display: inline-block; margin-bottom: 10px; font-size: 14px; font-weight: 600; }
+  .tag-now { color: var(--smoke); }
+  .tag-new { color: var(--rose-dark); }
+
+  /* ---- Картка прайсу, як на сайті ---- */
+  .price-item-2 {
+    width: 100%;
+    max-width: 385px;
+    background: linear-gradient(135deg, #3d3c3c 0%, #2a2a2a 100%);
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    color: #fff;
+  }
+  .price-item-title-container { display: flex; gap: 20px; align-items: center; margin-bottom: 25px; }
+  .price-icon { width: 40px; height: 40px; flex: none; }
+  .price-item-title { font-family: 'Chutz', sans-serif; font-size: 24px; line-height: 0.83; letter-spacing: 0.06em; text-transform: uppercase; }
+  .price-rows { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+  .price-rows li { display: flex; justify-content: space-between; gap: 14px; font-size: 16px; line-height: 1.25; }
+  .price-rows .n { font-weight: 300; }
+  .price-rows .p { white-space: nowrap; }
+
+  /* Нове: посилання внизу картки */
+  .card-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 32px;
+    border: 1px solid var(--beige);
+    border-radius: 10px;
+    color: var(--beige);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .card-more:hover { background: rgba(221, 205, 179, 0.1); }
+
+  /* ---- Кадр сторіс, як на сайті ---- */
+  .story {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 9 / 16;
+    border-radius: 14px;
+    overflow: hidden;
+    color: #fff;
+    background: #111;
+  }
+  .story > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .story::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,.35), transparent 22%, transparent 70%, rgba(0,0,0,.55)); }
+  .ss-top { position: absolute; z-index: 2; top: 0; left: 0; right: 0; padding: 12px 12px 0; }
+  .ss-bars { display: flex; gap: 4px; }
+  .ss-bars i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.35); }
+  .ss-bars i:first-child { background: #fff; }
+  .ss-who { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .ss-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #ad776b; }
+  .ss-title { font-family: 'Chutz', sans-serif; font-size: 20px; letter-spacing: 0.03em; flex: 1; }
+  .ss-close { font-size: 26px; line-height: 1; opacity: 0.9; }
+  .ss-bottom { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: grid; gap: 10px; padding: 0 14px 20px; }
+  .ss-book {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    border-radius: 10px;
+    background: #ad776b;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .ss-next-cat { justify-self: center; font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.85); }
+  .ss-note { margin-top: 10px; font-size: 14px; color: var(--smoke); max-width: 320px; }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute"><symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 41" id="price-item-icon">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0768 18.1722C13.6829 18.1722 14.2831 18.0528 14.843 17.8209C15.403 17.5889 15.9118 17.2489 16.3404 16.8204C16.769 16.3918 17.1089 15.883 17.3409 15.323C17.5728 14.7631 17.6922 14.1629 17.6922 13.5568C17.6922 12.9507 17.5728 12.3505 17.3409 11.7906C17.1089 11.2306 16.769 10.7218 16.3404 10.2932C15.9118 9.86464 15.403 9.52468 14.843 9.29273C14.2831 9.06079 13.6829 8.94141 13.0768 8.94141C11.8527 8.94141 10.6788 9.42767 9.81324 10.2932C8.94769 11.1588 8.46143 12.3327 8.46143 13.5568C8.46143 14.7809 8.94769 15.9548 9.81324 16.8204C10.6788 17.6859 11.8527 18.1722 13.0768 18.1722ZM13.0768 10.4799C13.8929 10.4799 14.6755 10.804 15.2525 11.3811C15.8296 11.9581 16.1537 12.7407 16.1537 13.5568C16.1537 14.3728 15.8296 15.1555 15.2525 15.7325C14.6755 16.3095 13.8929 16.6337 13.0768 16.6337C12.2608 16.6337 11.4781 16.3095 10.9011 15.7325C10.3241 15.1555 9.99989 14.3728 9.99989 13.5568C9.99989 12.7407 10.3241 11.9581 10.9011 11.3811C11.4781 10.804 12.2608 10.4799 13.0768 10.4799ZM13.0768 33.5568C14.3009 33.5568 15.4748 33.0705 16.3404 32.205C17.2059 31.3394 17.6922 30.1655 17.6922 28.9414C17.6922 27.7173 17.2059 26.5434 16.3404 25.6778C15.4748 24.8123 14.3009 24.326 13.0768 24.326C11.8527 24.326 10.6788 24.8123 9.81324 25.6778C8.94769 26.5434 8.46143 27.7173 8.46143 28.9414C8.46143 30.1655 8.94769 31.3394 9.81324 32.205C10.6788 33.0705 11.8527 33.5568 13.0768 33.5568ZM13.0768 25.8645C13.8929 25.8645 14.6755 26.1887 15.2525 26.7657C15.8296 27.3427 16.1537 28.1254 16.1537 28.9414C16.1537 29.7575 15.8296 30.5401 15.2525 31.1171C14.6755 31.6942 13.8929 32.0183 13.0768 32.0183C12.2608 32.0183 11.4781 31.6942 10.9011 31.1171C10.3241 30.5401 9.99989 29.7575 9.99989 28.9414C9.99989 28.1254 10.3241 27.3427 10.9011 26.7657C11.4781 26.1887 12.2608 25.8645 13.0768 25.8645Z" fill="white"></path>
+        <path d="M30.7354 29.3752C30.8819 29.5174 30.9659 29.712 30.9689 29.9161C30.9719 30.1202 30.8937 30.3172 30.7515 30.4637C30.6093 30.6102 30.4148 30.6942 30.2107 30.6972C30.0065 30.7002 29.8096 30.622 29.6631 30.4798L16.0077 17.2075C15.9341 17.1374 15.8751 17.0534 15.8342 16.9603C15.7932 16.8672 15.7711 16.767 15.7692 16.6653C15.7672 16.5637 15.7855 16.4627 15.8228 16.3681C15.8601 16.2735 15.9158 16.1873 15.9867 16.1144C16.0576 16.0415 16.1422 15.9834 16.2357 15.9434C16.3291 15.9034 16.4296 15.8823 16.5313 15.8814C16.6329 15.8805 16.7338 15.8997 16.828 15.938C16.9222 15.9763 17.0078 16.0329 17.08 16.1045L30.7354 29.3752Z" fill="white"></path>
+        <path d="M15.6094 25.3198C15.4649 25.4642 15.3838 25.6601 15.3838 25.8644C15.3838 26.0687 15.4649 26.2646 15.6094 26.409C15.7538 26.5535 15.9497 26.6346 16.154 26.6346C16.3583 26.6346 16.5542 26.5535 16.6986 26.409L30.5448 12.5629C30.6892 12.4184 30.7703 12.2225 30.7703 12.0182C30.7703 11.814 30.6892 11.6181 30.5448 11.4736C30.4003 11.3292 30.2044 11.248 30.0001 11.248C29.7959 11.248 29.6 11.3292 29.4555 11.4736L15.6094 25.3198Z" fill="white"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0001 38.1721C29.7708 38.1721 37.6924 30.2506 37.6924 20.4798C37.6924 10.709 29.7708 2.78749 20.0001 2.78749C10.2293 2.78749 2.30775 10.709 2.30775 20.4798C2.30775 30.2506 10.2293 38.1721 20.0001 38.1721ZM20.0001 39.7106C30.6216 39.7106 39.2308 31.1013 39.2308 20.4798C39.2308 9.85825 30.6216 1.24902 20.0001 1.24902C9.37852 1.24902 0.769287 9.85825 0.769287 20.4798C0.769287 31.1013 9.37852 39.7106 20.0001 39.7106Z" fill="white"></path>
+      </symbol></svg>
+
+  <main class="wrap hp">
+    <section>
+      <h2 class="sec-title">Прайс</h2>
+      <p class="hp-desc">У картці «Фарбування» внизу з'являється посилання на нову сторінку. Решта картки й інші картки без змін.</p>
+      <div class="pair">
+        <div>
+          <span class="tag tag-now">Зараз</span>
+          <div class="price-item-2" data-card></div>
+        </div>
+        <div>
+          <span class="tag tag-new">Буде</span>
+          <div class="price-item-2" data-card data-more></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec-title">Сторіс «Фарбування»</h2>
+      <p class="hp-desc">Зараз кнопка «Записатися» в сторіс фарбування веде в WLaunch, а там фарбування немає. Буде кнопка на нову сторінку з цінами і Telegram. В інших сторіс (стрижки, укладки, брови) залишається «Записатися».</p>
+      <div class="pair">
+        <div>
+          <span class="tag tag-now">Зараз</span>
+          <div class="story" data-story="Записатися"></div>
+          <p class="ss-note">Веде в WLaunch, де фарбування немає</p>
+        </div>
+        <div>
+          <span class="tag tag-new">Буде</span>
+          <div class="story" data-story="Ціни та запис"></div>
+          <p class="ss-note">Веде на сторінку «Фарбування»</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const ROWS = [
+      ['Коріння', '2000-2500 грн'],
+      ['Висвітлення коренів та тонування', '3000-4500 грн'],
+      ['Тонування', '1500-4000 грн'],
+      ['Однотонне фарбування', '2500-6000 грн'],
+      ['Вихід з чорного/виправлення невдалого фарбування', '4500-12000 грн'],
+      ['Пасма (ціна залежить від кількості пасм)', '1500-2500 грн'],
+      ['Складні техніки фарбування', '4500-13000 грн']
+    ];
+    document.querySelectorAll('[data-card]').forEach(el => {
+      el.innerHTML = `
+        <div class="price-item-title-container">
+          <svg class="price-icon" aria-hidden="true"><use href="#price-item-icon"></use></svg>
+          <p class="price-item-title">Фарбування</p>
+        </div>
+        <ul class="price-rows">${ROWS.map(([n, p]) => `<li><span class="n">${n}</span><span class="p">${p}</span></li>`).join('')}</ul>
+        ${'more' in el.dataset ? '<a class="card-more" href="g-combined.html">Детальніше про фарбування</a>' : ''}`;
+    });
+
+    const IMG = '../../ValentynaWeb/wwwroot/img/webp/';
+    document.querySelectorAll('[data-story]').forEach(el => {
+      const label = el.dataset.story;
+      const href = label === 'Записатися' ? '#' : 'g-combined.html';
+      el.innerHTML = `
+        <img src="${IMG}coloring-12-480.webp" alt="Фарбування: рожеве волосся">
+        <div class="ss-top">
+          <div class="ss-bars">${'<i></i>'.repeat(16)}</div>
+          <div class="ss-who"><img class="ss-avatar" src="${IMG}coloring-3-480.webp" alt=""><span class="ss-title">Фарбування</span><span class="ss-close" aria-hidden="true">×</span></div>
+        </div>
+        <div class="ss-bottom">
+          <a class="ss-book" href="${href}">${label}</a>
+          <span class="ss-next-cat">Далі: Брови ›</span>
+        </div>`;
+    });
+  </script>
+</body>
+</html>

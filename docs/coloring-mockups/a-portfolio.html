@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фарбування волосся у центрі Києва — Перукарня Валентина</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Варіант А: роботи першими. Фото в арці, як дзеркало в салоні. */
+  .hero-a { padding: 20px 0 8px; }
+
+  .hero-a-in { display: grid; gap: 0; }
+
+  .arch {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    /* верх — півколо: горизонтальний радіус = 50% ширини, вертикальний = 40% висоти (4:5) */
+    border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+    overflow: hidden;
+    background: var(--sand);
+  }
+
+  .arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+
+  .hero-a-text { padding: 24px 0 0; }
+
+  .hero-a h1 { font-size: 46px; margin-bottom: 18px; }
+
+  .hero-a .lead { margin-bottom: 24px; }
+
+  .hero-a .btn-row { margin-bottom: 20px; }
+  .hero-a .btn-main { flex: 1 1 260px; }
+
+  .facts { display: grid; gap: 2px; font-size: 15px; color: var(--smoke); }
+
+  @media (min-width: 900px) {
+    .hero-a { padding: 48px 0 24px; }
+    .hero-a-in { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 56px; }
+    .hero-a-text { order: -1; margin: 0; padding: 0 0 40px; }
+    .hero-a h1 { font-size: 92px; }
+    .arch { max-height: 680px; }
+    .hero-a .btn-main { flex: 0 0 auto; }
+  }
+
+  /* Роботи йдуть одразу за першим екраном — без відступу зверху */
+  .after-hero #works { padding-top: 32px; }
+</style>
+</head>
+<body>
+  <div data-s="header"></div>
+
+  <main class="after-hero">
+    <section class="hero-a"><div class="wrap hero-a-in">
+      <div class="arch"><img src="../../ValentynaWeb/wwwroot/img/webp/coloring-1-1280.webp" alt="Клієнтка з бірюзовим фарбуванням на довгому волоссі"></div>
+      <div class="hero-a-text">
+        <h1 class="display">Фарбування волосся</h1>
+        <p class="lead">Від тонування коренів до виходу з чорного. Надішліть фото волосся, і майстер підкаже техніку та орієнтовну ціну.</p>
+        <div class="btn-row">
+          <a class="btn btn-main" href="https://t.me/valentyna_perukarnia" target="_blank" rel="noopener"><i data-icon="tg"></i>Надіслати фото в Telegram</a>
+          <a class="btn btn-line" href="#prices">Ціни</a>
+        </div>
+        <div class="facts">
+          <span>вул. Богдана Хмельницького 94, центр Києва</span>
+          <span>Щодня з 10:00 до 21:00</span>
+        </div>
+      </div>
+    </div></section>
+
+    <div data-s="works" data-count="8"></div>
+    <div data-s="steps"></div>
+    <div data-s="prices"></div>
+    <div data-s="masters"></div>
+    <div data-s="reviews"></div>
+    <div data-s="faq"></div>
+    <div data-s="contacts"></div>
+  </main>
+
+  <div data-s="sticky"></div>
+  <script src="shared.js"></script>
+</body>
+</html>

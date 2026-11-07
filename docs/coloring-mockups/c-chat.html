@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фарбування волосся у центрі Києва — Перукарня Валентина</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Варіант В: перший екран — приклад переписки з майстром. Показує, що буде після кліку. */
+  .hero-c { background: var(--ink); color: #fff; padding: 32px 0 48px; }
+
+  .hero-c-in { display: grid; gap: 36px; }
+
+  .hero-c h1 { font-size: 44px; color: var(--beige); margin-bottom: 16px; }
+
+  .hero-c .lead { margin-bottom: 24px; color: rgba(255, 255, 255, 0.88); }
+
+  .hero-c .btn-main { width: 100%; }
+
+  .hero-c .facts { margin-top: 16px; font-size: 15px; color: rgba(255, 255, 255, 0.6); display: grid; gap: 2px; }
+
+  /* Переписка */
+  .chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .msg {
+    max-width: 82%;
+    padding: 10px 14px 8px;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .msg time { display: block; margin-top: 4px; font-size: 11px; text-align: right; opacity: 0.6; }
+
+  .msg-out { align-self: flex-end; background: var(--rose-dark); border-bottom-right-radius: 4px; }
+
+  .msg-in { align-self: flex-start; background: var(--ink-soft); border-bottom-left-radius: 4px; }
+
+  .msg-in b { display: block; font-size: 13px; color: var(--beige); font-weight: 600; margin-bottom: 2px; }
+
+  .msg-photo { padding: 4px; }
+  .msg-photo img { width: 220px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px 12px 4px 12px; }
+
+  .typing { align-self: flex-start; display: flex; gap: 4px; padding: 14px 16px; background: var(--ink-soft); border-radius: 16px; }
+  .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--beige); opacity: 0.5; animation: dot 1s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes dot { 50% { opacity: 1; transform: translateY(-2px); } }
+
+  .chat-caption { font-size: 13px; color: rgba(255, 255, 255, 0.5); text-align: center; margin-top: 4px; }
+
+  /* Один момент руху: повідомлення з'являються по черзі, як у живій переписці */
+  .chat .step { opacity: 0; transform: translateY(8px); }
+  .chat.play .step { animation: in 0.35s ease forwards; }
+  .chat.play .s1 { animation-delay: 0.2s; }
+  .chat.play .s2 { animation-delay: 0.9s; }
+  .chat.play .typing { animation: in 0.25s ease 1.6s forwards, out 0.2s ease 3.1s forwards; }
+  .chat.play .s3 { animation-delay: 3.2s; }
+  @keyframes in { to { opacity: 1; transform: none; } }
+  @keyframes out { to { opacity: 0; height: 0; padding: 0; margin: -5px 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat .step { opacity: 1; transform: none; }
+    .chat .typing { display: none; }
+  }
+
+  @media (min-width: 900px) {
+    .hero-c { padding: 72px 0 88px; }
+    .hero-c-in { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-c h1 { font-size: 80px; }
+    .hero-c .btn-main { width: auto; }
+  }
+</style>
+</head>
+<body>
+  <div data-s="header"></div>
+
+  <main>
+    <section class="hero-c"><div class="wrap hero-c-in">
+      <div>
+        <h1 class="display">Фарбування волосся</h1>
+        <p class="lead">Не знаєте, що вам підійде і скільки це коштуватиме? Надішліть фото волосся в Telegram, і майстер підкаже техніку та орієнтовну ціну.</p>
+        <a class="btn btn-main" href="https://t.me/valentyna_perukarnia" target="_blank" rel="noopener"><i data-icon="tg"></i>Надіслати фото в Telegram</a>
+        <div class="facts">
+          <span>вул. Богдана Хмельницького 94, центр Києва</span>
+          <span>Відповідаємо щодня з 10:00 до 21:00</span>
+        </div>
+      </div>
+
+      <div class="chat" aria-label="Приклад переписки з майстром">
+        <div class="msg msg-out msg-photo step s1"><img src="../../ValentynaWeb/wwwroot/img/webp/coloring-3-480.webp" alt="Фото волосся в дзеркалі від клієнтки"></div>
+        <div class="msg msg-out step s2">Привіт! Хочу освіжити колір, кінчики вже вимились. Ось як зараз<time>14:02</time></div>
+        <div class="typing step" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="msg msg-in step s3"><b>Перукарня Валентина</b>Привіт! Можна оновити кінчики або зробити пасма в тому ж відтінку. Орієнтовно 1&nbsp;500–4&nbsp;500&nbsp;грн, точніше скажемо на консультації. Коли вам зручно зайти?<time>14:09</time></div>
+        <p class="chat-caption">Приклад переписки</p>
+      </div>
+    </div></section>
+
+    <div data-s="steps"></div>
+    <div data-s="works" data-count="8" data-tone="block-sand"></div>
+    <div data-s="masters"></div>
+    <div data-s="prices"></div>
+    <div data-s="reviews"></div>
+    <div data-s="faq"></div>
+    <div data-s="contacts"></div>
+  </main>
+
+  <div data-s="sticky"></div>
+  <script src="shared.js"></script>
+  <script>
+    // Запускаємо переписку, коли вона з'являється на екрані
+    const chat = document.querySelector('.chat');
+    new IntersectionObserver(([e], obs) => {
+      if (e.isIntersecting) { chat.classList.add('play'); obs.disconnect(); }
+    }, { threshold: 0.3 }).observe(chat);
+  </script>
+</body>
+</html>

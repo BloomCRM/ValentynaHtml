@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сторінка «Фарбування» — варіанти</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Chutz'; src: url('../../ValentynaWeb/wwwroot/fonts/Chutz-Bold.woff2') format('woff2'); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: 'Montserrat', sans-serif; background: #ece7e1; color: #1f1b19; padding: 40px 16px 80px; }
+  h1 { font-family: 'Chutz', sans-serif; font-size: 40px; text-align: center; }
+  .intro { max-width: 64ch; margin: 12px auto 24px; text-align: center; line-height: 1.5; }
+  .common { max-width: 1500px; margin: 0 auto 56px; background: #fff; border-radius: 10px; padding: 24px 28px; line-height: 1.55; }
+  .common h2 { font-family: 'Chutz', sans-serif; font-size: 24px; margin-bottom: 8px; }
+  .common ul { padding-left: 20px; display: grid; gap: 4px; max-width: 90ch; }
+  .common h2 + p, .common ul + h2 { margin-top: 16px; }
+  .variant { max-width: 1500px; margin: 0 auto 72px; }
+  .variant h2 { font-family: 'Chutz', sans-serif; font-size: 28px; }
+  .variant p { margin: 6px 0 20px; max-width: 75ch; line-height: 1.5; }
+  .frames { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .phone { width: 375px; height: 760px; border: 10px solid #1f1b19; border-radius: 36px; overflow: hidden; background: #fff; flex: none; }
+  .phone iframe { width: 100%; height: 100%; border: 0; }
+  .desk { width: 1440px; height: 900px; transform: scale(0.6); transform-origin: 0 0; border: 0; border-radius: 8px; box-shadow: 0 0 0 1px #cfc6bb; }
+  .desk-wrap { width: 864px; height: 540px; flex: none; }
+  a.open { font-size: 14px; color: #8f5f55; }
+  @media (max-width: 1300px) { .desk-wrap { display: none; } }
+</style>
+</head>
+<body>
+  <h1>Сторінка «Фарбування»: три варіанти</h1>
+  <p class="intro">Окрема сторінка, на яку веде реклама за запитами на кшталт «фарбування волосся київ» чи «колорист». Макети живі: на телефоні можна гортати й натискати. Відрізняється перший екран і порядок блоків, решта спільна.</p>
+
+  <div class="common">
+    <h2>Робочий варіант після відгуку команди</h2>
+    <ul>
+      <li><a href="g-combined.html" target="_blank">Г. Роботи, ціни на шкалі, Telegram</a> — фото й роботи з А, шкала цін з Б.</li>
+      <li><a href="h-homepage.html" target="_blank">Головна: було / стало</a> — посилання в картці прайсу і кнопка в сторіс «Фарбування».</li>
+    </ul>
+  </div>
+
+  <div class="common">
+    <h2>Що спільне для всіх варіантів</h2>
+    <ul>
+      <li>Головна кнопка скрізь одна: «Надіслати фото в Telegram». На телефоні вона завжди внизу екрана, поруч кнопка дзвінка.</li>
+      <li>Блоки: роботи, як це працює (3 кроки), ціни, майстри, відгуки, питання, контакти.</li>
+      <li>Пунктирна рамка позначає те, що має дати Валик: майстри, цитати з відгуків, відповіді на частину питань.</li>
+      <li>Шапка, шрифти й кольори такі самі, як на головній. Логотип веде на головну, «Усі послуги» — до прайсу.</li>
+    </ul>
+    <h2>Що зміниться на головній</h2>
+    <ul>
+      <li>Лише посилання «Детальніше про фарбування» у картці прайсу і в сторіс. Більше нічого.</li>
+    </ul>
+  </div>
+
+  <section class="variant">
+    <h2>А. Роботи першими</h2>
+    <p>Фото в арці, як дзеркало в самому салоні, і одразу під ним вісім робіт. Для людей, які шукають «колорист київ» і спершу хочуть побачити, як працює майстер. Найбільше схоже на сам салон.</p>
+    <div class="frames">
+      <div class="phone"><iframe src="a-portfolio.html" title="Варіант А, телефон"></iframe></div>
+      <div class="desk-wrap"><iframe class="desk" src="a-portfolio.html" title="Варіант А, комп'ютер"></iframe></div>
+    </div>
+    <a class="open" href="a-portfolio.html" target="_blank">Відкрити окремо</a>
+  </section>
+
+  <section class="variant">
+    <h2>Б. Ціна першою</h2>
+    <p>Уже на першому екрані всі сім цін на шкалі від 0 до 13&nbsp;000&nbsp;грн: видно, яка послуга скільки коштує і чому вилка така широка. Для запитів «скільки коштує пофарбувати волосся». Кнопка — «Дізнатися ціну за фото».</p>
+    <div class="frames">
+      <div class="phone"><iframe src="b-price.html" title="Варіант Б, телефон"></iframe></div>
+      <div class="desk-wrap"><iframe class="desk" src="b-price.html" title="Варіант Б, комп'ютер"></iframe></div>
+    </div>
+    <a class="open" href="b-price.html" target="_blank">Відкрити окремо</a>
+  </section>
+
+  <section class="variant">
+    <h2>В. Переписка з майстром</h2>
+    <p>На першому екрані приклад переписки в Telegram: клієнтка надсилає фото, майстер відповідає технікою і ціною. Людина одразу бачить, що буде після натискання кнопки. Найнижчий поріг для того, хто про вас ще не чув.</p>
+    <div class="frames">
+      <div class="phone"><iframe src="c-chat.html" title="Варіант В, телефон"></iframe></div>
+      <div class="desk-wrap"><iframe class="desk" src="c-chat.html" title="Варіант В, комп'ютер"></iframe></div>
+    </div>
+    <a class="open" href="c-chat.html" target="_blank">Відкрити окремо</a>
+  </section>
+</body>
+</html>
