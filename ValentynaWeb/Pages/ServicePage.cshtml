@@ -51,6 +51,7 @@
           }
         </div>
         <p class="sp-facts">
+          <partial name="_RatingBadge" model="Model.Reviews" />
           <span data-translate="footer-address">@Model.Salon.Address</span>
           @foreach (var line in Model.Schedule)
           {
@@ -181,36 +182,8 @@
     </section>
   }
 
-  @if (s.Reviews.Count > 0 || Model.ReviewsUrl is not null)
-  {
-    <section class="sp-block sp-block-ink" id="reviews">
-      <div class="sp-wrap">
-        <h2 class="sp-title" data-i18n-en="Reviews">Відгуки</h2>
-        @if (s.Reviews.Count > 0)
-        {
-          <div class="sp-quotes">
-            @foreach (var review in s.Reviews)
-            {
-              <blockquote class="sp-quote">
-                <p data-i18n-en="@review.Text.EnAttr">@review.Text.Ua</p>
-                <footer>@review.Author</footer>
-              </blockquote>
-            }
-          </div>
-        }
-        @if (Model.ReviewsUrl is { } reviewsUrl)
-        {
-          <a class="sp-rating-link" href="@reviewsUrl" target="_blank" rel="noopener">
-            @if (Model.RatingText is { } rating)
-            {
-              <b>@rating</b>
-            }
-            <span data-i18n-en="All reviews on Google">Усі відгуки в Google</span>
-          </a>
-        }
-      </div>
-    </section>
-  }
+  @* Відгуки з Google — той самий блок, що на головній; Google нічого не віддав — блоку немає *@
+  <partial name="_Reviews" model="Model.Reviews" />
 
   @if (Model.Faq.Count > 0)
   {

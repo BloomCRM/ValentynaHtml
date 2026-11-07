@@ -122,15 +122,7 @@
       </div>
       <div class="hero-trust-side">
         <div class="hero-trust-facts">
-          @if (Model.Reviews.Rating is double heroRating && Model.Reviews.TotalCount is int heroTotal)
-          {
-            var heroCount = IndexModel.ReviewsCountLabel(heroTotal);
-            <a class="hero-trust-rating" href="@Model.Reviews.ProfileUrl" target="_blank" rel="noopener">
-              <b>@heroRating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</b>
-              <span class="hero-trust-stars" aria-hidden="true">★★★★★</span>
-              <span>@heroTotal <span data-translate="@heroCount.Key">@heroCount.Label</span></span>
-            </a>
-          }
+          <partial name="_RatingBadge" model="Model.Reviews" />
           <p data-translate="footer-address">@Model.Salon.Address</p>
           @foreach (var line in Model.Schedule)
           {
@@ -384,81 +376,7 @@
   <div class="section-img"></div>
 </section>
 
-@* Відгуки — лише актуальні з Google API; поки API нічого не віддав, блок не показуємо *@
-@if (Model.Reviews.Reviews.Count > 0)
-{
-<section class="reviews">
-  <div class="reviews-container">
-    <h2 class="reviews-title" data-translate="reviews-title">ВІДГУКИ НАШИХ КЛІЄНТІВ</h2>
-    <p class="reviews-subtitle" data-translate="reviews-subtitle">
-      Зазирніть у наше портфоліо вражаючих перевтілень та знайдіть натхнення
-      для свого нового образу
-    </p>
-    <p class="reviews-subtitle-tablet" data-translate="reviews-subtitle-tablet">
-      Наші клієнти – наш головний пріоритет! Довіра, якість та стиль – те,
-      що ми створюємо разом. Ознайомтесь із враженнями наших гостей і
-      приєднуйтесь до спільноти задоволених клієнтів
-    </p>
-    @if (Model.Reviews.Rating is double rating && Model.Reviews.TotalCount is int total)
-    {
-      var countLabel = IndexModel.ReviewsCountLabel(total);
-      <a class="reviews-summary" href="@Model.Reviews.ProfileUrl" target="_blank" rel="noopener">
-        <span class="reviews-summary-rating">@rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</span>
-        <span class="reviews-summary-meta">
-          <span class="reviews-summary-stars" aria-hidden="true">★★★★★</span>
-          <span class="reviews-summary-count">@total <span data-translate="@countLabel.Key">@countLabel.Label</span></span>
-        </span>
-      </a>
-    }
-    <div class="reviews-cards">
-      @foreach (var review in Model.Reviews.Reviews)
-      {
-        <div class="review-card" data-lang="@review.Language" hidden="@(review.Language == "en")">
-          <div class="review-header">
-            @if (!string.IsNullOrEmpty(review.AvatarUrl))
-            {
-              <img src="@Url.Content(review.AvatarUrl)" alt="" class="review-avatar" width="60" height="60" loading="lazy" referrerpolicy="no-referrer" />
-            }
-            else
-            {
-              <span class="review-avatar review-avatar-initial" aria-hidden="true">@(review.AuthorName.Length > 0 ? review.AuthorName[..1].ToUpperInvariant() : "?")</span>
-            }
-            <div class="review-info">
-              @if (!string.IsNullOrEmpty(review.AuthorUrl))
-              {
-                <a class="review-name" href="@review.AuthorUrl" target="_blank" rel="noopener nofollow">@review.AuthorName</a>
-              }
-              else
-              {
-                <p class="review-name">@review.AuthorName</p>
-              }
-              <span class="review-stars-text" aria-label="@review.Rating/5">@(new string('★', review.Rating) + new string('☆', 5 - review.Rating))</span>
-              @if (!string.IsNullOrEmpty(review.RelativeDate))
-              {
-                <time class="review-date" datetime="@review.PublishedAt?.ToString("o")">@review.RelativeDate</time>
-              }
-            </div>
-          </div>
-          <p class="review-text">@review.Text</p>
-          @if (!string.IsNullOrEmpty(review.GoogleUrl))
-          {
-            <a class="review-more" href="@review.GoogleUrl" target="_blank" rel="noopener" data-translate="reviews-read-more">Читати на Google</a>
-          }
-        </div>
-      }
-    </div>
-  </div>
-  <div class="reviews-dots">
-    @{ var firstDot = true; }
-    @foreach (var review in Model.Reviews.Reviews)
-    {
-      var active = firstDot && review.Language != "en";
-      if (active) { firstDot = false; }
-      <span class="dot-review@(active ? " active" : "")" data-lang="@review.Language" hidden="@(review.Language == "en")"></span>
-    }
-  </div>
-</section>
-}
+<partial name="_Reviews" model="Model.Reviews" />
 
 <footer class="footer" id="booking">
   <div class="footer-container">

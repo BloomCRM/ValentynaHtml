@@ -42,6 +42,8 @@ public class ServicePage
     /// <summary>Підпис посилання в картці прайсу на головній</summary>
     public LocalizedText CardLinkText { get; set; } = new();
     public List<ServicePageStep> Steps { get; set; } = new();
+    /// <summary>Свої цитати про цю послугу. Поки не виводяться: на сторінці — відгуки з Google, як на головній
+    /// (_Reviews); коли відкриють Google Business Profile API, відгуки про послугу зробимо окремо</summary>
     public List<ServicePageReview> Reviews { get; set; } = new();
     public List<ServicePageFaq> Faq { get; set; } = new();
 }

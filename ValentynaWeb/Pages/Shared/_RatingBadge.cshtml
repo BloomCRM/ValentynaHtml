@@ -1,0 +1,12 @@
+@model ValentynaWeb.Content.Models.ReviewsContent
+@* «5.0 ★★★★★ 174 відгуки у Google Maps» — рейтинг салону з Google (IReviewsProvider), веде на профіль.
+   Один на всі сторінки: перший екран головної і сторінок послуг. Немає даних від Google — нічого не виводимо *@
+@if (Model.Rating is double rating && Model.TotalCount is int total)
+{
+  var countLabel = IndexModel.ReviewsCountLabel(total);
+  <a class="hero-trust-rating" href="@Model.ProfileUrl" target="_blank" rel="noopener">
+    <b>@rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)</b>
+    <span class="hero-trust-stars" aria-hidden="true">★★★★★</span>
+    <span>@total <span data-translate="@countLabel.Key">@countLabel.Label</span></span>
+  </a>
+}

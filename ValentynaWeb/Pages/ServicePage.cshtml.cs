@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -44,10 +43,8 @@ public class ServicePageModel : PageModel
     public IReadOnlyList<Master> Masters { get; private set; } = [];
     /// <summary>Лише питання з відповіддю</summary>
     public IReadOnlyList<ServicePageFaq> Faq { get; private set; } = [];
-    /// <summary>Рейтинг у Google «4,9»; null — Google API не відповів</summary>
-    public string? RatingText { get; private set; }
-    /// <summary>Усі відгуки в Google; null — немає ні профілю, ні карти</summary>
-    public string? ReviewsUrl { get; private set; }
+    /// <summary>Рейтинг і відгуки з Google — ті самі, що на головній (_RatingBadge, _Reviews)</summary>
+    public ReviewsContent Reviews { get; private set; } = new();
 
     public async Task<IActionResult> OnGetAsync(string slug)
     {
@@ -74,9 +71,7 @@ public class ServicePageModel : PageModel
         Masters = _content.Masters.Masters.Where(m => m.Services.Contains(service.ServiceCategoryId)).ToList();
         Faq = service.Faq.Where(f => !string.IsNullOrWhiteSpace(f.Answer?.Ua)).ToList();
 
-        var reviews = await _reviews.GetAsync();
-        RatingText = reviews.Rating?.ToString("0.0", CultureInfo.InvariantCulture).Replace('.', ',');
-        ReviewsUrl = reviews.ProfileUrl ?? Salon.Socials.GoogleMaps;
+        Reviews = await _reviews.GetAsync();
 
         var home = $"https://{Request.Host}/";
         CanonicalUrl = home + service.Slug.ToLowerInvariant();
