@@ -164,7 +164,7 @@
       </li>
     }
   </ul>
-  <partial name="_ServiceStories" model="Model" />
+  <partial name="_ServiceStories" model="Model.Stories" />
   <a href="@Model.BookingUrl" target="_blank" class="services-btn" data-translate="hero-book">Записатися</a>
 </section>
 
@@ -319,11 +319,11 @@
                   }
                   else if (service.PriceFrom)
                   {
-                    <span class="service-price"><span data-translate="from-price">Від</span> @service.PriceDisplay</span>
+                    <span class="service-price"><span data-translate="from-price">Від</span> @PriceHtml.Of(service.PriceDisplay)</span>
                   }
                   else
                   {
-                    <span class="service-price">@service.PriceDisplay</span>
+                    <span class="service-price">@PriceHtml.Of(service.PriceDisplay)</span>
                   }
                 }
               </li>

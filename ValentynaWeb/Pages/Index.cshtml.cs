@@ -31,6 +31,8 @@ public class IndexModel : PageModel
     public string NextEventWhen { get; private set; } = "";
     public string NextEventWhenEn { get; private set; } = "";
     public IReadOnlyList<ServicePhotoCategory> ServicePhotos { get; private set; } = [];
+    /// <summary>Фото карток «Послуг» для перегляду-сторіз</summary>
+    public ServiceStories Stories { get; private set; } = new([]);
 
     /// <summary>Опублікована сторінка послуги для категорії (id з services.json) — для посилань з картки прайсу і сторіс; чернетки не показуємо</summary>
     public ServicePage? PublishedPageFor(string? categoryId) => _servicePages.FindPublishedByCategory(categoryId);
@@ -50,6 +52,8 @@ public class IndexModel : PageModel
 
         BookingUrl = _config["Booking:ExternalUrl"]
             ?? "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
+        Stories = new ServiceStories(ServicePhotos.Select(c => new ServiceStories.Category(
+            c.Title, c.TitleKey, null, c.Cover, c.Photos, StoryButton(c.ServiceId))).ToList());
 
         ServiceCategories = _content.Services.Categories;
         Salon = _content.Salon;
@@ -57,6 +61,13 @@ public class IndexModel : PageModel
         Schedule = Salon.OpeningHours.Select(ToScheduleLine).ToList();
         Reviews = await _reviews.GetAsync();
     }
+
+    // Кнопка внизу сторіз: послуга зі своєю опублікованою сторінкою (фарбування) веде туди — там ціни
+    // й запис через Telegram; решта — в онлайн-запис WLaunch
+    private ServiceStories.Cta StoryButton(string? serviceId) =>
+        PublishedPageFor(serviceId) is { } page
+            ? new("/" + page.Slug, null, "stories-page", "Ціни та запис", External: false)
+            : new(BookingUrl, null, "hero-book", "Записатися", External: true);
 
     // Ключ перекладу під українську множину: 1 відгук / 2 відгуки / 5 відгуків
     public static (string Key, string Label) ReviewsCountLabel(int n) =>

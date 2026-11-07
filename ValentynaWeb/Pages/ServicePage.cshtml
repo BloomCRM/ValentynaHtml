@@ -10,6 +10,9 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/service-page.css" asp-append-version="true" />
 }
+@section Scripts {
+    <script src="~/js/service-stories.js" asp-append-version="true"></script>
+}
 @section Head {
     <link rel="canonical" href="@Model.CanonicalUrl" />
     @if (!s.Published)
@@ -60,18 +63,25 @@
 
   @if (s.Works.Count > 0)
   {
-    <section class="sp-block sp-works" id="works">
+    @* Як «Галерея робіт» на головній: розмитий інтер'єр салону, заголовок плашкою (.gallery-title)
+       і кнопка Instagram (.gallery-link). Клік по фото відкриває всі роботи у форматі сторіз з цього фото *@
+    <section class="sp-works" id="works">
+      <h2 class="gallery-title" data-i18n-en="Our work">Роботи</h2>
       <div class="sp-wrap">
-        <h2 class="sp-title" data-i18n-en="Our work">Роботи</h2>
         <div class="sp-works-grid">
-          @foreach (var work in s.Works)
+          @for (var i = 0; i < s.Works.Count; i++)
           {
-            <responsive-img src="@work" alt="@($"{s.H1.Ua} в Перукарні Валентина")" sizes="(max-width: 899px) 50vw, 25vw" />
+            <button type="button" class="sp-work" data-story-index="0" data-story-photo="@i" aria-label="Відкрити фото @(i + 1) з @s.Works.Count">
+              <responsive-img src="@s.Works[i]" alt="@($"{s.H1.Ua} в Перукарні Валентина")" sizes="(max-width: 899px) 50vw, 25vw" />
+            </button>
           }
         </div>
         @if (Model.Salon.Socials.Instagram is { } instagram)
         {
-          <a class="sp-more" href="@instagram" target="_blank" rel="noopener" data-i18n-en="More work on Instagram">Більше робіт в Instagram</a>
+          <a href="@instagram" class="gallery-link" target="_blank" rel="noopener noreferrer">
+            <span data-translate="gallery-more">Більше фото в Instagram</span>
+            <svg class="gallery-icon"><use href="#instagram"></use></svg>
+          </a>
         }
       </div>
     </section>
@@ -91,7 +101,7 @@
                 @for (var i = 0; i < Model.Prices.Ticks.Count; i++)
                 {
                   var tick = Model.Prices.Ticks[i];
-                  <span style="left:@Model.Prices.Pct(tick)%">@PriceScale.Num(tick)@(i == lastTick ? " грн" : "")</span>
+                  <span style="left:@Model.Prices.Pct(tick)%">@PriceHtml.Of(i == lastTick ? PriceScale.Num(tick) + " грн" : PriceScale.Num(tick))</span>
                 }
               </li>
             }
@@ -106,11 +116,11 @@
                   }
                   else if (row.IsFrom)
                   {
-                    <b><span data-translate="from-price">Від</span> @row.PriceText</b>
+                    <b><span data-translate="from-price">Від</span> @PriceHtml.Of(row.PriceText)</b>
                   }
                   else
                   {
-                    <b>@row.PriceText</b>
+                    <b>@PriceHtml.Of(row.PriceText)</b>
                   }
                 </div>
                 @if (row.From is int lo && row.To is int hi)
@@ -253,6 +263,12 @@
     </div>
   </section>
 </main>
+
+@* Перегляд робіт у форматі сторіз — поза <main>, щоб стилі сторінки (.sp-page img…) не чіпали його *@
+@if (s.Works.Count > 0)
+{
+  <partial name="_ServiceStories" model="Model.Stories" />
+}
 
 @* Нижня панель на телефоні (до 900px): головна дія завжди під рукою *@
 <div class="sp-contact-bar" id="contact-bar">

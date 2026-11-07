@@ -58,18 +58,26 @@
   line-height: 1.02;
 }
 
+/* Заголовки розділів — як на головній (site.css, «Єдиний ритм заголовків розділів»):
+   по центру, капс, 40px (планшет 36, телефон 30); до контенту 40px (телефон 24) */
 .sp-title {
   font-family: 'Chutz', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 30px;
-  line-height: 1.1;
+  font-size: 40px;
+  line-height: 1.15;
   letter-spacing: 0.05em;
-  margin-bottom: 24px;
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: 40px;
 }
 
-@media (min-width: 900px) {
-  .sp-title { font-size: 44px; margin-bottom: 36px; }
+@media (max-width: 1199px) and (min-width: 768px) {
+  .sp-title { font-size: 36px; }
+}
+
+@media (max-width: 767px) {
+  .sp-title { font-size: 30px; line-height: 1.2; margin-bottom: 24px; }
 }
 
 .sp-lead {
@@ -149,7 +157,8 @@
 }
 
 /* ---------- Перший екран ---------- */
-.sp-hero { padding: 20px 0 8px; }
+/* знизу — такий самий відступ, як над заголовками: далі «Роботи» на фото-фоні */
+.sp-hero { padding: 20px 0 56px; }
 .sp-hero-in { display: grid; }
 
 .sp-arch {
@@ -175,7 +184,7 @@
 .sp-facts { display: grid; gap: 2px; font-size: 15px; color: var(--sp-smoke); }
 
 @media (min-width: 900px) {
-  .sp-hero { padding: 48px 0 24px; }
+  .sp-hero { padding: 48px 0 80px; }
   .sp-hero-in { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 56px; }
   .sp-hero-text { order: -1; padding: 0 0 40px; }
   .sp-hero h1 { font-size: 92px; }
@@ -184,13 +193,25 @@
 }
 
 /* ---------- Секції ---------- */
-.sp-block { padding: 56px 0; }
-@media (min-width: 900px) { .sp-block { padding: 96px 0; } }
+/* Ритм як на головній: 80px над заголовком і знизу розділу (телефон 56) */
+.sp-block { padding: 80px 0; }
+@media (max-width: 767px) { .sp-block { padding: 56px 0; } }
 .sp-block-sand { background: var(--sp-sand); }
 .sp-block-ink { background: var(--sp-ink); color: #fff; }
 
-/* ---------- Роботи ---------- */
-.sp-hero + .sp-works { padding-top: 32px; }
+/* два білі розділи поспіль (напр. «Як це працює» і «Майстри») — відступ між ними один, а не подвійний */
+.sp-block:not(.sp-block-sand, .sp-block-ink) + .sp-block:not(.sp-block-sand, .sp-block-ink) { padding-top: 0; }
+
+/* ---------- Роботи: як «Галерея робіт» на головній ---------- */
+/* Заголовок-плашка (.gallery-title) і кнопка Instagram (.gallery-link) — з site.css; тут фон і сітка */
+.sp-works {
+  padding-bottom: 80px;
+  background: linear-gradient(rgba(20, 17, 16, 0.55), rgba(20, 17, 16, 0.55)), url('../img/gallery-bg-interior.webp') center / cover no-repeat;
+}
+
+@media (max-width: 767px) {
+  .sp-works { padding-bottom: 56px; }
+}
 
 .sp-works-grid {
   display: grid;
@@ -198,29 +219,37 @@
   gap: 8px;
 }
 
-.sp-works-grid img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
 @media (min-width: 900px) {
   .sp-works-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 }
 
-.sp-more {
-  display: inline-block;
-  margin-top: 20px;
-  font-weight: 500;
-  color: var(--sp-rose-dark);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+/* кожне фото — кнопка: відкриває роботи у форматі сторіз (js/service-stories.js) */
+.sp-work {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
 }
+
+.sp-works-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sp-work:hover img { transform: scale(1.04); }
+
+.sp-works .gallery-link { margin-top: 32px; }
 
 /* ---------- Ціни на шкалі ---------- */
 .sp-scale-box {
   max-width: 820px;
+  margin: 0 auto;
   background: var(--sp-paper);
   border-radius: 10px;
   padding: 20px 16px 4px;
@@ -244,8 +273,9 @@
   border-bottom: 1px solid var(--sp-line);
 }
 
-.sp-scale-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
-.sp-scale-axis span:first-child { transform: none; }
+/* > — лише самі підписи: усередині останнього ще span «грн» (перекладається на UAH) */
+.sp-scale-axis > span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.sp-scale-axis > span:first-child { transform: none; }
 
 .sp-scale-head {
   display: flex;
@@ -327,7 +357,9 @@
 .sp-quote footer { margin-top: 12px; font-size: 14px; color: var(--sp-beige); }
 
 .sp-rating-link {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
   gap: 8px;
   align-items: baseline;
   color: #fff;
@@ -339,7 +371,7 @@
 .sp-rating-link b { font-family: 'Chutz', sans-serif; font-size: 26px; color: var(--sp-beige); }
 
 /* ---------- Питання ---------- */
-.sp-faq { max-width: 760px; }
+.sp-faq { max-width: 760px; margin: 0 auto; }
 .sp-faq details { border-bottom: 1px solid var(--sp-line); }
 
 .sp-faq summary {
@@ -367,16 +399,14 @@
 .sp-faq details p { padding: 0 0 20px; max-width: 60ch; color: var(--sp-smoke); }
 
 /* ---------- Фінал і контакти ---------- */
-.sp-final { display: grid; gap: 40px; }
-
-@media (min-width: 900px) {
-  .sp-final { grid-template-columns: 1.2fr 1fr; align-items: end; }
-}
+/* по центру, як і заголовок: заклик з кнопками, під ним адреса */
+.sp-final { display: grid; gap: 40px; justify-items: center; text-align: center; }
 
 .sp-final .sp-title { margin-bottom: 16px; }
-.sp-final .sp-lead { margin-bottom: 24px; }
+.sp-final .sp-lead { margin: 0 auto 24px; }
+.sp-final .sp-btn-row { justify-content: center; }
 
-.sp-where { font-style: normal; display: grid; gap: 6px; font-size: 16px; }
+.sp-where { font-style: normal; display: grid; justify-items: center; gap: 6px; font-size: 16px; }
 .sp-where a { font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Нижня панель на телефоні ---------- */
@@ -407,5 +437,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sp-faq summary::after { transition: none; }
+  .sp-faq summary::after,
+  .sp-works-grid img { transition: none; }
 }

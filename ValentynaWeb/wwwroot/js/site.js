@@ -41,6 +41,8 @@ const translations = {
     'hero-prices': 'Ціни',
     'stories-next': 'Далі',
     'stories-page': 'Ціни та запис',
+    'stories-tg': 'Надіслати фото в Telegram',
+    'currency': 'грн',
     'telegram-btn': 'написати в Telegram',
     
     // Logo
@@ -193,6 +195,8 @@ const translations = {
     'hero-prices': 'Prices',
     'stories-next': 'Next',
     'stories-page': 'Prices & booking',
+    'stories-tg': 'Send a photo on Telegram',
+    'currency': 'UAH',
     'telegram-btn': 'write in Telegram',
     
     // Logo

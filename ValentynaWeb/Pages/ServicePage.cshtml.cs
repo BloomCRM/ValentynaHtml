@@ -39,6 +39,8 @@ public class ServicePageModel : PageModel
     public string TelegramUrl { get; private set; } = TelegramFallback;
     /// <summary>Те саме з англійським текстом — для data-i18n-href-en; null — EN-тексту немає</summary>
     public string? TelegramUrlEn { get; private set; }
+    /// <summary>Роботи у форматі сторіз (клік по фото в «Роботах»)</summary>
+    public ServiceStories Stories { get; private set; } = new([]);
     public IReadOnlyList<Master> Masters { get; private set; } = [];
     /// <summary>Лише питання з відповіддю</summary>
     public IReadOnlyList<ServicePageFaq> Faq { get; private set; } = [];
@@ -63,6 +65,11 @@ public class ServicePageModel : PageModel
         var telegram = Salon.Socials.Telegram ?? TelegramFallback;
         TelegramUrl = WithText(telegram, service.TelegramText.Ua);
         TelegramUrlEn = service.TelegramText.EnAttr is { } en ? WithText(telegram, en) : null;
+
+        // кнопка внизу сторіз — та сама головна дія сторінки, що й скрізь тут
+        Stories = new ServiceStories([new ServiceStories.Category(
+            service.H1.Ua, null, service.H1.EnAttr, service.HeroImage, service.Works,
+            new ServiceStories.Cta(TelegramUrl, TelegramUrlEn, "stories-tg", "Надіслати фото в Telegram", External: true))]);
 
         Masters = _content.Masters.Masters.Where(m => m.Services.Contains(service.ServiceCategoryId)).ToList();
         Faq = service.Faq.Where(f => !string.IsNullOrWhiteSpace(f.Answer?.Ua)).ToList();

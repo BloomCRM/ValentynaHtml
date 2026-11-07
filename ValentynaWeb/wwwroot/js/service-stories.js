@@ -1,6 +1,7 @@
-// Фото послуг у форматі сторіз: клік по картці в секції «Послуги» відкриває її фото.
+// Фото у форматі сторіз: клік по картці «Послуг» на головній або по роботі на сторінці послуги.
+// data-story-index — яка категорія, data-story-photo — з якого фото (за замовчуванням з першого).
 // Телефон: тап зліва — назад, по центру — пауза/відтворення, справа — далі, утримання — пауза.
-// Після останнього фото послуги переходить до наступної. Дані — з #service-stories-data.
+// Після останнього фото послуги переходить до наступної. Дані — з #service-stories-data (_ServiceStories).
 (() => {
   const dialog = document.getElementById('service-stories');
   const dataEl = document.getElementById('service-stories-data');
@@ -17,14 +18,13 @@
   const flash = $('ss-flash');
   const nextCatBtn = $('ss-next-cat');
   const bookBtn = dialog.querySelector('.ss-book');
-  const bookingUrl = bookBtn.getAttribute('href');
 
   // stopped — пауза кнопкою або тапом по центру; holding — поки тримають палець/мишку
   let cat = 0, photo = 0, elapsed = 0, last = 0, stopped = false, holding = false, frame = 0, downAt = 0;
 
   const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'ua');
   const t = (key, fallback) => (typeof translations !== 'undefined' && translations[lang()]?.[key]) || fallback;
-  const titleOf = c => (lang() === 'en' ? t(c.titleKey, c.title) : c.title);
+  const titleOf = c => (lang() === 'en' ? c.titleEn || t(c.titleKey, c.title) : c.title);
 
   // Розмір фото вибираємо самі під ширину кадру й щільність екрана і ставимо звичайний src.
   // srcset, змінений скриптом, Safari на iPhone іноді не перечитує — і показує попереднє фото.
@@ -55,20 +55,14 @@
     nextCatBtn.hidden = !nextCat;
     if (nextCat) nextCatBtn.textContent = `${t('stories-next', 'Далі')}: ${titleOf(nextCat)} ›`;
 
-    // Категорія зі своєю сторінкою (фарбування) веде туди: там ціни й запис через Telegram.
-    // Решта — в онлайн-запис WLaunch, як і було. data-translate міняємо разом із текстом,
-    // щоб перемикач мови в site.js підставляв правильний підпис
-    if (c.pageUrl) {
-      bookBtn.href = c.pageUrl;
-      bookBtn.removeAttribute('target');
-      bookBtn.dataset.translate = 'stories-page';
-      bookBtn.textContent = t('stories-page', 'Ціни та запис');
-    } else {
-      bookBtn.href = bookingUrl;
-      bookBtn.target = '_blank';
-      bookBtn.dataset.translate = 'hero-book';
-      bookBtn.textContent = t('hero-book', 'Записатися');
-    }
+    // Кнопка внизу — своя в кожної категорії (WLaunch, сторінка послуги чи Telegram), див. ServiceStories.Cta.
+    // data-translate міняємо разом із текстом, щоб перемикач мови в site.js підставляв правильний підпис
+    const cta = c.cta;
+    bookBtn.href = (lang() === 'en' && cta.urlEn) || cta.url;
+    if (cta.external) bookBtn.target = '_blank';
+    else bookBtn.removeAttribute('target');
+    bookBtn.dataset.translate = cta.key;
+    bookBtn.textContent = t(cta.key, cta.text);
 
     barsEl.innerHTML = c.photos.map(() => '<div class="ss-bar"><i></i></div>').join('');
     [...barsEl.children].forEach((b, k) => { b.firstChild.style.width = k < photo ? '100%' : '0'; });
@@ -109,10 +103,10 @@
     frame = requestAnimationFrame(tick);
   };
 
-  const open = index => {
+  const open = (index, photoIndex = 0) => {
     setStopped(false);
     dialog.showModal();
-    go(index, 0);
+    go(index, Math.min(photoIndex, categories[index].photos.length - 1));
     last = performance.now();
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(tick);
@@ -121,7 +115,7 @@
   };
 
   document.querySelectorAll('[data-story-index]').forEach(card => {
-    card.addEventListener('click', () => open(Number(card.dataset.storyIndex)));
+    card.addEventListener('click', () => open(Number(card.dataset.storyIndex), Number(card.dataset.storyPhoto) || 0));
   });
 
   // довге утримання — це пауза, а не тап: після нього фото не перемикаємо.

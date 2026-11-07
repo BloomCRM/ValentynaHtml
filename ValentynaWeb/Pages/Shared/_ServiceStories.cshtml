@@ -1,18 +1,22 @@
-@model ValentynaWeb.Pages.IndexModel
-@* Перегляд фото послуги у форматі сторіз (js/service-stories.js).
+@model ValentynaWeb.Pages.ServiceStories
+@* Перегляд фото у форматі сторіз (js/service-stories.js): картки «Послуг» на головній, роботи на сторінці послуги.
+   Відкривають його елементи з data-story-index (категорія) і data-story-photo (з якого фото, за замовчуванням з першого).
    Телефон: на весь екран, тап зліва — назад, по центру — пауза, справа — далі.
    Десктоп: кадр 4:5 по центру на розмитому фоні, стрілки по боках. *@
 @{
-    var storiesData = Model.ServicePhotos.Select(c => new
+    var storiesData = Model.Categories.Select(c => new
     {
         title = c.Title,
         titleKey = c.TitleKey,
+        titleEn = c.TitleEn,
         cover = IndexModel.WebpBase(c.Cover),
         photos = c.Photos.Select(IndexModel.WebpBase),
-        // своя опублікована сторінка послуги (фарбування): кнопка внизу сторіс веде туди замість WLaunch
-        pageUrl = Model.PublishedPageFor(c.ServiceId) is { } servicePage ? "/" + servicePage.Slug : null
+        cta = new { url = c.Cta.Url, urlEn = c.Cta.UrlEn, key = c.Cta.TranslateKey, text = c.Cta.Text, external = c.Cta.External }
     });
+    // підпис і адреса кнопки до відкриття; при відкритті скрипт ставить кнопку відкритої категорії
+    var firstCta = Model.Categories.FirstOrDefault()?.Cta;
 }
+@* < у JSON екранується (<) — </script> у назві чи адресі не закриє тег *@
 <script type="application/json" id="service-stories-data">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(storiesData))</script>
 
 <dialog class="ss" id="service-stories" aria-label="Фото послуги">
@@ -36,7 +40,7 @@
     <button type="button" class="ss-tap ss-tap-next" id="ss-tap-next" aria-label="Наступне фото"></button>
     <div class="ss-flash" id="ss-flash" aria-hidden="true"></div>
     <div class="ss-bottom">
-      <a class="ss-book" href="@Model.BookingUrl" target="_blank" rel="noopener" data-translate="hero-book">Записатися</a>
+      <a class="ss-book" href="@(firstCta?.Url ?? "#")" target="_blank" rel="noopener" data-translate="@firstCta?.TranslateKey">@firstCta?.Text</a>
       <button type="button" class="ss-next-cat" id="ss-next-cat"></button>
     </div>
   </div>
