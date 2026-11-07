@@ -2,18 +2,22 @@
 const closeBtn = document.getElementById('close-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
-burgerBtn.addEventListener('click', () => {
-  mobileMenu.classList.add('active');
-});
+// Бургер-меню є лише на головній; на сторінках послуг його немає — тоді нічого не вішаємо,
+// інакше скрипт падає тут і не працюють ні переклад, ні події аналітики
+if (burgerBtn && closeBtn && mobileMenu) {
+  burgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+  });
 
-closeBtn.addEventListener('click', () => {
-  mobileMenu.classList.remove('active');
-});
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+  });
 
-// Пункт меню веде до розділу на цій же сторінці — меню закриваємо, інакше скрол відбувається під ним
-mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
-  link.addEventListener('click', () => mobileMenu.classList.remove('active'));
-});
+  // Пункт меню веде до розділу на цій же сторінці — меню закриваємо, інакше скрол відбувається під ним
+  mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+  });
+}
 
 // Language translations
 const translations = {
@@ -36,6 +40,7 @@ const translations = {
     'hero-services': 'Перейти до послуг',
     'hero-prices': 'Ціни',
     'stories-next': 'Далі',
+    'stories-page': 'Ціни та запис',
     'telegram-btn': 'написати в Telegram',
     
     // Logo
@@ -187,6 +192,7 @@ const translations = {
     'hero-services': 'View Services',
     'hero-prices': 'Prices',
     'stories-next': 'Next',
+    'stories-page': 'Prices & booking',
     'telegram-btn': 'write in Telegram',
     
     // Logo
@@ -404,6 +410,12 @@ function switchLanguage(lang) {
     element.textContent = lang === 'en' ? element.dataset.i18nEn : element.dataset.i18nUa;
   });
 
+  // EN-адреса посилання (Telegram з англійським готовим текстом): UA-адресу запам'ятовуємо, щоб повернути
+  document.querySelectorAll('[data-i18n-href-en]').forEach(link => {
+    if (link.dataset.i18nHrefUa === undefined) link.dataset.i18nHrefUa = link.getAttribute('href');
+    link.setAttribute('href', lang === 'en' ? link.dataset.i18nHrefEn : link.dataset.i18nHrefUa);
+  });
+
   updateNewsMore();
   switchReviewsLanguage(lang);
   updateContactFabLabel(lang);
@@ -453,7 +465,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialize gallery slider when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new GallerySlider();
-  new Lightbox();
+  // галерея з лайтбоксом є лише на головній
+  if (document.getElementById('lightbox-modal')) new Lightbox();
 });
 
 // Горизонтальні слайдери (.js-scroller): стрілки ‹ › по боках, під ними крапки за кількістю карток,
