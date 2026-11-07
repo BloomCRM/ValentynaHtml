@@ -1,0 +1,18 @@
+@page "/{slug}"
+@model ServicePageModel
+@{
+    ViewData["PageTitle"] = Model.Service.Title;
+    ViewData["Description"] = Model.Service.Description;
+    ViewData["OwnContactBar"] = true;
+}
+@section Head {
+    <link rel="canonical" href="@Model.CanonicalUrl" />
+    @if (!Model.Service.Published)
+    {
+        <meta name="robots" content="noindex" />
+    }
+}
+
+<main class="sp-page">
+  <h1 data-i18n-en="@Model.Service.H1.EnAttr">@Model.Service.H1.Ua</h1>
+</main>

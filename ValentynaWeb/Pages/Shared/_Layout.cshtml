@@ -6,8 +6,23 @@
     <meta charset="utf-8" />
     @await Html.PartialAsync("_Analytics")
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Перукарня Валентина — стрижки, фарбування, укладка в центрі Києва" />
-    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " — " : "")Перукарня Валентина — стрижки, фарбування, догляд у центрі Києва</title>
+    @* Сторінки послуг задають свої title і description; головна — як було *@
+    @if (ViewData["Description"] is string description)
+    {
+        <meta name="description" content="@description" />
+    }
+    else
+    {
+        <meta name="description" content="Перукарня Валентина — стрижки, фарбування, укладка в центрі Києва" />
+    }
+    @if (ViewData["PageTitle"] is string pageTitle)
+    {
+        <title>@pageTitle</title>
+    }
+    else
+    {
+        <title>@(ViewData["Title"] != null ? ViewData["Title"] + " — " : "")Перукарня Валентина — стрижки, фарбування, догляд у центрі Києва</title>
+    }
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
@@ -27,9 +42,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     @await RenderSectionAsync("Styles", required: false)
+    @* canonical, noindex для чернеток і JSON-LD сторінки послуги *@
+    @await RenderSectionAsync("Head", required: false)
     @await Html.PartialAsync("_JsonLd")
 </head>
-<body>
+<body class="@(ViewData["OwnContactBar"] is true ? "has-contact-bar" : null)">
     @await Html.PartialAsync("_GtmNoscript")
 
     @RenderBody()
@@ -106,9 +123,13 @@
         var telegramUrl = Content.Salon.Socials.Telegram ?? "https://t.me/valentyna_perukarnia";
     }
 
-    <a href="@bookingUrl" target="_blank" rel="noopener" class="sticky-book-btn" aria-label="Записатися онлайн">
-        Записатися
-    </a>
+    @* На сторінках послуг своя нижня панель (Telegram + дзвінок): липка «Записатися» веде в WLaunch, де цих послуг немає *@
+    @if (ViewData["OwnContactBar"] is not true)
+    {
+        <a href="@bookingUrl" target="_blank" rel="noopener" class="sticky-book-btn" aria-label="Записатися онлайн">
+            Записатися
+        </a>
+    }
 
     @* Плаваюча кнопка «Зв'язатися»: одна кнопка з трубкою; тап — над нею виїжджають «Подзвонити» і Telegram (js/site.js) *@
     <div class="contact-fab" id="contact-fab">

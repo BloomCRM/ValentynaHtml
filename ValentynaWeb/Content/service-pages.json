@@ -1,0 +1,79 @@
+{
+  "pages": [
+    {
+      "slug": "farbuvannia",
+      "published": false,
+      "serviceCategoryId": "coloring",
+      "title": "Фарбування волосся у центрі Києва — Перукарня Валентина",
+      "description": "Фарбування волосся в центрі Києва: коріння, тонування, складні техніки, вихід з чорного. Ціни від 1500 грн. Надішліть фото — майстер підкаже техніку.",
+      "h1": { "ua": "Фарбування волосся", "en": "Hair coloring" },
+      "lead": {
+        "ua": "Від тонування коренів до виходу з чорного. Надішліть фото волосся, і майстер підкаже техніку та орієнтовну ціну.",
+        "en": "From root toning to coming out of black. Send a photo of your hair and a stylist will suggest a technique and an estimated price."
+      },
+      "heroImage": "img/coloring-1",
+      "heroAlt": "Клієнтка з бірюзовим фарбуванням на довгому волоссі",
+      "works": [
+        "img/coloring-3",
+        "img/coloring-12",
+        "img/coloring-5",
+        "img/coloring-2",
+        "img/coloring-13",
+        "img/coloring-7",
+        "img/coloring-16",
+        "img/coloring-14"
+      ],
+      "priceNote": {
+        "ua": "Ціна залежить від довжини й густоти волосся, його стану і рангу майстра. Точну суму майстер назве після фото або на консультації.",
+        "en": "The price depends on hair length and thickness, its condition and the stylist's level. The stylist will give the exact price after seeing a photo or at a consultation."
+      },
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо фарбування.",
+        "en": "Hi! I'm writing from your website about hair coloring."
+      },
+      "cardLinkText": { "ua": "Детальніше про фарбування", "en": "More about hair coloring" },
+      "steps": [
+        {
+          "title": { "ua": "Надішліть фото волосся в Telegram", "en": "Send a photo of your hair on Telegram" },
+          "text": {
+            "ua": "Краще при денному світлі, спереду і ззаду. Напишіть, який колір хочете.",
+            "en": "Daylight works best, front and back. Tell us what colour you'd like."
+          }
+        },
+        {
+          "title": { "ua": "Майстер підкаже техніку й ціну", "en": "A stylist suggests the technique and price" },
+          "text": { "ua": "Відповідаємо щодня з 10:00 до 21:00.", "en": "We reply daily from 10:00 to 21:00." }
+        },
+        {
+          "title": { "ua": "Консультація або одразу фарбування", "en": "Consultation or straight to coloring" },
+          "text": {
+            "ua": "Можна спершу прийти на консультацію в салон, а можна одразу записатися на фарбування.",
+            "en": "Come to the salon for a consultation first, or book the coloring right away."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштує консультація?", "en": "How much is a consultation?" },
+          "answer": null
+        },
+        {
+          "question": { "ua": "Чи можна вийти з чорного в блонд?", "en": "Can I go from black to blonde?" },
+          "answer": {
+            "ua": "Так, це окрема послуга. Скільки сеансів знадобиться, майстер скаже після фото: це залежить від того, як довго і чим фарбували волосся.",
+            "en": "Yes, it's a separate service. The stylist will tell you how many sessions it takes after seeing a photo: it depends on how long and with what your hair was dyed."
+          }
+        },
+        {
+          "question": { "ua": "Скільки триває фарбування?", "en": "How long does coloring take?" },
+          "answer": null
+        },
+        {
+          "question": { "ua": "Якими фарбами працюєте?", "en": "Which hair dyes do you use?" },
+          "answer": null
+        }
+      ]
+    }
+  ]
+}
