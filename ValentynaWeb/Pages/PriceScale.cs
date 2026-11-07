@@ -12,7 +12,7 @@ namespace ValentynaWeb.Pages;
 public partial class PriceScale
 {
     private const int TickStep = 5000;
-    private static readonly NumberFormatInfo Spaces = new() { NumberGroupSeparator = " " };
+    private static readonly NumberFormatInfo Spaces = new() { NumberGroupSeparator = "\u00A0" };
 
     /// <summary>From/To = null — ціну не вдалося розібрати: рядок показує текст із прайсу без смужки.</summary>
     public record Row(string Name, string? TranslateKey, string PriceText, int? From, int? To);
