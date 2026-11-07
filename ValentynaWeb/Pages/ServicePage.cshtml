@@ -3,17 +3,253 @@
 @{
     ViewData["PageTitle"] = Model.Service.Title;
     ViewData["Description"] = Model.Service.Description;
+    // своя нижня панель «Надіслати фото» + дзвінок замість липкої «Записатися» (WLaunch) і круглої «Зв'язатися»
     ViewData["OwnContactBar"] = true;
+    var s = Model.Service;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/service-page.css" asp-append-version="true" />
 }
 @section Head {
     <link rel="canonical" href="@Model.CanonicalUrl" />
-    @if (!Model.Service.Published)
+    @if (!s.Published)
     {
+        @* чернетка: відкривається за прямим посиланням, але Google її не індексує *@
         <meta name="robots" content="noindex" />
     }
     <script type="application/ld+json">@Html.Raw(Model.JsonLd)</script>
 }
 
+@* Значок Telegram кольором тексту (у спрайті _Layout він з fill="none"); телефон — #fab-phone з _Layout *@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sp-icon-tg" viewBox="0 0 18 18"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M17.9821 2.22666C18.0212 1.9646 17.996 1.69575 17.9091 1.44812C17.8222 1.2005 17.6769 0.98316 17.4882 0.818751C17.2996 0.654343 17.0745 0.548881 16.8364 0.513355C16.5983 0.477828 16.356 0.513535 16.1347 0.616758L0.821211 7.74547C-0.246253 8.2425 -0.30088 9.94943 0.821211 10.4643C1.93245 10.9762 3.05973 11.4445 4.20091 11.8682C5.24689 12.2504 6.38778 12.6039 7.30211 12.7039C7.55196 13.0346 7.86629 13.3534 8.18689 13.6445C8.67674 14.09 9.26599 14.5484 9.87495 14.988C11.0947 15.8692 12.4478 16.7118 13.3594 17.2603C14.4493 17.9138 15.7541 17.1613 15.9493 15.8474L17.9821 2.22666ZM2.53793 9.09497L16.0818 2.79003L14.1851 15.5029C13.2905 14.9653 12.0018 14.1603 10.8538 13.3306C10.3246 12.955 9.81378 12.5488 9.32331 12.1138C9.19223 11.9954 9.06498 11.8719 8.94181 11.7435L12.489 7.8227C12.657 7.63705 12.7515 7.3852 12.7516 7.12255C12.7516 6.85991 12.6573 6.60799 12.4894 6.4222C12.3215 6.23642 12.0937 6.132 11.8562 6.1319C11.6186 6.13181 11.3907 6.23606 11.2227 6.42171L7.33883 10.7158C6.68151 10.6227 5.76629 10.3534 4.76151 9.98705C4.01349 9.7115 3.27233 9.4137 2.53882 9.09398L2.53793 9.09497Z" /></symbol>
+</svg>
+
+<partial name="_ServicePageHeader" model="Model" />
+
 <main class="sp-page">
-  <h1 data-i18n-en="@Model.Service.H1.EnAttr">@Model.Service.H1.Ua</h1>
+  @* Перший екран: фото в арці (як дзеркало в салоні), на десктопі текст ліворуч *@
+  <section class="sp-hero" id="hero">
+    <div class="sp-wrap sp-hero-in">
+      <div class="sp-arch">
+        <responsive-img src="@s.HeroImage" alt="@s.HeroAlt" eager="true" sizes="(max-width: 899px) 100vw, 45vw" />
+      </div>
+      <div class="sp-hero-text">
+        <h1 class="sp-display" data-i18n-en="@s.H1.EnAttr">@s.H1.Ua</h1>
+        <p class="sp-lead" data-i18n-en="@s.Lead.EnAttr">@s.Lead.Ua</p>
+        <div class="sp-btn-row">
+          <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
+            <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+            <span data-i18n-en="Send a photo on Telegram">Надіслати фото в Telegram</span>
+          </a>
+          @if (Model.Prices.Rows.Count > 0)
+          {
+            <a class="sp-btn sp-btn-line" href="#prices" data-i18n-en="Prices">Ціни</a>
+          }
+        </div>
+        <p class="sp-facts">
+          <span>@Model.Salon.Address</span>
+          @foreach (var line in Model.Schedule)
+          {
+            <span><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</span>
+          }
+        </p>
+      </div>
+    </div>
+  </section>
+
+  @if (s.Works.Count > 0)
+  {
+    <section class="sp-block sp-works" id="works">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Our work">Роботи</h2>
+        <div class="sp-works-grid">
+          @foreach (var work in s.Works)
+          {
+            <responsive-img src="@work" alt="@($"{s.H1.Ua} в Перукарні Валентина")" sizes="(max-width: 899px) 50vw, 25vw" />
+          }
+        </div>
+        @if (Model.Salon.Socials.Instagram is { } instagram)
+        {
+          <a class="sp-more" href="@instagram" target="_blank" rel="noopener" data-i18n-en="More work on Instagram">Більше робіт в Instagram</a>
+        }
+      </div>
+    </section>
+  }
+
+  @if (Model.Prices.Rows.Count > 0)
+  {
+    var lastTick = Model.Prices.Ticks.Count - 1;
+    <section class="sp-block sp-block-sand" id="prices">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Prices">Ціни</h2>
+        <div class="sp-scale-box">
+          <ul class="sp-scale">
+            @if (Model.Prices.Ticks.Count > 0)
+            {
+              <li class="sp-scale-axis" aria-hidden="true">
+                @for (var i = 0; i < Model.Prices.Ticks.Count; i++)
+                {
+                  var tick = Model.Prices.Ticks[i];
+                  <span style="left:@Model.Prices.Pct(tick)%">@PriceScale.Num(tick)@(i == lastTick ? " грн" : "")</span>
+                }
+              </li>
+            }
+            @foreach (var row in Model.Prices.Rows)
+            {
+              <li>
+                <div class="sp-scale-head">
+                  <span data-translate="@row.TranslateKey">@row.Name</span>
+                  <b>@row.PriceText</b>
+                </div>
+                @if (row.From is int lo && row.To is int hi)
+                {
+                  <div class="sp-scale-track" aria-hidden="true"><span class="sp-scale-fill" style="left:@Model.Prices.Pct(lo)%;width:@Model.Prices.Pct(hi - lo)%"></span></div>
+                }
+              </li>
+            }
+          </ul>
+          @if (!string.IsNullOrWhiteSpace(s.PriceNote.Ua))
+          {
+            <p class="sp-price-note" data-i18n-en="@s.PriceNote.EnAttr">@s.PriceNote.Ua</p>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (s.Steps.Count > 0)
+  {
+    <section class="sp-block" id="steps">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="How it works">Як це працює</h2>
+        <ol class="sp-steps">
+          @for (var i = 0; i < s.Steps.Count; i++)
+          {
+            <li>
+              <span class="sp-step-n" aria-hidden="true">@(i + 1)</span>
+              <h3 data-i18n-en="@s.Steps[i].Title.EnAttr">@s.Steps[i].Title.Ua</h3>
+              <p data-i18n-en="@s.Steps[i].Text.EnAttr">@s.Steps[i].Text.Ua</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </section>
+  }
+
+  @if (Model.Masters.Count > 0)
+  {
+    <section class="sp-block" id="masters">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Stylists">Майстри</h2>
+        <div class="sp-masters">
+          @foreach (var m in Model.Masters)
+          {
+            <article class="sp-master">
+              <img class="sp-master-photo" src="@m.AvatarUrl" alt="@m.Name" loading="lazy" />
+              <h3>@m.Name</h3>
+              <p class="sp-master-role">@m.Role</p>
+              @if (m.About is { } about && !string.IsNullOrWhiteSpace(about.Ua))
+              {
+                <p data-i18n-en="@about.EnAttr">@about.Ua</p>
+              }
+            </article>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (s.Reviews.Count > 0 || Model.ReviewsUrl is not null)
+  {
+    <section class="sp-block sp-block-ink" id="reviews">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Reviews">Відгуки</h2>
+        @if (s.Reviews.Count > 0)
+        {
+          <div class="sp-quotes">
+            @foreach (var review in s.Reviews)
+            {
+              <blockquote class="sp-quote">
+                <p data-i18n-en="@review.Text.EnAttr">@review.Text.Ua</p>
+                <footer>@review.Author</footer>
+              </blockquote>
+            }
+          </div>
+        }
+        @if (Model.ReviewsUrl is { } reviewsUrl)
+        {
+          <a class="sp-rating-link" href="@reviewsUrl" target="_blank" rel="noopener">
+            @if (Model.RatingText is { } rating)
+            {
+              <b>@rating</b>
+            }
+            <span data-i18n-en="All reviews on Google">Усі відгуки в Google</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+
+  @if (Model.Faq.Count > 0)
+  {
+    <section class="sp-block" id="faq">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Questions">Питання</h2>
+        <div class="sp-faq">
+          @foreach (var item in Model.Faq)
+          {
+            <details>
+              <summary data-i18n-en="@item.Question.EnAttr">@item.Question.Ua</summary>
+              <p data-i18n-en="@item.Answer!.EnAttr">@item.Answer!.Ua</p>
+            </details>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <section class="sp-block sp-block-sand" id="contacts">
+    <div class="sp-wrap sp-final">
+      <div>
+        <h2 class="sp-title" data-i18n-en="Not sure what to choose?">Не знаєте, що обрати?</h2>
+        <p class="sp-lead" data-i18n-en="Send a photo and a stylist will suggest what suits you.">Надішліть фото, і майстер підкаже, що підійде саме вам.</p>
+        <div class="sp-btn-row">
+          <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
+            <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+            <span data-i18n-en="Send a photo on Telegram">Надіслати фото в Telegram</span>
+          </a>
+          <a class="sp-btn sp-btn-line" href="tel:@Model.Salon.Phone">
+            <svg class="sp-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#fab-phone"></use></svg>
+            <span data-translate="fab-call">Подзвонити</span>
+          </a>
+        </div>
+      </div>
+      <address class="sp-where">
+        <b data-i18n-en="Valentyna hair salon">Перукарня Валентина</b>
+        <span>@Model.Salon.Address</span>
+        @foreach (var line in Model.Schedule)
+        {
+          <span><span data-translate="@line.TranslateKey">@line.Days</span> @line.Time</span>
+        }
+        <a href="tel:@Model.Salon.Phone">@Model.PhoneDisplay</a>
+        @if (Model.Salon.Socials.GoogleMaps is { } maps)
+        {
+          <a href="@maps" target="_blank" rel="noopener" data-i18n-en="Get directions">Прокласти маршрут</a>
+        }
+        <a href="/#price" data-i18n-en="All salon services">Усі послуги перукарні</a>
+      </address>
+    </div>
+  </section>
 </main>
+
+@* Нижня панель на телефоні (до 900px): головна дія завжди під рукою *@
+<div class="sp-contact-bar" id="contact-bar">
+  <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener" aria-label="Надіслати фото в Telegram">
+    <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+    <span data-i18n-en="Send a photo">Надіслати фото</span>
+  </a>
+  <a class="sp-btn sp-btn-icon" href="tel:@Model.Salon.Phone" aria-label="Подзвонити">
+    <svg class="sp-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#fab-phone"></use></svg>
+  </a>
+</div>

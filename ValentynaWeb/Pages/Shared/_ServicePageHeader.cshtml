@@ -1,0 +1,24 @@
+@model ServicePageModel
+@* Коротка шапка сторінок послуг: без бургер-меню — лише шлях на головну, мова і зв'язок.
+   Телефон і «Надіслати фото» видно з 900px; на телефоні вони в нижній панелі (#contact-bar).
+   Кнопки мови — ті самі .lang-btn[data-lang], що й на головній: їх обробляє switchLanguage у site.js *@
+<header class="sp-topbar">
+  <div class="sp-wrap sp-topbar-in">
+    <a class="sp-logo" href="/" aria-label="Перукарня Валентина, на головну">
+      <span data-translate="logo-main">ВАЛЕНТИНА</span>
+      <span class="sp-logo-sub" data-translate="logo-sub">перукарня</span>
+    </a>
+    <nav class="sp-topnav" aria-label="Навігація">
+      <a class="sp-topnav-link" href="/#price" data-i18n-en="All services">Усі послуги</a>
+      <div class="sp-lang">
+        <button type="button" class="lang-btn active" data-lang="ua">UA</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a class="sp-topphone" href="tel:@Model.Salon.Phone">@Model.PhoneDisplay</a>
+      <a class="sp-btn sp-btn-main sp-btn-sm sp-topcta" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
+        <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+        <span data-i18n-en="Send a photo">Надіслати фото</span>
+      </a>
+    </nav>
+  </div>
+</header>

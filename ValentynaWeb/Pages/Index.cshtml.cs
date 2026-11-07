@@ -99,13 +99,13 @@ public class IndexModel : PageModel
     };
 
     // "+380637250589" → "+38 (063) 725-05-89"; інші формати — як є
-    private static string FormatPhone(string phone) =>
+    public static string FormatPhone(string phone) =>
         phone.Length == 13 && phone.StartsWith("+380")
             ? $"+38 ({phone[3..6]}) {phone[6..9]}-{phone[9..11]}-{phone[11..13]}"
             : phone;
 
     // ["Mon".."Sun"] → "Щодня"; ["Mon".."Fri"] → "Пн-Пт". EN-переклад — у site.js за ключем
-    private static ScheduleLine ToScheduleLine(OpeningHours h)
+    public static ScheduleLine ToScheduleLine(OpeningHours h)
     {
         var time = $"{h.Open} - {h.Close}";
         if (h.Days.Count == 7)
