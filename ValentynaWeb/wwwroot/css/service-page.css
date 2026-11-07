@@ -242,7 +242,10 @@
   transition: transform 0.4s ease;
 }
 
-.sp-work:hover img { transform: scale(1.04); }
+/* лише з мишкою: на телефоні :hover «залипає» після тапу — фото лишалось збільшеним після закриття сторіз */
+@media (hover: hover) {
+  .sp-work:hover img { transform: scale(1.04); }
+}
 
 .sp-works .gallery-link { margin-top: 32px; }
 
