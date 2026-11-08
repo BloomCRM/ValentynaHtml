@@ -50,8 +50,7 @@ public class IndexModel : PageModel
         if (NextEvent is not null)
             (NextEventWhen, NextEventWhenEn) = EventWhen(NextEvent.EventDate, today);
 
-        BookingUrl = _config["Booking:ExternalUrl"]
-            ?? "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
+        BookingUrl = BookingLink.From(_config);
         Stories = new ServiceStories(ServicePhotos.Select(c => new ServiceStories.Category(
             c.Title, c.TitleKey, null, c.Cover, c.Photos, StoryButton(c.ServiceId))).ToList());
 

@@ -9,6 +9,7 @@ namespace ValentynaWeb.Pages;
 /// <summary>
 /// Сторінка послуги (/farbuvannia …). Тексти — з service-pages.json, ціни — з категорії services.json,
 /// майстри — з masters.json (у кого в services є ця категорія). Невідома адреса → 404.
+/// Головна дія (primaryAction) — Telegram або онлайн-запис WLaunch.
 /// Чернетка (published: false) відкривається за прямим посиланням, але з noindex.
 /// </summary>
 public class ServicePageModel : PageModel
@@ -17,11 +18,13 @@ public class ServicePageModel : PageModel
 
     private readonly IContentProvider _content;
     private readonly IReviewsProvider _reviews;
+    private readonly IConfiguration _config;
 
-    public ServicePageModel(IContentProvider content, IReviewsProvider reviews)
+    public ServicePageModel(IContentProvider content, IReviewsProvider reviews, IConfiguration config)
     {
         _content = content;
         _reviews = reviews;
+        _config = config;
     }
 
     public ServicePage Service { get; private set; } = new();
@@ -38,6 +41,10 @@ public class ServicePageModel : PageModel
     public string TelegramUrl { get; private set; } = TelegramFallback;
     /// <summary>Те саме з англійським текстом — для data-i18n-href-en; null — EN-тексту немає</summary>
     public string? TelegramUrlEn { get; private set; }
+    /// <summary>Онлайн-запис WLaunch — головна кнопка сторінок з primaryAction "booking"</summary>
+    public string BookingUrl { get; private set; } = "";
+    /// <summary>Головна дія — «Записатися» (WLaunch), Telegram другою кнопкою; інакше — «Надіслати фото в Telegram»</summary>
+    public bool IsBooking => Service.PrimaryAction == "booking";
     /// <summary>Роботи у форматі сторіз (клік по фото в «Роботах»)</summary>
     public ServiceStories Stories { get; private set; } = new([]);
     public IReadOnlyList<Master> Masters { get; private set; } = [];
@@ -63,10 +70,14 @@ public class ServicePageModel : PageModel
         TelegramUrl = WithText(telegram, service.TelegramText.Ua);
         TelegramUrlEn = service.TelegramText.EnAttr is { } en ? WithText(telegram, en) : null;
 
+        BookingUrl = BookingLink.From(_config);
+
         // кнопка внизу сторіз — та сама головна дія сторінки, що й скрізь тут
+        var storiesButton = IsBooking
+            ? new ServiceStories.Cta(BookingUrl, null, "hero-book", "Записатися", External: true)
+            : new ServiceStories.Cta(TelegramUrl, TelegramUrlEn, "stories-tg", "Надіслати фото в Telegram", External: true);
         Stories = new ServiceStories([new ServiceStories.Category(
-            service.H1.Ua, null, service.H1.EnAttr, service.HeroImage, service.Works,
-            new ServiceStories.Cta(TelegramUrl, TelegramUrlEn, "stories-tg", "Надіслати фото в Telegram", External: true))]);
+            service.H1.Ua, null, service.H1.EnAttr, service.HeroImage, service.Works, storiesButton)]);
 
         Masters = service.ServiceCategoryId is { } categoryId
             ? _content.Masters.Masters.Where(m => m.Services.Contains(categoryId)).ToList()

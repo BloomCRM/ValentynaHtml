@@ -41,13 +41,24 @@
         <h1 class="sp-display" data-i18n-en="@s.H1.EnAttr">@s.H1.Ua</h1>
         <p class="sp-lead" data-i18n-en="@s.Lead.EnAttr">@s.Lead.Ua</p>
         <div class="sp-btn-row">
+          @if (Model.IsBooking)
+          {
+            <a class="sp-btn sp-btn-main" href="@Model.BookingUrl" target="_blank" rel="noopener" data-translate="hero-book">Записатися</a>
+            <a class="sp-btn sp-btn-line" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
+              <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+              <span data-i18n-en="Message us on Telegram">Написати в Telegram</span>
+            </a>
+          }
+          else
+          {
           <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
             <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
             <span data-i18n-en="Send a photo on Telegram">Надіслати фото в Telegram</span>
           </a>
-          @if (Model.Prices.Rows.Count > 0)
+          if (Model.Prices.Rows.Count > 0)
           {
             <a class="sp-btn sp-btn-line" href="#prices" data-i18n-en="Prices">Ціни</a>
+          }
           }
         </div>
         <p class="sp-facts">
@@ -69,7 +80,8 @@
     <section class="sp-works" id="works">
       <h2 class="gallery-title" data-i18n-en="Our work">Роботи</h2>
       <div class="sp-wrap">
-        <div class="sp-works-grid">
+        @* 3 або 6 фото — 3 колонки, щоб у сітці не було дірок (3 — і на телефоні) *@
+        <div class="@(s.Works.Count switch { 3 => "sp-works-grid sp-works-3", 6 => "sp-works-grid sp-works-6", _ => "sp-works-grid" })">
           @for (var i = 0; i < s.Works.Count; i++)
           {
             <button type="button" class="sp-work" data-story-index="0" data-story-photo="@i" aria-label="Відкрити фото @(i + 1) з @s.Works.Count">
@@ -215,6 +227,19 @@
     <div class="sp-wrap sp-final">
       <div>
         <h2 class="sp-title" data-i18n-en="Not sure what to choose?">Не знаєте, що обрати?</h2>
+        @if (Model.IsBooking)
+        {
+          <p class="sp-lead" data-i18n-en="Message us on Telegram and a stylist will suggest what suits you.">Напишіть нам у Telegram, і майстер підкаже, що підійде саме вам.</p>
+          <div class="sp-btn-row">
+            <a class="sp-btn sp-btn-main" href="@Model.BookingUrl" target="_blank" rel="noopener" data-translate="hero-book">Записатися</a>
+            <a class="sp-btn sp-btn-line" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
+              <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
+              <span data-i18n-en="Message us on Telegram">Написати в Telegram</span>
+            </a>
+          </div>
+        }
+        else
+        {
         <p class="sp-lead" data-i18n-en="Send a photo and a stylist will suggest what suits you.">Надішліть фото, і майстер підкаже, що підійде саме вам.</p>
         <div class="sp-btn-row">
           <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener">
@@ -226,6 +251,7 @@
             <span data-translate="fab-call">Подзвонити</span>
           </a>
         </div>
+        }
       </div>
       <address class="sp-where">
         <b data-i18n-en="Valentyna hair salon">Перукарня Валентина</b>
@@ -253,10 +279,17 @@
 
 @* Нижня панель на телефоні (до 900px): головна дія завжди під рукою *@
 <div class="sp-contact-bar" id="contact-bar">
+  @if (Model.IsBooking)
+  {
+    <a class="sp-btn sp-btn-main" href="@Model.BookingUrl" target="_blank" rel="noopener" data-translate="hero-book">Записатися</a>
+  }
+  else
+  {
   <a class="sp-btn sp-btn-main" href="@Model.TelegramUrl" data-i18n-href-en="@Model.TelegramUrlEn" target="_blank" rel="noopener" aria-label="Надіслати фото в Telegram">
     <svg class="sp-icon" aria-hidden="true"><use href="#sp-icon-tg"></use></svg>
     <span data-i18n-en="Send a photo">Надіслати фото</span>
   </a>
+  }
   <a class="sp-btn sp-btn-icon" href="tel:@Model.Salon.Phone" aria-label="Подзвонити">
     <svg class="sp-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#fab-phone"></use></svg>
   </a>

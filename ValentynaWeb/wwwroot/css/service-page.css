@@ -228,6 +228,13 @@
   .sp-works-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 }
 
+/* 3 фото — 3 колонки всюди, 6 — 3 колонки на десктопі: без дірок у сітці (класи ставить ServicePage.cshtml) */
+.sp-works-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (min-width: 900px) {
+  .sp-works-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 /* кожне фото — кнопка: відкриває роботи у форматі сторіз (js/service-stories.js) */
 .sp-work {
   display: block;
