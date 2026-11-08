@@ -270,7 +270,7 @@
 .sp-scale { list-style: none; }
 .sp-scale li { padding: 12px 0; }
 
-/* Підписи осі стоять точно на своїх значеннях (0, 5 000, 10 000 з 13 000) */
+/* Підписи осі стоять точно на своїх значеннях (крок — у PriceScale: 0 / 5 000 / 10 000 з 13 000) */
 .sp-scale .sp-scale-axis {
   position: relative;
   height: 26px;
@@ -284,6 +284,18 @@
 /* > — лише самі підписи: усередині останнього ще span «грн» (перекладається на UAH) */
 .sp-scale-axis > span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
 .sp-scale-axis > span:first-child { transform: none; }
+
+/* Підзаголовок групи прайсу («Стрижки ножицями», «Догляд К18») */
+.sp-scale .sp-scale-group {
+  padding: 18px 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sp-rose-dark);
+}
+
+.sp-scale .sp-scale-axis + .sp-scale-group { padding-top: 6px; }
 
 .sp-scale-head {
   display: flex;

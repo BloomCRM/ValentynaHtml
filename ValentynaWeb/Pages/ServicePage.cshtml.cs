@@ -53,7 +53,7 @@ public class ServicePageModel : PageModel
 
         Service = service;
         var category = _content.Services.Categories.FirstOrDefault(c => c.Id == service.ServiceCategoryId);
-        Prices = PriceScale.From(category?.Services ?? []);
+        Prices = PriceScale.From(category?.Services ?? [], service.PriceKeys);
 
         Salon = _content.Salon;
         PhoneDisplay = IndexModel.FormatPhone(Salon.Phone);

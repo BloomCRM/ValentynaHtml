@@ -106,29 +106,37 @@
                 }
               </li>
             }
-            @foreach (var row in Model.Prices.Rows)
+            @foreach (var priceGroup in Model.Prices.Sections)
             {
-              <li>
-                <div class="sp-scale-head">
-                  <span data-translate="@row.TranslateKey">@row.Name</span>
-                  @if (row.PriceTranslateKey != null)
+              @* назва групи прайсу («Стрижки ножицями»); EN — за тим самим ключем, що на головній *@
+              if (priceGroup.Name is not null)
+              {
+                <li class="sp-scale-group" data-translate="@priceGroup.TranslateKey">@priceGroup.Name</li>
+              }
+              foreach (var row in priceGroup.Rows)
+              {
+                <li>
+                  <div class="sp-scale-head">
+                    <span data-translate="@row.TranslateKey">@row.Name</span>
+                    @if (row.PriceTranslateKey != null)
+                    {
+                      <b data-translate="@row.PriceTranslateKey">@row.PriceText</b>
+                    }
+                    else if (row.IsFrom)
+                    {
+                      <b><span data-translate="from-price">Від</span> @PriceHtml.Of(row.PriceText)</b>
+                    }
+                    else
+                    {
+                      <b>@PriceHtml.Of(row.PriceText)</b>
+                    }
+                  </div>
+                  @if (row.From is int lo && row.To is int hi)
                   {
-                    <b data-translate="@row.PriceTranslateKey">@row.PriceText</b>
+                    <div class="sp-scale-track" aria-hidden="true"><span class="sp-scale-fill" style="left:@Model.Prices.Pct(lo)%;width:@Model.Prices.Pct(hi - lo)%"></span></div>
                   }
-                  else if (row.IsFrom)
-                  {
-                    <b><span data-translate="from-price">Від</span> @PriceHtml.Of(row.PriceText)</b>
-                  }
-                  else
-                  {
-                    <b>@PriceHtml.Of(row.PriceText)</b>
-                  }
-                </div>
-                @if (row.From is int lo && row.To is int hi)
-                {
-                  <div class="sp-scale-track" aria-hidden="true"><span class="sp-scale-fill" style="left:@Model.Prices.Pct(lo)%;width:@Model.Prices.Pct(hi - lo)%"></span></div>
-                }
-              </li>
+                </li>
+              }
             }
           </ul>
           @if (!string.IsNullOrWhiteSpace(s.PriceNote.Ua))
