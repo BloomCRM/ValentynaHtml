@@ -12,8 +12,9 @@ public class ServicePhotoCategory
     /// <summary>Ключ EN-перекладу назви у site.js (services-cuts, …)</summary>
     public string? TitleKey { get; set; }
 
-    /// <summary>Id категорії прайсу (services.json), напр. "coloring": якщо в неї є опублікована сторінка, кнопка в сторіс веде туди</summary>
-    public string? ServiceId { get; set; }
+    /// <summary>Адреса сторінки послуги з service-pages.json ("farbuvannia"): коли сторінка опублікована, кнопка в сторіс веде туди.
+    /// За адресою, а не за категорією прайсу: укладки й догляд ділять одну категорію "care"</summary>
+    public string? Page { get; set; }
     /// <summary>Обкладинка картки — шлях без розширення, як у &lt;responsive-img&gt;: "img/cuts"</summary>
     public string Cover { get; set; } = "";
     /// <summary>Фото сторіз — так само без розширення; WebP-варіанти лежать у img/webp/</summary>

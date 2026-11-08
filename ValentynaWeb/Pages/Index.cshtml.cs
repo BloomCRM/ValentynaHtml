@@ -34,8 +34,8 @@ public class IndexModel : PageModel
     /// <summary>Фото карток «Послуг» для перегляду-сторіз</summary>
     public ServiceStories Stories { get; private set; } = new([]);
 
-    /// <summary>Опублікована сторінка послуги для категорії (id з services.json) — для посилань з картки прайсу і сторіс; чернетки не показуємо</summary>
-    public ServicePage? PublishedPageFor(string? categoryId) => _servicePages.FindPublishedByCategory(categoryId);
+    /// <summary>Опубліковані сторінки послуг категорії прайсу (id з services.json) — посилання внизу картки; чернетки не показуємо</summary>
+    public IReadOnlyList<ServicePage> PublishedPagesFor(string? categoryId) => _servicePages.PublishedForCategory(categoryId);
 
     public async Task OnGetAsync()
     {
@@ -51,22 +51,30 @@ public class IndexModel : PageModel
             (NextEventWhen, NextEventWhenEn) = EventWhen(NextEvent.EventDate, today);
 
         BookingUrl = BookingLink.From(_config);
-        Stories = new ServiceStories(ServicePhotos.Select(c => new ServiceStories.Category(
-            c.Title, c.TitleKey, null, c.Cover, c.Photos, StoryButton(c.ServiceId))).ToList());
-
+        // прайс — до сторіз: кнопка в сторіз залежить від того, чи є на сторінці послуги ціни
         ServiceCategories = _content.Services.Categories;
+        Stories = new ServiceStories(ServicePhotos.Select(c => new ServiceStories.Category(
+            c.Title, c.TitleKey, null, c.Cover, c.Photos, StoryButton(c.Page))).ToList());
+
         Salon = _content.Salon;
         PhoneDisplay = FormatPhone(Salon.Phone);
         Schedule = Salon.OpeningHours.Select(ToScheduleLine).ToList();
         Reviews = await _reviews.GetAsync();
     }
 
-    // Кнопка внизу сторіз: послуга зі своєю опублікованою сторінкою (фарбування) веде туди — там ціни
-    // й запис через Telegram; решта — в онлайн-запис WLaunch
-    private ServiceStories.Cta StoryButton(string? serviceId) =>
-        PublishedPageFor(serviceId) is { } page
-            ? new("/" + page.Slug, null, "stories-page", "Ціни та запис", External: false)
-            : new(BookingUrl, null, "hero-book", "Записатися", External: true);
+    // Кнопка внизу сторіз: картка з опублікованою сторінкою веде туди — «Ціни та запис», якщо на сторінці є ціни,
+    // інакше «Детальніше» (завивка, брови); решта — в онлайн-запис WLaunch
+    private ServiceStories.Cta StoryButton(string? pageSlug) =>
+        _servicePages.FindPublished(pageSlug) is not { } page
+            ? new(BookingUrl, null, "hero-book", "Записатися", External: true)
+            : HasPrices(page)
+                ? new("/" + page.Slug, null, "stories-page", "Ціни та запис", External: false)
+                : new("/" + page.Slug, null, "stories-more", "Детальніше", External: false);
+
+    // ті самі ціни, що покаже сторінка: її категорія і priceKeys
+    private bool HasPrices(ServicePage page) =>
+        ServiceCategories.FirstOrDefault(c => c.Id == page.ServiceCategoryId) is { } category
+        && PriceScale.From(category.Services, page.PriceKeys).Rows.Count > 0;
 
     // Ключ перекладу під українську множину: 1 відгук / 2 відгуки / 5 відгуків
     public static (string Key, string Label) ReviewsCountLabel(int n) =>

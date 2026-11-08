@@ -5246,3 +5246,8 @@ button,
 .price-more:focus-visible {
   background: rgba(221, 205, 179, 0.1);
 }
+
+/* дві сторінки в одній картці («Миття, укладки та догляд» → укладки і догляд) — друге посилання ближче до першого */
+.price-more + .price-more {
+  margin-top: 12px;
+}

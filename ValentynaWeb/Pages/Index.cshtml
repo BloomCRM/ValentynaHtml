@@ -321,7 +321,7 @@
               </li>
             }
           </ul>
-          @if (Model.PublishedPageFor(category.Id) is { } servicePage)
+          @foreach (var servicePage in Model.PublishedPagesFor(category.Id))
           {
             <a href="/@servicePage.Slug" class="price-more" data-i18n-en="@servicePage.CardLinkText.EnAttr">@servicePage.CardLinkText.Ua</a>
           }

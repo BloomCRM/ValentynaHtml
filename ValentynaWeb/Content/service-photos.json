@@ -3,6 +3,7 @@
     {
       "title": "Стрижки",
       "titleKey": "services-cuts",
+      "page": "stryzhky",
       "cover": "img/cuts",
       "photos": [
         "img/cuts",
@@ -19,6 +20,7 @@
     {
       "title": "Укладки",
       "titleKey": "services-styling",
+      "page": "ukladky",
       "cover": "img/styling-4",
       "photos": [
         "img/styling-4",
@@ -31,6 +33,7 @@
     {
       "title": "Догляд",
       "titleKey": "services-care",
+      "page": "dohliad",
       "cover": "img/care-3",
       "photos": [
         "img/care-3",
@@ -41,6 +44,7 @@
     {
       "title": "Хім та біо завивка",
       "titleKey": "services-chemical",
+      "page": "zavyvka",
       "cover": "img/perm-1",
       "photos": [
         "img/perm-1",
@@ -53,7 +57,7 @@
     {
       "title": "Фарбування",
       "titleKey": "services-coloring",
-      "serviceId": "coloring",
+      "page": "farbuvannia",
       "cover": "img/coloring-cover-2",
       "photos": [
         "img/coloring-cover-2",
@@ -78,6 +82,7 @@
     {
       "title": "Брови",
       "titleKey": "services-brows",
+      "page": "brovy",
       "cover": "img/brows-1",
       "photos": [
         "img/brows-1",

@@ -42,6 +42,7 @@ const translations = {
     'stories-next': 'Далі',
     'stories-page': 'Ціни та запис',
     'stories-tg': 'Надіслати фото в Telegram',
+    'stories-more': 'Детальніше',
     'currency': 'грн',
     'telegram-btn': 'написати в Telegram',
     
@@ -196,6 +197,7 @@ const translations = {
     'stories-next': 'Next',
     'stories-page': 'Prices & booking',
     'stories-tg': 'Send a photo on Telegram',
+    'stories-more': 'Learn more',
     'currency': 'UAH',
     'telegram-btn': 'write in Telegram',
     

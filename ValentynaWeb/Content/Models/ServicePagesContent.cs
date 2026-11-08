@@ -11,11 +11,15 @@ public class ServicePagesContent
             ? null
             : Pages.FirstOrDefault(p => string.Equals(p.Slug, slug, StringComparison.OrdinalIgnoreCase));
 
-    /// <summary>Опублікована сторінка категорії прайсу (id з services.json); чернетки не повертаємо.</summary>
-    public ServicePage? FindPublishedByCategory(string? categoryId) =>
+    /// <summary>Опублікована сторінка за адресою; чернетки не повертаємо — з головної посилаємось лише на опубліковані.</summary>
+    public ServicePage? FindPublished(string? slug) => FindBySlug(slug) is { Published: true } page ? page : null;
+
+    /// <summary>Опубліковані сторінки категорії прайсу (id з services.json) — посилання внизу картки прайсу на головній.
+    /// Їх може бути кілька: «Миття, укладки та догляд» → укладки і догляд.</summary>
+    public IReadOnlyList<ServicePage> PublishedForCategory(string? categoryId) =>
         string.IsNullOrEmpty(categoryId)
-            ? null
-            : Pages.FirstOrDefault(p => p.Published && string.Equals(p.ServiceCategoryId, categoryId, StringComparison.Ordinal));
+            ? []
+            : Pages.Where(p => p.Published && string.Equals(p.ServiceCategoryId, categoryId, StringComparison.Ordinal)).ToList();
 }
 
 public class ServicePage
