@@ -68,7 +68,9 @@ public class ServicePageModel : PageModel
             service.H1.Ua, null, service.H1.EnAttr, service.HeroImage, service.Works,
             new ServiceStories.Cta(TelegramUrl, TelegramUrlEn, "stories-tg", "Надіслати фото в Telegram", External: true))]);
 
-        Masters = _content.Masters.Masters.Where(m => m.Services.Contains(service.ServiceCategoryId)).ToList();
+        Masters = service.ServiceCategoryId is { } categoryId
+            ? _content.Masters.Masters.Where(m => m.Services.Contains(categoryId)).ToList()
+            : [];
         Faq = service.Faq.Where(f => !string.IsNullOrWhiteSpace(f.Answer?.Ua)).ToList();
 
         Reviews = await _reviews.GetAsync();

@@ -74,6 +74,387 @@
           "answer": null
         }
       ]
+    },
+    {
+      "slug": "stryzhky",
+      "published": false,
+      "serviceCategoryId": "cuts",
+      "primaryAction": "booking",
+      "title": "Стрижки в центрі Києва — Перукарня Валентина",
+      "description": "Жіночі, чоловічі й дитячі стрижки ножицями та машинкою в центрі Києва, вул. Б. Хмельницького 94. Ціни від 550 грн. Онлайн-запис щодня.",
+      "h1": { "ua": "Стрижки", "en": "Haircuts" },
+      "lead": {
+        "ua": "Жіночі, чоловічі й дитячі стрижки ножицями та машинкою, а ще борода. Запишіться онлайн або напишіть у Telegram, якщо хочете порадитися.",
+        "en": "Women's, men's and kids' haircuts with scissors or clippers, plus beard trims. Book online or message us on Telegram if you'd like advice first."
+      },
+      "heroImage": "img/cuts",
+      "heroAlt": "Стрижка в Перукарні Валентина",
+      "works": [
+        "img/cuts-2",
+        "img/cuts-3",
+        "img/cuts-4",
+        "img/cuts-5",
+        "img/cuts-6",
+        "img/cuts-7"
+      ],
+      "priceNote": {
+        "ua": "Ціна залежить від довжини й густоти волосся та рангу майстра. Точну суму майстер назве перед стрижкою.",
+        "en": "The price depends on hair length and thickness and the stylist's level. The stylist will confirm the exact price before the cut."
+      },
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо стрижки.",
+        "en": "Hi! I'm writing from your website about a haircut."
+      },
+      "cardLinkText": { "ua": "Детальніше про стрижки", "en": "More about haircuts" },
+      "steps": [
+        {
+          "title": { "ua": "Оберіть час онлайн", "en": "Pick a time online" },
+          "text": {
+            "ua": "Кнопка «Записатися» відкриває онлайн-запис: послуга і вільний час. Працюємо щодня з 10:00 до 21:00.",
+            "en": "The Book button opens online booking with services and free slots. We're open daily from 10:00 to 21:00."
+          }
+        },
+        {
+          "title": { "ua": "Покажіть, що хочете", "en": "Show what you want" },
+          "text": {
+            "ua": "Візьміть фото-референс або опишіть стрижку — майстер підкаже, як вона ляже саме на ваше волосся.",
+            "en": "Bring a reference photo or describe the cut — the stylist will tell you how it will work with your hair."
+          }
+        },
+        {
+          "title": { "ua": "Стрижка в салоні", "en": "Haircut at the salon" },
+          "text": {
+            "ua": "Чекаємо вас на Богдана Хмельницького 94. Якщо плани змінились, напишіть у Telegram.",
+            "en": "See you at 94 Bohdana Khmelnytskoho St. If your plans change, message us on Telegram."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштує стрижка?", "en": "How much is a haircut?" },
+          "answer": {
+            "ua": "Залежить від довжини волосся й рангу майстра. Усі ціни — на шкалі вище.",
+            "en": "It depends on hair length and the stylist's level. All prices are on the scale above."
+          }
+        },
+        {
+          "question": { "ua": "Як записатися?", "en": "How do I book?" },
+          "answer": {
+            "ua": "Онлайн через кнопку «Записатися» — там видно вільний час. Або напишіть у Telegram чи подзвоніть.",
+            "en": "Online via the Book button, where you can see free slots. Or message us on Telegram or call."
+          }
+        },
+        {
+          "question": { "ua": "Чи стрижете дітей?", "en": "Do you cut kids' hair?" },
+          "answer": {
+            "ua": "Так, ножицями або машинкою. Ціни — на шкалі вище.",
+            "en": "Yes, with scissors or clippers. Prices are on the scale above."
+          }
+        },
+        {
+          "question": { "ua": "Скільки триває стрижка?", "en": "How long does a haircut take?" },
+          "answer": null
+        },
+        {
+          "question": { "ua": "Що таке стрижка-донат на лікування раку?", "en": "What is the cancer-treatment donation haircut?" },
+          "answer": null
+        }
+      ]
+    },
+    {
+      "slug": "ukladky",
+      "published": false,
+      "serviceCategoryId": "care",
+      "priceKeys": ["styling-1", "styling-2", "styling-3"],
+      "primaryAction": "booking",
+      "title": "Укладки волосся в центрі Києва — Перукарня Валентина",
+      "description": "Укладки волосся трьох рівнів складності в центрі Києва, вул. Б. Хмельницького 94. Ціни від 800 грн. Онлайн-запис щодня з 10:00 до 21:00.",
+      "h1": { "ua": "Укладки", "en": "Hair styling" },
+      "lead": {
+        "ua": "Укладка на щодень чи на особливу подію — три рівні складності. Запишіться онлайн або надішліть референс у Telegram.",
+        "en": "Everyday or special-occasion styling, in three levels of complexity. Book online or send a reference on Telegram."
+      },
+      "heroImage": "img/styling-4",
+      "heroAlt": "Укладка в Перукарні Валентина",
+      "works": [
+        "img/styling-1",
+        "img/styling-2",
+        "img/styling-3",
+        "img/styling-5"
+      ],
+      "priceNote": {
+        "ua": "Що складніша укладка і довше волосся, то вищий рівень. Не знаєте, який рівень потрібен, — надішліть референс у Telegram.",
+        "en": "The more complex the styling and the longer the hair, the higher the level. Not sure which level you need? Send a reference on Telegram."
+      },
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо укладки.",
+        "en": "Hi! I'm writing from your website about hair styling."
+      },
+      "cardLinkText": { "ua": "Детальніше про укладки", "en": "More about styling" },
+      "steps": [
+        {
+          "title": { "ua": "Оберіть час онлайн", "en": "Pick a time online" },
+          "text": {
+            "ua": "Кнопка «Записатися» відкриває онлайн-запис: послуга і вільний час. Працюємо щодня з 10:00 до 21:00.",
+            "en": "The Book button opens online booking with services and free slots. We're open daily from 10:00 to 21:00."
+          }
+        },
+        {
+          "title": { "ua": "Надішліть референс", "en": "Send a reference" },
+          "text": {
+            "ua": "Фото укладки, яку хочете, — у Telegram, щоб майстер підказав рівень і ціну.",
+            "en": "Send a photo of the styling you want on Telegram so the stylist can tell you the level and price."
+          }
+        },
+        {
+          "title": { "ua": "Укладка в салоні", "en": "Styling at the salon" },
+          "text": {
+            "ua": "Чекаємо вас на Богдана Хмельницького 94. Якщо плани змінились, напишіть у Telegram.",
+            "en": "See you at 94 Bohdana Khmelnytskoho St. If your plans change, message us on Telegram."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштує укладка?", "en": "How much is styling?" },
+          "answer": {
+            "ua": "Залежить від рівня складності — ціни на шкалі вище.",
+            "en": "It depends on the level of complexity — prices are on the scale above."
+          }
+        },
+        {
+          "question": { "ua": "Як записатися?", "en": "How do I book?" },
+          "answer": {
+            "ua": "Онлайн через кнопку «Записатися» — там видно вільний час. Або напишіть у Telegram чи подзвоніть.",
+            "en": "Online via the Book button, where you can see free slots. Or message us on Telegram or call."
+          }
+        },
+        {
+          "question": { "ua": "Чи можна прийти з референсом?", "en": "Can I bring a reference?" },
+          "answer": {
+            "ua": "Так, візьміть фото — майстер підкаже, що вийде з вашим волоссям.",
+            "en": "Yes, bring a photo — the stylist will tell you what will work with your hair."
+          }
+        },
+        {
+          "question": { "ua": "Скільки триває укладка?", "en": "How long does styling take?" },
+          "answer": null
+        }
+      ]
+    },
+    {
+      "slug": "dohliad",
+      "published": false,
+      "serviceCategoryId": "care",
+      "priceKeys": ["svc-group-wash", "svc-group-k18", "svc-group-oil", "svc-group-voey"],
+      "primaryAction": "booking",
+      "title": "Догляд за волоссям у центрі Києва — Перукарня Валентина",
+      "description": "Миття голови, догляди K18 і La Biosthetique Oil therapy, пілінг Voey у центрі Києва. Ціни від 800 грн. Онлайн-запис щодня з 10:00 до 21:00.",
+      "h1": { "ua": "Догляд за волоссям", "en": "Hair care" },
+      "lead": {
+        "ua": "Миття голови, відновлювальні догляди K18 і La Biosthetique Oil therapy, пілінг шкіри голови Voey. Запишіться онлайн або напишіть у Telegram, щоб підібрати догляд.",
+        "en": "Hair wash, K18 and La Biosthetique Oil therapy repair treatments, Voey scalp peeling. Book online or message us on Telegram to pick a treatment."
+      },
+      "heroImage": "img/care-3",
+      "heroAlt": "Догляд за волоссям у Перукарні Валентина",
+      "works": [
+        "img/care-1",
+        "img/care-2",
+        "img/care-3"
+      ],
+      "priceNote": {
+        "ua": "Ціна залежить від довжини волосся. Не знаєте, який догляд обрати, — напишіть у Telegram, майстер підкаже.",
+        "en": "The price depends on hair length. Not sure which treatment to choose? Message us on Telegram and a stylist will help."
+      },
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо догляду за волоссям.",
+        "en": "Hi! I'm writing from your website about hair care."
+      },
+      "cardLinkText": { "ua": "Детальніше про догляд", "en": "More about hair care" },
+      "steps": [
+        {
+          "title": { "ua": "Оберіть час онлайн", "en": "Pick a time online" },
+          "text": {
+            "ua": "Кнопка «Записатися» відкриває онлайн-запис: послуга і вільний час. Працюємо щодня з 10:00 до 21:00.",
+            "en": "The Book button opens online booking with services and free slots. We're open daily from 10:00 to 21:00."
+          }
+        },
+        {
+          "title": { "ua": "Майстер оцінить волосся", "en": "The stylist checks your hair" },
+          "text": {
+            "ua": "І підкаже, який догляд потрібен саме вашому волоссю.",
+            "en": "And suggests the treatment your hair needs."
+          }
+        },
+        {
+          "title": { "ua": "Догляд у салоні", "en": "Treatment at the salon" },
+          "text": {
+            "ua": "Чекаємо вас на Богдана Хмельницького 94. Якщо плани змінились, напишіть у Telegram.",
+            "en": "See you at 94 Bohdana Khmelnytskoho St. If your plans change, message us on Telegram."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштує догляд?", "en": "How much is a treatment?" },
+          "answer": {
+            "ua": "Залежить від догляду й довжини волосся — ціни на шкалі вище.",
+            "en": "It depends on the treatment and hair length — prices are on the scale above."
+          }
+        },
+        {
+          "question": { "ua": "Як записатися?", "en": "How do I book?" },
+          "answer": {
+            "ua": "Онлайн через кнопку «Записатися» — там видно вільний час. Або напишіть у Telegram чи подзвоніть.",
+            "en": "Online via the Book button, where you can see free slots. Or message us on Telegram or call."
+          }
+        },
+        {
+          "question": { "ua": "Який догляд обрати?", "en": "Which treatment should I choose?" },
+          "answer": {
+            "ua": "Напишіть у Telegram або запитайте майстра в салоні — він підкаже за станом волосся.",
+            "en": "Message us on Telegram or ask the stylist at the salon — they'll advise based on your hair."
+          }
+        },
+        {
+          "question": { "ua": "Чим відрізняються K18 і Oil therapy?", "en": "What's the difference between K18 and Oil therapy?" },
+          "answer": null
+        }
+      ]
+    },
+    {
+      "slug": "zavyvka",
+      "published": false,
+      "primaryAction": "telegram",
+      "title": "Хімічна і біозавивка в центрі Києва — Перукарня Валентина",
+      "description": "Хімічна та біозавивка волосся в центрі Києва, вул. Б. Хмельницького 94. Надішліть фото в Telegram — майстер підкаже завивку і назве ціну.",
+      "h1": { "ua": "Хімічна і біозавивка", "en": "Perm and bio perm" },
+      "lead": {
+        "ua": "Хімічна та біозавивка: стійкі локони без щоденної укладки. Надішліть фото волосся, і майстер підкаже, яка завивка підійде і скільки вона коштуватиме.",
+        "en": "Perm and bio perm: lasting curls without daily styling. Send a photo of your hair and a stylist will suggest the right perm and its price."
+      },
+      "heroImage": "img/perm-1",
+      "heroAlt": "Завивка в Перукарні Валентина",
+      "works": [
+        "img/perm-2",
+        "img/perm-3",
+        "img/perm-4",
+        "img/perm-5"
+      ],
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо завивки.",
+        "en": "Hi! I'm writing from your website about a perm."
+      },
+      "steps": [
+        {
+          "title": { "ua": "Надішліть фото волосся в Telegram", "en": "Send a photo of your hair on Telegram" },
+          "text": {
+            "ua": "Краще при денному світлі. Напишіть, які локони хочете, — можна з референсом.",
+            "en": "Daylight works best. Tell us what curls you'd like — a reference photo helps."
+          }
+        },
+        {
+          "title": { "ua": "Майстер підкаже вид завивки й ціну", "en": "The stylist suggests the type of perm and the price" },
+          "text": { "ua": "Відповідаємо щодня з 10:00 до 21:00.", "en": "We reply daily from 10:00 to 21:00." }
+        },
+        {
+          "title": { "ua": "Завивка в салоні", "en": "Perm at the salon" },
+          "text": {
+            "ua": "Оберемо зручний час і чекаємо вас на Богдана Хмельницького 94.",
+            "en": "We'll find a convenient time and see you at 94 Bohdana Khmelnytskoho St."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштує завивка?", "en": "How much is a perm?" },
+          "answer": {
+            "ua": "Залежить від довжини й стану волосся. Надішліть фото в Telegram — майстер назве ціну.",
+            "en": "It depends on hair length and condition. Send a photo on Telegram and the stylist will give you the price."
+          }
+        },
+        {
+          "question": { "ua": "Чим хімічна завивка відрізняється від біозавивки?", "en": "What's the difference between a perm and a bio perm?" },
+          "answer": null
+        },
+        {
+          "question": { "ua": "Скільки тримається завивка?", "en": "How long does a perm last?" },
+          "answer": null
+        }
+      ]
+    },
+    {
+      "slug": "brovy",
+      "published": false,
+      "primaryAction": "booking",
+      "title": "Брови в центрі Києва — Перукарня Валентина",
+      "description": "Брови в перукарні «Валентина» в центрі Києва, вул. Б. Хмельницького 94. Онлайн-запис щодня з 10:00 до 21:00 або напишіть у Telegram.",
+      "h1": { "ua": "Брови", "en": "Brows" },
+      "lead": {
+        "ua": "Форма й колір брів, що пасують саме вам. Запишіться онлайн або напишіть у Telegram, щоб порадитися з майстром.",
+        "en": "Brow shape and colour that suit you. Book online or message us on Telegram to ask the artist."
+      },
+      "heroImage": "img/brows-1",
+      "heroAlt": "Брови в Перукарні Валентина",
+      "works": [
+        "img/brows-2",
+        "img/brows-3",
+        "img/brows-4",
+        "img/brows-5",
+        "img/brows-6",
+        "img/brows-7",
+        "img/brows-8",
+        "img/brows-9"
+      ],
+      "telegramText": {
+        "ua": "Привіт! Пишу з сайту щодо брів.",
+        "en": "Hi! I'm writing from your website about brows."
+      },
+      "steps": [
+        {
+          "title": { "ua": "Оберіть час онлайн", "en": "Pick a time online" },
+          "text": {
+            "ua": "Кнопка «Записатися» відкриває онлайн-запис: послуга і вільний час. Працюємо щодня з 10:00 до 21:00.",
+            "en": "The Book button opens online booking with services and free slots. We're open daily from 10:00 to 21:00."
+          }
+        },
+        {
+          "title": { "ua": "Майстер підбере форму", "en": "The artist picks the shape" },
+          "text": { "ua": "Під риси обличчя й ваші побажання.", "en": "To suit your features and wishes." }
+        },
+        {
+          "title": { "ua": "Брови в салоні", "en": "Brows at the salon" },
+          "text": {
+            "ua": "Чекаємо вас на Богдана Хмельницького 94. Якщо плани змінились, напишіть у Telegram.",
+            "en": "See you at 94 Bohdana Khmelnytskoho St. If your plans change, message us on Telegram."
+          }
+        }
+      ],
+      "reviews": [],
+      "faq": [
+        {
+          "question": { "ua": "Скільки коштують брови?", "en": "How much do brows cost?" },
+          "answer": {
+            "ua": "Ціну підкаже адміністратор: напишіть у Telegram або подзвоніть.",
+            "en": "The administrator will tell you: message us on Telegram or call."
+          }
+        },
+        {
+          "question": { "ua": "Як записатися?", "en": "How do I book?" },
+          "answer": {
+            "ua": "Онлайн через кнопку «Записатися» — там видно вільний час. Або напишіть у Telegram чи подзвоніть.",
+            "en": "Online via the Book button, where you can see free slots. Or message us on Telegram or call."
+          }
+        },
+        {
+          "question": { "ua": "Які послуги з бровами робите?", "en": "Which brow services do you offer?" },
+          "answer": null
+        }
+      ]
     }
   ]
 }

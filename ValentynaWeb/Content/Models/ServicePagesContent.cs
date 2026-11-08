@@ -24,8 +24,14 @@ public class ServicePage
     public string Slug { get; set; } = "";
     /// <summary>false — чернетка: відкривається за прямим посиланням, але з noindex, без sitemap і без посилань з головної</summary>
     public bool Published { get; set; }
-    /// <summary>Id категорії в services.json, звідки беремо ціни: "coloring"</summary>
-    public string ServiceCategoryId { get; set; } = "";
+    /// <summary>Id категорії в services.json, звідки беремо ціни: "coloring". null — цін на сторінці немає (завивка, брови)</summary>
+    public string? ServiceCategoryId { get; set; }
+    /// <summary>Які рядки категорії показати: ключ заголовка групи ("svc-group-wash") — уся група,
+    /// ключ рядка ("styling-1") — цей рядок. null або порожньо — уся категорія</summary>
+    public List<string>? PriceKeys { get; set; }
+    /// <summary>Головна дія: "telegram" — «Надіслати фото в Telegram» (фарбування, завивка);
+    /// "booking" — «Записатися» в онлайн-запис WLaunch, Telegram — другою кнопкою</summary>
+    public string PrimaryAction { get; set; } = "telegram";
     /// <summary>&lt;title&gt; повністю (лише UA — Google індексує UA-версію)</summary>
     public string Title { get; set; } = "";
     public string Description { get; set; } = "";
