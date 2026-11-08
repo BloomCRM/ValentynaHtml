@@ -12,8 +12,11 @@ public class JsonContentProvider : IContentProvider, IDisposable
     private readonly JsonSerializerOptions _jsonOptions = new() { PropertyNameCaseInsensitive = true };
     private readonly ConcurrentDictionary<string, object> _cache = new();
 
-    public JsonContentProvider(IWebHostEnvironment env)
+    private readonly ILogger<JsonContentProvider> _logger;
+
+    public JsonContentProvider(IWebHostEnvironment env, ILogger<JsonContentProvider> logger)
     {
+        _logger = logger;
         _contentRoot = Path.Combine(env.ContentRootPath, "Content");
         _fileProvider = new PhysicalFileProvider(_contentRoot);
 
@@ -50,8 +53,9 @@ public class JsonContentProvider : IContentProvider, IDisposable
                 ? JsonSerializer.Deserialize<T>(File.ReadAllText(path), _jsonOptions) ?? new T()
                 : new T();
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Не вдалося прочитати {File}: лишаємо попередню версію (на старті — порожню)", key);
             _cache.TryAdd(key, new T());
         }
     }

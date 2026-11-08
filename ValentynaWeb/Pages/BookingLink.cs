@@ -9,5 +9,9 @@ public static class BookingLink
     private const string Fallback =
         "https://w.wlaunch.net/i/bf6cc32e-8bcc-11ef-9c30-2dc04baaba8b/b/bf6dd4b3-8bcc-11ef-9c30-2dc04baaba8b/r";
 
-    public static string From(IConfiguration config) => config["Booking:ExternalUrl"] ?? Fallback;
+    public static string From(IConfiguration config)
+    {
+        var url = config["Booking:ExternalUrl"];
+        return string.IsNullOrWhiteSpace(url) ? Fallback : url;
+    }
 }

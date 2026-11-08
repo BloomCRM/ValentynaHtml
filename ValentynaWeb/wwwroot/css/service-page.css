@@ -291,6 +291,8 @@
 /* > — лише самі підписи: усередині останнього ще span «грн» (перекладається на UAH) */
 .sp-scale-axis > span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
 .sp-scale-axis > span:first-child { transform: none; }
+/* підпис біля самого кінця шкали (2 000 з 2 100) — праворуч від позначки не вміщається: вирівнюємо по правому краю */
+.sp-scale-axis > .sp-scale-tick-end { transform: translateX(-100%); }
 
 /* Підзаголовок групи прайсу («Стрижки ножицями», «Догляд К18») */
 .sp-scale .sp-scale-group {
