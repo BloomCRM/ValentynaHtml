@@ -76,7 +76,8 @@ $app.Id
 import { readFileSync } from 'node:fs';
 
 const base = process.argv[2] ?? 'http://localhost:5190';
-const norm = s => s.replace(/\?v=[\w-]+/g, '').replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim();
+// localhost:5180 → localhost: еталон знятий на 5180, а canonical і JSON-LD беруть хост із запиту
+const norm = s => s.replace(/localhost:\d+/g, 'localhost').replace(/\?v=[\w-]+/g, '').replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim();
 let failed = false;
 
 for (const [name, path] of [['home', '/'], ['farbuvannia', '/farbuvannia']]) {
