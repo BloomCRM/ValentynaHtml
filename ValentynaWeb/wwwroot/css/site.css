@@ -4987,6 +4987,7 @@ button,
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
+  pointer-events: none; /* порожнє місце над згорнутою кнопкою не перехоплює дотики до сторінки */
 }
 
 @media (min-width: 769px) {
@@ -5009,6 +5010,7 @@ button,
   box-shadow: 0 6px 18px rgba(60, 30, 24, 0.35);
   transition: background 0.25s ease, transform 0.2s ease;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 }
 
 .contact-fab-toggle:hover {
