@@ -19,12 +19,14 @@ public class ServicePageModel : PageModel
     private readonly IContentProvider _content;
     private readonly IReviewsProvider _reviews;
     private readonly IConfiguration _config;
+    private readonly ServicePageLinks _links;
 
-    public ServicePageModel(IContentProvider content, IReviewsProvider reviews, IConfiguration config)
+    public ServicePageModel(IContentProvider content, IReviewsProvider reviews, IConfiguration config, ServicePageLinks links)
     {
         _content = content;
         _reviews = reviews;
         _config = config;
+        _links = links;
     }
 
     public ServicePage Service { get; private set; } = new();
@@ -52,6 +54,8 @@ public class ServicePageModel : PageModel
     public IReadOnlyList<ServicePageFaq> Faq { get; private set; } = [];
     /// <summary>Рейтинг і відгуки з Google — ті самі, що на головній (_RatingBadge, _Reviews)</summary>
     public ReviewsContent Reviews { get; private set; } = new();
+    /// <summary>Інші сторінки послуг для блоку «Інші послуги» — ті самі правила, що й посилання з головної (ServicePageLinks)</summary>
+    public IReadOnlyList<ServicePageLinks.Link> OtherServices { get; private set; } = [];
 
     public async Task<IActionResult> OnGetAsync(string slug)
     {
@@ -83,6 +87,10 @@ public class ServicePageModel : PageModel
             ? _content.Masters.Masters.Where(m => m.Services.Contains(categoryId)).ToList()
             : [];
         Faq = service.Faq.Where(f => !string.IsNullOrWhiteSpace(f.Answer?.Ua)).ToList();
+
+        OtherServices = _links.All()
+            .Where(l => !string.Equals(l.Page.Slug, service.Slug, StringComparison.OrdinalIgnoreCase))
+            .ToList();
 
         Reviews = await _reviews.GetAsync();
 

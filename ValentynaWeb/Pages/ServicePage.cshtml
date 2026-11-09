@@ -225,6 +225,27 @@
     </section>
   }
 
+  @if (Model.OtherServices.Count > 0)
+  {
+    @* Інші послуги: обкладинка картки «Послуг» і назва; телефон — стрічка вбік, десктоп — до п'яти в ряд *@
+    <section class="sp-block" id="other-services">
+      <div class="sp-wrap">
+        <h2 class="sp-title" data-i18n-en="Other services">Інші послуги</h2>
+        <ul class="sp-others">
+          @foreach (var link in Model.OtherServices)
+          {
+            <li>
+              <a class="sp-other" href="/@link.Page.Slug">
+                <responsive-img src="@link.Cover" alt="" sizes="(max-width: 899px) 45vw, 18vw" />
+                <span data-i18n-en="@link.Page.H1.EnAttr">@link.Page.H1.Ua</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+  }
+
   <section class="sp-block sp-block-sand" id="contacts">
     <div class="sp-wrap sp-final">
       <div>

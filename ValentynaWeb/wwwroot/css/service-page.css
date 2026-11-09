@@ -401,6 +401,47 @@
 .sp-faq details[open] summary::after { transform: rotate(45deg); }
 .sp-faq details p { padding: 0 0 20px; max-width: 60ch; color: var(--sp-smoke); }
 
+/* ---------- Інші послуги ---------- */
+/* Телефон: стрічка вбік зі снапом; десктоп: до п'яти в ряд */
+.sp-others {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(140px, 42%);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+}
+
+.sp-others li { scroll-snap-align: start; }
+
+.sp-other {
+  display: grid;
+  gap: 10px;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sp-other img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.sp-other:hover span,
+.sp-other:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (min-width: 900px) {
+  .sp-others {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: visible;
+  }
+}
+
 /* ---------- Фінал і контакти ---------- */
 /* по центру, як і заголовок: заклик з кнопками, під ним адреса */
 .sp-final { display: grid; gap: 40px; justify-items: center; text-align: center; }
