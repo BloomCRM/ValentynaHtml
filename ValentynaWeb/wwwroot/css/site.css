@@ -5251,3 +5251,100 @@ button,
 .price-more + .price-more {
   margin-top: 12px;
 }
+
+/* ////////////////// Переходи на сторінки послуг (ServicePageLinks) ////////////////// */
+
+/* Меню на десктопі: «Послуги» з випадним списком сторінок — при наведенні або фокусі.
+   padding-top у .nav-dropdown — «місток», щоб список не зникав, поки курсор іде від пункту до нього */
+.nav-item-services {
+  position: relative;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 30;
+  display: none;
+  padding-top: 12px;
+  transform: translateX(-50%);
+}
+
+.nav-item-services:hover .nav-dropdown,
+.nav-item-services:focus-within .nav-dropdown {
+  display: block;
+}
+
+.nav-dropdown-list {
+  min-width: 240px;
+  padding: 8px 0;
+  border-radius: 10px;
+  background: rgba(31, 27, 25, 0.96);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 9px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ddcdb3;
+}
+
+/* Бургер: сторінки послуг під «Послугами»; меню прокручується, якщо пункти не вміщаються на екран */
+.mobile-nav-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+  padding-left: 16px;
+}
+
+.mobile-nav-link.mobile-nav-sublink {
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+@media screen and (max-width: 1199px) {
+  .mobile-menu {
+    overflow-y: auto;
+  }
+}
+
+/* Картка «Послуг»: плашка на сторінку послуги поверх фото (лічильник фото — праворуч) */
+.services-page-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f1b19;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.services-page-link:hover,
+.services-page-link:focus-visible {
+  background: #fff;
+  color: #8f5f55;
+}
+
+/* Підвал: підзаголовок «Послуги» під «Швидкими посиланнями» */
+.footer-subtitle {
+  margin: 24px 0 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #3d3c3c;
+  text-align: center;
+}
