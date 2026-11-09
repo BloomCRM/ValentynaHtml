@@ -5317,7 +5317,29 @@ button,
     height: 100vh;
     height: 100dvh;
     overflow-y: auto;
+    align-items: flex-start;
+    overscroll-behavior: contain;
   }
+
+  /* панель росте разом із пунктами, а не обривається на 868px */
+  .mobile-menu-container {
+    height: auto;
+    min-height: 100%;
+  }
+
+  /* темна смуга «закрити» завжди на екрані */
+  .close-button {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
+}
+
+/* відкрите меню — над липкою «Записатися» (1000) і «Зв'язатися» (999);
+   z-index самого .mobile-menu не допоможе: воно всередині .logo-container (isolation, z-index 5) */
+.logo-container:has(.mobile-menu.active) {
+  z-index: 1001;
 }
 
 /* Картка «Послуг»: плашка на сторінку послуги поверх фото (лічильник фото — праворуч) */
@@ -5326,6 +5348,8 @@ button,
   top: 12px;
   left: 12px;
   z-index: 2;
+  display: inline-flex; /* на телефоні a { min-height: 44px } — центруємо підпис у плашці */
+  align-items: center;
   padding: 7px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
