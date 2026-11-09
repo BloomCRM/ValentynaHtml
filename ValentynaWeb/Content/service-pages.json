@@ -2,7 +2,7 @@
   "pages": [
     {
       "slug": "farbuvannia",
-      "published": false,
+      "published": true,
       "serviceCategoryId": "coloring",
       "title": "Фарбування волосся у центрі Києва — Перукарня Валентина",
       "description": "Фарбування волосся в центрі Києва: коріння, тонування, складні техніки, вихід з чорного. Ціни від 1500 грн. Надішліть фото — майстер підкаже техніку.",
@@ -77,7 +77,7 @@
     },
     {
       "slug": "stryzhky",
-      "published": false,
+      "published": true,
       "serviceCategoryId": "cuts",
       "primaryAction": "booking",
       "title": "Стрижки в центрі Києва — Перукарня Валентина",
@@ -164,7 +164,7 @@
     },
     {
       "slug": "ukladky",
-      "published": false,
+      "published": true,
       "serviceCategoryId": "care",
       "priceKeys": ["styling-1", "styling-2", "styling-3"],
       "primaryAction": "booking",
@@ -246,7 +246,7 @@
     },
     {
       "slug": "dohliad",
-      "published": false,
+      "published": true,
       "serviceCategoryId": "care",
       "priceKeys": ["svc-group-wash", "svc-group-k18", "svc-group-oil", "svc-group-voey"],
       "primaryAction": "booking",
@@ -327,7 +327,7 @@
     },
     {
       "slug": "zavyvka",
-      "published": false,
+      "published": true,
       "primaryAction": "telegram",
       "title": "Хімічна і біозавивка в центрі Києва — Перукарня Валентина",
       "description": "Хімічна та біозавивка волосся в центрі Києва, вул. Б. Хмельницького 94. Надішліть фото в Telegram — майстер підкаже завивку і назве ціну.",
@@ -389,7 +389,7 @@
     },
     {
       "slug": "brovy",
-      "published": false,
+      "published": true,
       "primaryAction": "booking",
       "title": "Брови в центрі Києва — Перукарня Валентина",
       "description": "Брови в перукарні «Валентина» в центрі Києва, вул. Б. Хмельницького 94. Онлайн-запис щодня з 10:00 до 21:00 або напишіть у Telegram.",
