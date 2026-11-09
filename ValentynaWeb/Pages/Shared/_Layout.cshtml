@@ -6,23 +6,32 @@
     <meta charset="utf-8" />
     @await Html.PartialAsync("_Analytics")
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @* Сторінки послуг задають свої title і description; головна — як було *@
-    @if (ViewData["Description"] is string description)
-    {
-        <meta name="description" content="@description" />
+    @* Сторінки послуг задають свої title, description, адресу і картинку прев'ю; головна — як було *@
+    @{
+        var pageDescription = ViewData["Description"] as string
+            ?? "Перукарня Валентина — стрижки, фарбування, укладка в центрі Києва";
+        var pageTitleText = ViewData["PageTitle"] as string
+            ?? (ViewData["Title"] != null ? ViewData["Title"] + " — " : "") + "Перукарня Валентина — стрижки, фарбування, догляд у центрі Києва";
+        var siteRoot = $"https://{Context.Request.Host}";
+        // картинки 1200×630 малює scripts/og-images.mjs у wwwroot/img/og/
+        var ogImage = siteRoot + (ViewData["OgImage"] as string ?? "/img/og/home.jpg");
+        var ogUrl = ViewData["OgUrl"] as string ?? siteRoot + Context.Request.Path.Value?.ToLowerInvariant();
     }
-    else
-    {
-        <meta name="description" content="Перукарня Валентина — стрижки, фарбування, укладка в центрі Києва" />
-    }
-    @if (ViewData["PageTitle"] is string pageTitle)
-    {
-        <title>@pageTitle</title>
-    }
-    else
-    {
-        <title>@(ViewData["Title"] != null ? ViewData["Title"] + " — " : "")Перукарня Валентина — стрижки, фарбування, догляд у центрі Києва</title>
-    }
+    <meta name="description" content="@pageDescription" />
+    <title>@pageTitleText</title>
+    @* Прев'ю посилання в Telegram, Viber, WhatsApp, Facebook (Open Graph) і X *@
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Перукарня Валентина" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:title" content="@pageTitleText" />
+    <meta property="og:description" content="@pageDescription" />
+    <meta property="og:url" content="@ogUrl" />
+    <meta property="og:image" content="@ogImage" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="@pageTitleText" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />

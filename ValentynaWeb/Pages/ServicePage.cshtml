@@ -1,10 +1,17 @@
 @page "/{slug}"
 @model ServicePageModel
+@inject IWebHostEnvironment WebHost
 @{
     ViewData["PageTitle"] = Model.Service.Title;
     ViewData["Description"] = Model.Service.Description;
     // своя нижня панель «Надіслати фото» + дзвінок замість липкої «Записатися» (WLaunch) і круглої «Зв'язатися»
     ViewData["OwnContactBar"] = true;
+    // прев'ю посилання: своя картинка сторінки (scripts/og-images.mjs), якщо її ще не намалювали — картинка головної
+    ViewData["OgUrl"] = Model.CanonicalUrl;
+    if (WebHost.WebRootFileProvider.GetFileInfo($"img/og/{Model.Service.Slug.ToLowerInvariant()}.jpg").Exists)
+    {
+        ViewData["OgImage"] = $"/img/og/{Model.Service.Slug.ToLowerInvariant()}.jpg";
+    }
     var s = Model.Service;
 }
 @section Styles {
