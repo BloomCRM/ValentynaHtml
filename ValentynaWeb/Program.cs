@@ -7,6 +7,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddOutputCache(o => o.AddBasePolicy(b => b.Expire(TimeSpan.FromMinutes(5))));
 builder.Services.AddLocalization(o => o.ResourcesPath = "Resources");
 builder.Services.AddSingleton<IContentProvider, JsonContentProvider>();
+builder.Services.AddSingleton<ValentynaWeb.Pages.ServicePageLinks>();
 
 builder.Services.AddMemoryCache();
 builder.Services.Configure<GooglePlacesOptions>(builder.Configuration.GetSection("GooglePlaces"));

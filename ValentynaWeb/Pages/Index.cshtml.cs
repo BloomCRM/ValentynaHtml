@@ -9,13 +9,14 @@ public class IndexModel : PageModel
     private readonly IConfiguration _config;
     private readonly IContentProvider _content;
     private readonly IReviewsProvider _reviews;
-    private ServicePagesContent _servicePages = new();
+    private readonly ServicePageLinks _links;
 
-    public IndexModel(IConfiguration config, IContentProvider content, IReviewsProvider reviews)
+    public IndexModel(IConfiguration config, IContentProvider content, IReviewsProvider reviews, ServicePageLinks links)
     {
         _config = config;
         _content = content;
         _reviews = reviews;
+        _links = links;
     }
 
     public string BookingUrl { get; private set; } = "#";
@@ -34,13 +35,27 @@ public class IndexModel : PageModel
     /// <summary>Фото карток «Послуг» для перегляду-сторіз</summary>
     public ServiceStories Stories { get; private set; } = new([]);
 
-    /// <summary>Опубліковані сторінки послуг категорії прайсу (id з services.json) — посилання внизу картки; чернетки не показуємо</summary>
-    public IReadOnlyList<ServicePage> PublishedPagesFor(string? categoryId) => _servicePages.PublishedForCategory(categoryId);
+    /// <summary>Сторінки послуг для посилань (меню, картки, підвал, прайс, сторіз): опубліковані; локально — усі</summary>
+    public IReadOnlyList<ServicePageLinks.Link> ServiceLinks { get; private set; } = [];
+
+    /// <summary>Сторінки категорії прайсу (id з services.json) — посилання внизу картки прайсу; в «Миття, укладки та догляд» їх дві</summary>
+    public IEnumerable<ServicePageLinks.Link> ServiceLinksFor(string? categoryId) =>
+        string.IsNullOrEmpty(categoryId)
+            ? []
+            : ServiceLinks.Where(l => string.Equals(l.Page.ServiceCategoryId, categoryId, StringComparison.Ordinal));
+
+    /// <summary>Сторінка картки «Послуг» (поле page у service-photos.json); null — посилатися нікуди</summary>
+    public ServicePageLinks.Link? ServiceLinkFor(string? pageSlug) =>
+        ServiceLinks.FirstOrDefault(l => string.Equals(l.Page.Slug, pageSlug, StringComparison.OrdinalIgnoreCase));
+
+    /// <summary>Підпис посилання на сторінку і його ключ перекладу: «Ціни та запис», якщо на сторінці є ціни, інакше «Детальніше»</summary>
+    public static (string Key, string Text) LinkLabel(ServicePageLinks.Link link) =>
+        link.HasPrices ? ("stories-page", "Ціни та запис") : ("stories-more", "Детальніше");
 
     public async Task OnGetAsync()
     {
         ServicePhotos = _content.ServicePhotos.Categories;
-        _servicePages = _content.ServicePages;
+        ServiceLinks = _links.All();
 
         var today = KyivToday();
         var news = _content.News.Items;
@@ -51,7 +66,6 @@ public class IndexModel : PageModel
             (NextEventWhen, NextEventWhenEn) = EventWhen(NextEvent.EventDate, today);
 
         BookingUrl = BookingLink.From(_config);
-        // прайс — до сторіз: кнопка в сторіз залежить від того, чи є на сторінці послуги ціни
         ServiceCategories = _content.Services.Categories;
         Stories = new ServiceStories(ServicePhotos.Select(c => new ServiceStories.Category(
             c.Title, c.TitleKey, null, c.Cover, c.Photos, StoryButton(c.Page))).ToList());
@@ -62,19 +76,15 @@ public class IndexModel : PageModel
         Reviews = await _reviews.GetAsync();
     }
 
-    // Кнопка внизу сторіз: картка з опублікованою сторінкою веде туди — «Ціни та запис», якщо на сторінці є ціни,
-    // інакше «Детальніше» (завивка, брови); решта — в онлайн-запис WLaunch
-    private ServiceStories.Cta StoryButton(string? pageSlug) =>
-        _servicePages.FindPublished(pageSlug) is not { } page
-            ? new(BookingUrl, null, "hero-book", "Записатися", External: true)
-            : HasPrices(page)
-                ? new("/" + page.Slug, null, "stories-page", "Ціни та запис", External: false)
-                : new("/" + page.Slug, null, "stories-more", "Детальніше", External: false);
-
-    // ті самі ціни, що покаже сторінка: її категорія і priceKeys
-    private bool HasPrices(ServicePage page) =>
-        ServiceCategories.FirstOrDefault(c => c.Id == page.ServiceCategoryId) is { } category
-        && PriceScale.From(category.Services, page.PriceKeys).Rows.Count > 0;
+    // Кнопка внизу сторіз: картка зі сторінкою, на яку можна посилатися, веде туди (підпис — LinkLabel);
+    // решта — в онлайн-запис WLaunch
+    private ServiceStories.Cta StoryButton(string? pageSlug)
+    {
+        if (ServiceLinkFor(pageSlug) is not { } link)
+            return new(BookingUrl, null, "hero-book", "Записатися", External: true);
+        var (key, text) = LinkLabel(link);
+        return new("/" + link.Page.Slug, null, key, text, External: false);
+    }
 
     // Ключ перекладу під українську множину: 1 відгук / 2 відгуки / 5 відгуків
     public static (string Key, string Label) ReviewsCountLabel(int n) =>

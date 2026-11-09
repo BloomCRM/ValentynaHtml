@@ -321,9 +321,9 @@
               </li>
             }
           </ul>
-          @foreach (var servicePage in Model.PublishedPagesFor(category.Id))
+          @foreach (var link in Model.ServiceLinksFor(category.Id))
           {
-            <a href="/@servicePage.Slug" class="price-more" data-i18n-en="@servicePage.CardLinkText.EnAttr">@servicePage.CardLinkText.Ua</a>
+            <a href="/@link.Page.Slug" class="price-more" data-i18n-en="@link.Page.CardLinkText.EnAttr">@link.Page.CardLinkText.Ua</a>
           }
         </div>
       }
