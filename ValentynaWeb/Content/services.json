@@ -64,6 +64,21 @@
         { "translateKey": "svc-length-1-2", "name": "1/2 довжина", "priceDisplay": "1600 грн" },
         { "translateKey": "svc-length-3-4", "name": "3/4 довжина", "priceDisplay": "2100 грн" }
       ]
+    },
+    {
+      "id": "brows",
+      "name": "Брови",
+      "translateKey": "price-brows",
+      "cssClass": "price-item-4",
+      "rowCssClass": "price-list-row",
+      "services": [
+        { "translateKey": "svc-brow-shaping", "name": "Корекція брів", "priceDisplay": "950 грн" },
+        { "translateKey": "svc-brow-tint-shaping", "name": "Фарбування/освітлення + корекція брів", "priceDisplay": "1350 грн" },
+        { "translateKey": "svc-brow-lami-shaping", "name": "Ламінування + корекція брів", "priceDisplay": "1500 грн" },
+        { "translateKey": "svc-brow-lami-shaping-tint", "name": "Ламінування + корекція + фарбування брів", "priceDisplay": "1700 грн" },
+        { "translateKey": "svc-lash-tint", "name": "Фарбування вій (лише в комплексі з послугами брів)", "priceDisplay": "400 грн" },
+        { "translateKey": "svc-face-wax", "name": "Депіляція воском на обличчі (лише в комплексі з послугами брів)", "priceDisplay": "400 грн" }
+      ]
     }
   ]
 }

@@ -330,11 +330,11 @@
       "published": true,
       "primaryAction": "telegram",
       "title": "Хімічна і біозавивка в центрі Києва — Перукарня Валентина",
-      "description": "Хімічна та біозавивка волосся в центрі Києва, вул. Б. Хмельницького 94. Надішліть фото в Telegram — майстер підкаже завивку і назве ціну.",
+      "description": "Хімічна та біозавивка в центрі Києва, вул. Б. Хмельницького 94. Лише після консультації: надішліть фото в Telegram — запишемо до майстра.",
       "h1": { "ua": "Хімічна і біозавивка", "en": "Perm and bio perm" },
       "lead": {
-        "ua": "Хімічна та біозавивка: стійкі локони без щоденної укладки. Надішліть фото волосся, і майстер підкаже, яка завивка підійде і скільки вона коштуватиме.",
-        "en": "Perm and bio perm: lasting curls without daily styling. Send a photo of your hair and a stylist will suggest the right perm and its price."
+        "ua": "Хімічна та біозавивка: стійкі локони без щоденної укладки. Завивку робимо лише після консультації: надішліть фото волосся, і ми запишемо вас до майстра.",
+        "en": "Perm and bio perm: lasting curls without daily styling. We only do perms after a consultation: send a photo of your hair and we'll book you in with a stylist."
       },
       "heroImage": "img/perm-1",
       "heroAlt": "Завивка в Перукарні Валентина",
@@ -357,14 +357,17 @@
           }
         },
         {
-          "title": { "ua": "Майстер підкаже вид завивки й ціну", "en": "The stylist suggests the type of perm and the price" },
-          "text": { "ua": "Відповідаємо щодня з 10:00 до 21:00.", "en": "We reply daily from 10:00 to 21:00." }
+          "title": { "ua": "Консультація в салоні", "en": "Consultation at the salon" },
+          "text": {
+            "ua": "Майстер оцінить волосся, підбере вид завивки й назве ціну. Без консультації завивку не робимо.",
+            "en": "The stylist checks your hair, picks the type of perm and gives you the price. We don't do perms without a consultation."
+          }
         },
         {
-          "title": { "ua": "Завивка в салоні", "en": "Perm at the salon" },
+          "title": { "ua": "Завивка", "en": "The perm" },
           "text": {
-            "ua": "Оберемо зручний час і чекаємо вас на Богдана Хмельницького 94.",
-            "en": "We'll find a convenient time and see you at 94 Bohdana Khmelnytskoho St."
+            "ua": "У зручний для вас час, на Богдана Хмельницького 94.",
+            "en": "At a time that suits you, at 94 Bohdana Khmelnytskoho St."
           }
         }
       ],
@@ -373,8 +376,15 @@
         {
           "question": { "ua": "Скільки коштує завивка?", "en": "How much is a perm?" },
           "answer": {
-            "ua": "Залежить від довжини й стану волосся. Надішліть фото в Telegram — майстер назве ціну.",
-            "en": "It depends on hair length and condition. Send a photo on Telegram and the stylist will give you the price."
+            "ua": "Ціну майстер назве на консультації: вона залежить від довжини й стану волосся.",
+            "en": "The stylist will give you the price at the consultation: it depends on hair length and condition."
+          }
+        },
+        {
+          "question": { "ua": "Чи можна без консультації?", "en": "Can I skip the consultation?" },
+          "answer": {
+            "ua": "Ні, завивку робимо лише після консультації: так майстер переконається, що вона підійде вашому волоссю.",
+            "en": "No, we only do perms after a consultation: that way the stylist makes sure it suits your hair."
           }
         },
         {
@@ -390,13 +400,14 @@
     {
       "slug": "brovy",
       "published": true,
+      "serviceCategoryId": "brows",
       "primaryAction": "booking",
       "title": "Брови в центрі Києва — Перукарня Валентина",
-      "description": "Брови в перукарні «Валентина» в центрі Києва, вул. Б. Хмельницького 94. Онлайн-запис щодня з 10:00 до 21:00 або напишіть у Telegram.",
+      "description": "Корекція, фарбування, освітлення й ламінування брів у центрі Києва, вул. Б. Хмельницького 94. Ціни від 950 грн. Онлайн-запис щодня.",
       "h1": { "ua": "Брови", "en": "Brows" },
       "lead": {
-        "ua": "Форма й колір брів, що пасують саме вам. Запишіться онлайн або напишіть у Telegram, щоб порадитися з майстром.",
-        "en": "Brow shape and colour that suit you. Book online or message us on Telegram to ask the artist."
+        "ua": "Корекція, фарбування або освітлення й ламінування брів, а в комплексі — фарбування вій і депіляція воском. Запишіться онлайн або напишіть у Telegram, щоб порадитися з майстром.",
+        "en": "Brow shaping, tinting or lightening and lamination, plus lash tinting and facial waxing as add-ons. Book online or message us on Telegram to ask the artist."
       },
       "heroImage": "img/brows-1",
       "heroAlt": "Брови в Перукарні Валентина",
@@ -410,10 +421,15 @@
         "img/brows-8",
         "img/brows-9"
       ],
+      "priceNote": {
+        "ua": "Фарбування вій і депіляцію воском робимо лише в комплексі з послугами для брів.",
+        "en": "Lash tinting and facial waxing are only available together with a brow service."
+      },
       "telegramText": {
         "ua": "Привіт! Пишу з сайту щодо брів.",
         "en": "Hi! I'm writing from your website about brows."
       },
+      "cardLinkText": { "ua": "Детальніше про брови", "en": "More about brows" },
       "steps": [
         {
           "title": { "ua": "Оберіть час онлайн", "en": "Pick a time online" },
@@ -439,8 +455,8 @@
         {
           "question": { "ua": "Скільки коштують брови?", "en": "How much do brows cost?" },
           "answer": {
-            "ua": "Ціну підкаже адміністратор: напишіть у Telegram або подзвоніть.",
-            "en": "The administrator will tell you: message us on Telegram or call."
+            "ua": "Залежить від послуги — усі ціни на шкалі вище.",
+            "en": "It depends on the service — all prices are on the scale above."
           }
         },
         {
@@ -452,7 +468,10 @@
         },
         {
           "question": { "ua": "Які послуги з бровами робите?", "en": "Which brow services do you offer?" },
-          "answer": null
+          "answer": {
+            "ua": "Корекцію, фарбування або освітлення, ламінування брів. У комплексі з ними — фарбування вій і депіляцію воском на обличчі.",
+            "en": "Brow shaping, tinting or lightening, and lamination. Together with these — lash tinting and facial waxing."
+          }
         }
       ]
     }

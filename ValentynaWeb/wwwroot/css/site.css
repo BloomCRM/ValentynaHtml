@@ -953,7 +953,8 @@ ul {
   transform: translateY(-10px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
-.price-item-3 {
+.price-item-3,
+.price-item-4 {
   width: 385px;
   min-height: 647px;
   background: linear-gradient(135deg, #5a5a5a 0%, #404040 100%);
@@ -965,7 +966,8 @@ ul {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.price-item-3::before {
+.price-item-3::before,
+.price-item-4::before {
   content: '';
   position: absolute;
   top: 0;
@@ -976,7 +978,8 @@ ul {
   pointer-events: none;
 }
 
-.price-item-3:hover {
+.price-item-3:hover,
+.price-item-4:hover {
   transform: translateY(-10px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
@@ -1990,7 +1993,8 @@ ul {
     padding-right: 78px;
   }
 
-  .price-item-3 {
+  .price-item-3,
+  .price-item-4 {
     background: url('../img/price-list-desktop3.png') no-repeat center
       calc(100% - -20px) / cover;
     width: 541px;
@@ -2805,7 +2809,8 @@ ul {
     pointer-events: none;
   }
 
-  .price-item-3 {
+  .price-item-3,
+  .price-item-4 {
     width: 350px;
     min-height: 647px;
     background: linear-gradient(135deg, #5a5a5a 0%, #404040 100%);
@@ -2817,7 +2822,8 @@ ul {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .price-item-3::before {
+  .price-item-3::before,
+  .price-item-4::before {
     content: '';
     position: absolute;
     top: 0;
@@ -5376,4 +5382,16 @@ button,
   font-size: 16px;
   color: #3d3c3c;
   text-align: center;
+}
+
+/* ////////////////// Прайс: 4 і більше категорій (з бровами) — на десктопі по дві в ряд ////////////////// */
+/* Чотири в ряд стискались до ~280px, і картки виростали вдвічі через перенесення рядків */
+@media screen and (min-width: 1200px) {
+  .price-cards:has(> :nth-child(4)) {
+    flex-wrap: wrap;
+  }
+
+  .price-cards:has(> :nth-child(4)) > div {
+    flex: 0 0 calc(50% - 20px);
+  }
 }

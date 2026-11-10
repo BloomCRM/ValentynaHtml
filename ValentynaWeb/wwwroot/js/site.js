@@ -80,6 +80,7 @@ const translations = {
     'price-cuts': 'Стрижки',
     'price-coloring': 'Фарбування',
     'price-care': 'Миття, укладки та догляд',
+    'price-brows': 'Брови',
     
     // Price items
     'short-cut': 'Коротка стрижка',
@@ -123,6 +124,12 @@ const translations = {
     'svc-group-k18': 'Догляд К18',
     'svc-group-oil': 'Догляд La Biosthetique Oil therapy',
     'svc-group-voey': 'Пілінг Voey Flake Escape',
+    'svc-brow-shaping': 'Корекція брів',
+    'svc-brow-tint-shaping': 'Фарбування/освітлення + корекція брів',
+    'svc-brow-lami-shaping': 'Ламінування + корекція брів',
+    'svc-brow-lami-shaping-tint': 'Ламінування + корекція + фарбування брів',
+    'svc-lash-tint': 'Фарбування вій (лише в комплексі з послугами брів)',
+    'svc-face-wax': 'Депіляція воском на обличчі (лише в комплексі з послугами брів)',
     
     'hair-wash': 'Миття голови',
     'styling-1': 'Укладка 1го рівня',
@@ -235,6 +242,7 @@ const translations = {
     'price-cuts': 'Haircuts',
     'price-coloring': 'Coloring',
     'price-care': 'Washing, Styling & Care',
+    'price-brows': 'Brows',
     
     // Price items
     'short-cut': 'Short haircut',
@@ -278,6 +286,12 @@ const translations = {
     'svc-group-k18': 'K18 treatment',
     'svc-group-oil': 'La Biosthetique Oil therapy',
     'svc-group-voey': 'Voey Flake Escape scalp peeling',
+    'svc-brow-shaping': 'Brow shaping',
+    'svc-brow-tint-shaping': 'Brow tinting/lightening + shaping',
+    'svc-brow-lami-shaping': 'Brow lamination + shaping',
+    'svc-brow-lami-shaping-tint': 'Brow lamination + shaping + tinting',
+    'svc-lash-tint': 'Lash tinting (only with a brow service)',
+    'svc-face-wax': 'Facial waxing (only with a brow service)',
     
     'hair-wash': 'Hair wash',
     'styling-1': '1st level styling',
